@@ -8,11 +8,13 @@ TEMPLATE = app
 
 ################################################################################
 HEADERS +=                  \
+    src/event.hpp           \
     src/mainwindow.hpp      \
     src/section.hpp         \
 
 ################################################################################
 SOURCES +=                  \
+    src/event.cpp           \
     src/main.cpp            \
     src/mainwindow.cpp      \
     src/section.cpp         \
