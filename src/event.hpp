@@ -18,6 +18,8 @@ typedef std::vector<Section> Sections;
 class Event
 {
 public:
+    typedef Sections::size_type size_type;
+
     ////////////////////
     Event() = default;
     explicit Event(QString name) { set_name(std::move(name)); }
@@ -32,6 +34,12 @@ public:
     ////////////////////
     void set_name(QString name) { _name = std::move(name); }
     const QString& name() const noexcept { return _name; }
+
+    ////////////////////
+    const Sections& sections() const noexcept { return _sections; }
+
+    const Section& section(size_type n) const { return _sections.at(n); }
+    Section& section(size_type n) { return _sections.at(n); }
 
     ////////////////////
     void clear();
