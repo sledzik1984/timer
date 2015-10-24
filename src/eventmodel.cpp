@@ -10,7 +10,7 @@ const std::vector<QString> headers =
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-EventModel* EventModel::getModel()
+EventModel* EventModel::get_model()
 {
     static EventModel model;
     return &model;

@@ -25,7 +25,7 @@ public:
     virtual Qt::ItemFlags flags(const QModelIndex& index) const override;
 
     ////////////////////
-    static EventModel* getModel();
+    static EventModel* get_model();
 
 private:
     Event event;
