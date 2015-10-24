@@ -12,6 +12,7 @@ HEADERS +=                  \
     src/event.hpp           \
     src/mainwindow.hpp      \
     src/section.hpp         \
+    src/sectionmodel.hpp    \
 
 ################################################################################
 SOURCES +=                  \
@@ -20,6 +21,7 @@ SOURCES +=                  \
     src/main.cpp            \
     src/mainwindow.cpp      \
     src/section.cpp         \
+    src/sectionmodel.cpp    \
 
 ################################################################################
 FORMS +=                    \
