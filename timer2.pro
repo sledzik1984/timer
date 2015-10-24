@@ -8,12 +8,14 @@ TEMPLATE = app
 
 ################################################################################
 HEADERS +=                  \
+    src/editwindow.hpp      \
     src/event.hpp           \
     src/mainwindow.hpp      \
     src/section.hpp         \
 
 ################################################################################
 SOURCES +=                  \
+    src/editwindow.cpp      \
     src/event.cpp           \
     src/main.cpp            \
     src/mainwindow.cpp      \
@@ -21,4 +23,5 @@ SOURCES +=                  \
 
 ################################################################################
 FORMS +=                    \
+    src/editwindow.ui       \
     src/mainwindow.ui       \
