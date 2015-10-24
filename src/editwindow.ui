@@ -13,15 +13,20 @@
   <property name="windowTitle">
    <string>Edit</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">font: 18pt</string>
-  </property>
   <layout class="QGridLayout" name="layout">
    <item row="0" column="0">
-    <widget class="QLineEdit" name="name"/>
+    <widget class="QLineEdit" name="name">
+     <property name="styleSheet">
+      <string notr="true">font: 18pt</string>
+     </property>
+    </widget>
    </item>
    <item row="1" column="0">
-    <widget class="QTableView" name="sections"/>
+    <widget class="QTableView" name="sections">
+     <property name="styleSheet">
+      <string notr="true">font: 18pt</string>
+     </property>
+    </widget>
    </item>
    <item row="2" column="0">
     <widget class="QWidget" name="widget" native="true">
