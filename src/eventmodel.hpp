@@ -1,6 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef SECTIONMODEL_HPP
-#define SECTIONMODEL_HPP
+#ifndef EVENTMODEL_HPP
+#define EVENTMODEL_HPP
+
+#include "event.hpp"
 
 #include <QAbstractTableModel>
 #include <QModelIndex>
@@ -8,10 +10,10 @@
 #include <QVariant>
 
 ////////////////////////////////////////////////////////////////////////////////
-class SectionModel : public QAbstractTableModel
+class EventModel : public QAbstractTableModel
 {
 public:
-    explicit SectionModel(QObject* parent = nullptr);
+    explicit EventModel(QObject* parent = nullptr);
 
     virtual int columnCount(const QModelIndex& parent = QModelIndex()) const override;
     virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
@@ -23,8 +25,11 @@ public:
     virtual Qt::ItemFlags flags(const QModelIndex& index) const override;
 
     ////////////////////
-    static SectionModel* getModel();
+    static EventModel* getModel();
+
+private:
+    Event event;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-#endif // SECTIONMODEL_HPP
+#endif // EVENTMODEL_HPP
