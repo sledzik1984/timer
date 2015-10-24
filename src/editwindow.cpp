@@ -5,4 +5,23 @@
 EditWindow::EditWindow(QWidget* parent) : QWidget(parent)
 {
     setupUi(this);
+
+    connect(open, &QToolButton::clicked, this, &EditWindow::open_clicked);
+    connect(save, &QToolButton::clicked, this, &EditWindow::save_clicked);
+    connect(save_as, &QToolButton::clicked, this, &EditWindow::save_as_clicked);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void EditWindow::open_clicked()
+{
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void EditWindow::save_clicked()
+{
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void EditWindow::save_as_clicked()
+{
 }

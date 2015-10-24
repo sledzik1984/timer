@@ -11,6 +11,11 @@ class EditWindow : public QWidget, private Ui::EditWindow
 
 public:
     explicit EditWindow(QWidget* parent = nullptr);
+
+private:
+    void open_clicked();
+    void save_clicked();
+    void save_as_clicked();
 };
 
 ////////////////////////////////////////////////////////////////////////////////
