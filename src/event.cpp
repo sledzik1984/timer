@@ -20,36 +20,29 @@ void Event::read(QXmlStreamReader& reader)
     //           ...
     //         </event>
 
-    try
+    ////////////////////
+    // the reader should already be positioned on
+    // the event element
+    if(reader.tokenType() != QXmlStreamReader::StartElement || reader.name() != "event")
+        throw QString("Expecting event start element");
+
+    ////////////////////
+    auto attributes = reader.attributes();
+
+    if(!attributes.hasAttribute("name")) throw QString("Missing name attribute");
+    set_name(attributes.value("name").toString());
+
+    ////////////////////
+    while(reader.readNextStartElement())
     {
-        ////////////////////
-        // the reader should already be positioned on
-        // the event element
-        if(reader.tokenType() != QXmlStreamReader::StartElement || reader.name() != "event")
-            throw "Expecting event start element";
+        Section section;
+        section.read(reader);
 
-        ////////////////////
-        auto attributes = reader.attributes();
-
-        if(!attributes.hasAttribute("name")) throw "Missing name attribute";
-        set_name(attributes.value("name").toString());
-
-        ////////////////////
-        while(reader.readNextStartElement())
-        {
-            Section section;
-            section.read(reader);
-
-            _sections.push_back(std::move(section));
-        }
-
-        if(reader.tokenType() != QXmlStreamReader::EndElement || reader.name() != "event")
-            throw "Expecting event end element";
+        _sections.push_back(std::move(section));
     }
-    catch(const char* e)
-    {
-        reader.raiseError(e);
-    }
+
+    if(reader.tokenType() != QXmlStreamReader::EndElement || reader.name() != "event")
+        throw QString("Expecting event end element");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
