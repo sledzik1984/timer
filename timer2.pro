@@ -27,3 +27,7 @@ SOURCES +=                  \
 FORMS +=                    \
     src/editwindow.ui       \
     src/mainwindow.ui       \
+
+################################################################################
+RESOURCES +=                \
+    res/resource.qrc        \
