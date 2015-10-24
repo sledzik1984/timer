@@ -3,6 +3,8 @@
 #define SECTION_HPP
 
 #include <QString>
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
 
 #include <chrono>
 #include <utility>
@@ -45,6 +47,12 @@ public:
 
     void set_duration(std::chrono::seconds duration) { _duration = duration; }
     const std::chrono::seconds duration() const noexcept { return _duration; }
+
+protected:
+    ////////////////////
+    void read(QXmlStreamReader&);
+    void write(QXmlStreamWriter&) const;
+    friend class Event;
 
 private:
     QString _name;
