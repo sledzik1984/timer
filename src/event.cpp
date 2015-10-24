@@ -20,6 +20,9 @@ void Event::read(QXmlStreamReader& reader)
     //           ...
     //         </event>
 
+    if(reader.tokenType() != QXmlStreamReader::StartElement)
+        reader.readNextStartElement();
+
     ////////////////////
     // the reader should already be positioned on
     // the event element
