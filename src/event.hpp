@@ -4,7 +4,6 @@
 
 #include "section.hpp"
 
-#include <QObject>
 #include <QString>
 
 #include <utility>
@@ -14,26 +13,23 @@
 typedef std::vector<Section> Sections;
 
 ////////////////////////////////////////////////////////////////////////////////
-class Event : public QObject
+class Event
 {
-    Q_OBJECT
-
 public:
-    explicit Event(QString name) :
-        _name(std::move(name))
-    { }
+    ////////////////////
+    Event() = default;
+    explicit Event(QString name) { set_name(std::move(name)); }
 
     ////////////////////
-    void set_name(QString name)
-    {
-        _name = std::move(name);
-        emit name_changed(_name);
-    }
+    Event(const Event&) = default;
+    Event(Event&&) = default;
 
+    Event& operator=(const Event&) = default;
+    Event& operator=(Event&&) = default;
+
+    ////////////////////
+    void set_name(QString name) { _name = std::move(name); }
     const QString& name() const noexcept { return _name; }
-
-signals:
-    void name_changed(const QString&);
 
 private:
     QString _name;
