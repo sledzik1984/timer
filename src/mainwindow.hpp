@@ -5,7 +5,7 @@
 #include "ui_mainwindow.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-class MainWindow : public QMainWindow, private Ui::MainWindow
+class MainWindow : public QWidget, private Ui::MainWindow
 {
     Q_OBJECT
 
