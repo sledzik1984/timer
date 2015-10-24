@@ -5,6 +5,8 @@
 #include "section.hpp"
 
 #include <QString>
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
 
 #include <utility>
 #include <vector>
@@ -30,6 +32,12 @@ public:
     ////////////////////
     void set_name(QString name) { _name = std::move(name); }
     const QString& name() const noexcept { return _name; }
+
+    ////////////////////
+    void clear();
+
+    void read(QXmlStreamReader&);
+    void write(QXmlStreamWriter&) const;
 
 private:
     QString _name;
