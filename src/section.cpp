@@ -13,18 +13,18 @@ void Section::read(QXmlStreamReader& reader)
     // the reader should already be positioned on
     // the section element
     if(reader.tokenType() != QXmlStreamReader::StartElement || reader.name() != "section")
-        throw "Expecting section start element";
+        throw QString("Expecting section start element");
 
     ////////////////////
     auto attributes = reader.attributes();
 
-    if(!attributes.hasAttribute("name")) throw "Missing name attribute";
+    if(!attributes.hasAttribute("name")) throw QString("Missing name attribute");
     set_name(attributes.value("name").toString());
 
     if(!attributes.hasAttribute("duration")) throw "Missing duration attribute";
 
     QTime time = QTime::fromString(attributes.value("duration").toString(), "h:mm:ss");
-    if(!time.isValid()) throw "Invalid duration attribute";
+    if(!time.isValid()) throw QString("Invalid duration attribute");
 
     set_duration(std::chrono::seconds(QTime(0, 0).secsTo(time)));
 
@@ -32,7 +32,7 @@ void Section::read(QXmlStreamReader& reader)
     reader.readElementText();
 
     if(reader.tokenType() != QXmlStreamReader::EndElement || reader.name() != "section")
-        throw "Expecting section end element";
+        throw QString("Expecting section end element");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
