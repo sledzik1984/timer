@@ -102,6 +102,8 @@ void EventModel::save()
         if(!file.open(QFile::WriteOnly)) throw QString("Failed to open file for writing");
 
         QXmlStreamWriter writer(&file);
+        writer.setAutoFormatting(true);
+
         _event.write(writer);
 
         if(writer.hasError()) throw file.errorString();
