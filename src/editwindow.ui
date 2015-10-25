@@ -35,6 +35,35 @@
      </property>
      <layout class="QHBoxLayout" name="layout_2">
       <item>
+       <widget class="QToolButton" name="clear">
+        <property name="minimumSize">
+         <size>
+          <width>70</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>New</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/resource.qrc">
+          <normaloff>:/new.png</normaloff>:/new.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextUnderIcon</enum>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QToolButton" name="open">
         <property name="minimumSize">
          <size>
