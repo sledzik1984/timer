@@ -7,6 +7,7 @@
 #include <QAbstractTableModel>
 #include <QModelIndex>
 #include <QObject>
+#include <QString>
 #include <QVariant>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -25,10 +26,17 @@ public:
     virtual Qt::ItemFlags flags(const QModelIndex& index) const override;
 
     ////////////////////
+    void clear();
+    void open(QString filename);
+    void save();
+    void save_as(QString filename);
+
+    ////////////////////
     static EventModel* get_model();
 
 private:
-    Event event;
+    Event _event;
+    QString _filename;
 };
 
 ////////////////////////////////////////////////////////////////////////////////

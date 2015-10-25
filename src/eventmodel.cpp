@@ -1,6 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "eventmodel.hpp"
 
+#include <QFile>
+
+#include <utility>
 #include <vector>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -32,7 +35,7 @@ int EventModel::columnCount(const QModelIndex& parent) const
 ////////////////////////////////////////////////////////////////////////////////
 int EventModel::rowCount(const QModelIndex& parent) const
 {
-    return parent.isValid() ? 0 : event.sections().size();
+    return parent.isValid() ? 0 : _event.sections().size();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -60,4 +63,62 @@ bool EventModel::setData(const QModelIndex& index, const QVariant& value, int ro
 Qt::ItemFlags EventModel::flags(const QModelIndex& index) const
 {
     return QAbstractTableModel::flags(index);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void EventModel::clear()
+{
+    beginResetModel();
+
+    _filename.clear();
+    _event.clear();
+
+    endResetModel();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void EventModel::open(QString filename)
+{
+    QFile file(filename);
+    if(!file.open(QFile::ReadOnly)) throw QString("Failed to open file for reading");
+
+    beginResetModel();
+
+    _filename = std::move(filename);
+    QXmlStreamReader reader(&file);
+    _event.read(reader);
+
+    endResetModel();
+
+    if(reader.hasError()) throw reader.errorString();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void EventModel::save()
+{
+    if(_filename.size())
+    {
+        QFile file(_filename);
+        if(!file.open(QFile::WriteOnly)) throw QString("Failed to open file for writing");
+
+        QXmlStreamWriter writer(&file);
+        _event.write(writer);
+
+        if(writer.hasError()) throw file.errorString();
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void EventModel::save_as(QString filename)
+{
+    std::swap(_filename, filename);
+    try
+    {
+        save();
+    }
+    catch(...)
+    {
+        std::swap(_filename, filename);
+        throw;
+    }
 }
