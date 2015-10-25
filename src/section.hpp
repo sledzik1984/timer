@@ -3,10 +3,10 @@
 #define SECTION_HPP
 
 #include <QString>
+#include <QTime>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
-#include <chrono>
 #include <utility>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -16,15 +16,10 @@ public:
     ////////////////////
     Section() = default;
 
-    template<typename Rep, typename Period>
-    Section(QString name, std::chrono::duration<Rep, Period> duration) :
-        Section(std::move(name), std::chrono::duration_cast<std::chrono::seconds>(duration))
-    { }
-
-    Section(QString name, std::chrono::seconds duration)
+    Section(QString name, QTime time)
     {
         set_name(std::move(name));
-        set_duration(duration);
+        set_time(std::move(time));
     }
 
     ////////////////////
@@ -39,14 +34,8 @@ public:
     const QString& name() const noexcept { return _name; }
 
     ////////////////////
-    template<typename Rep, typename Period>
-    void set_duration(std::chrono::duration<Rep, Period> duration)
-    {
-        set_duration(std::chrono::duration_cast<std::chrono::seconds>(duration));
-    }
-
-    void set_duration(std::chrono::seconds duration) { _duration = duration; }
-    const std::chrono::seconds duration() const noexcept { return _duration; }
+    void set_time(QTime time) { _time = std::move(time); }
+    const QTime& time() const noexcept { return _time; }
 
 protected:
     ////////////////////
@@ -56,7 +45,7 @@ protected:
 
 private:
     QString _name;
-    std::chrono::seconds _duration;
+    QTime _time;
 };
 
 ////////////////////////////////////////////////////////////////////////////////

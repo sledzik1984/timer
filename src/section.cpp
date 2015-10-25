@@ -21,12 +21,10 @@ void Section::read(QXmlStreamReader& reader)
     if(!attributes.hasAttribute("name")) throw QString("Missing name attribute");
     set_name(attributes.value("name").toString());
 
-    if(!attributes.hasAttribute("duration")) throw "Missing duration attribute";
+    if(!attributes.hasAttribute("time")) throw QString("Missing time attribute");
+    set_time(QTime::fromString(attributes.value("time").toString(), "h:mm:ss"));
 
-    QTime time = QTime::fromString(attributes.value("duration").toString(), "h:mm:ss");
-    if(!time.isValid()) throw QString("Invalid duration attribute");
-
-    set_duration(std::chrono::seconds(QTime(0, 0).secsTo(time)));
+    if(!time().isValid()) throw QString("Invalid time attribute");
 
     ////////////////////
     reader.readElementText();
@@ -39,7 +37,7 @@ void Section::read(QXmlStreamReader& reader)
 void Section::write(QXmlStreamWriter& writer) const
 {
     writer.writeStartElement("section");
-    writer.writeAttribute("name", _name);
-    writer.writeAttribute("duration", QTime(0, 0).addSecs(_duration.count()).toString("h:mm:ss"));
+    writer.writeAttribute("name", name());
+    writer.writeAttribute("time", time().toString("h:mm:ss"));
     writer.writeEndElement();
 }
