@@ -44,7 +44,16 @@
    <item>
     <widget class="QTableView" name="sections">
      <property name="styleSheet">
-      <string notr="true">font: 18pt</string>
+      <string notr="true">*
+{
+  font: 18pt
+}
+QTableView::item
+{
+  border: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+}</string>
      </property>
      <property name="alternatingRowColors">
       <bool>true</bool>

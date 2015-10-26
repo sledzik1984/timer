@@ -3,6 +3,7 @@
 #define EDITWINDOW_HPP
 
 #include "eventmodel.hpp"
+#include "timedelegate.hpp"
 
 #include "ui_editwindow.h"
 
@@ -29,6 +30,8 @@ private:
     QFileDialog* dialog = nullptr;
 
     void set_button();
+
+    TimeDelegate delegate;
 };
 
 ////////////////////////////////////////////////////////////////////////////////

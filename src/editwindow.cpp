@@ -11,6 +11,7 @@ EditWindow::EditWindow(QWidget* parent) : QWidget(parent),
     setupUi(this);
 
     sections->setModel(model);
+    sections->setItemDelegateForColumn(Column::Time, &delegate);
 
     connect(name, &QLineEdit::textChanged, model, &EventModel::set_name);
     connect(model, &EventModel::name_changed, name, &QLineEdit::setText);
@@ -25,9 +26,9 @@ EditWindow::EditWindow(QWidget* parent) : QWidget(parent),
     connect(save_as, &QToolButton::clicked, this, &EditWindow::save_as_clicked);
 
     QHeaderView* header = sections->horizontalHeader();
-    header->setSectionResizeMode(0, QHeaderView::ResizeToContents);
-    header->setSectionResizeMode(1, QHeaderView::Stretch);
-    header->setSectionResizeMode(2, QHeaderView::ResizeToContents);
+    header->setSectionResizeMode(Column::Num , QHeaderView::ResizeToContents);
+    header->setSectionResizeMode(Column::Name, QHeaderView::Stretch);
+    header->setSectionResizeMode(Column::Time, QHeaderView::ResizeToContents);
 
     dialog->setConfirmOverwrite(true);
     dialog->setDefaultSuffix("xml");
