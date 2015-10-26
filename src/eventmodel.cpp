@@ -7,9 +7,11 @@
 #include <vector>
 
 ////////////////////////////////////////////////////////////////////////////////
-const std::vector<QString> headers =
+enum Column { Num, Name, Time, Color };
+
+const std::vector<QString> headers
 {
-    "#", "Name", "Time", "",
+    "#", "Name", "Time", ""
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,6 +43,22 @@ int EventModel::rowCount(const QModelIndex& parent) const
 ////////////////////////////////////////////////////////////////////////////////
 QVariant EventModel::data(const QModelIndex& index, int role) const
 {
+    if(role == Qt::DisplayRole)
+    {
+        int row = index.row();
+        switch(index.column())
+        {
+        case Column::Num:
+            return row + 1;
+
+        case Column::Name:
+            return _event.section(row).name();
+
+        case Column::Time:
+            return _event.section(row).time();
+        }
+    }
+
     return QVariant();
 }
 
