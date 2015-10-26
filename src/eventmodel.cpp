@@ -73,13 +73,35 @@ QVariant EventModel::headerData(int section, Qt::Orientation orientation, int ro
 ////////////////////////////////////////////////////////////////////////////////
 bool EventModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
+    int row = index.row();
+    int column = index.column();
+
+    if(role == Qt::EditRole)
+    {
+        switch(column)
+        {
+        case Column::Name:
+            _event.section(row).set_name(value.toString());
+            return true;
+
+        case Column::Time:
+            _event.section(row).set_time(value.toTime());
+            return true;
+        }
+    }
+
     return false;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 Qt::ItemFlags EventModel::flags(const QModelIndex& index) const
 {
-    return QAbstractTableModel::flags(index);
+    int column = index.column();
+
+    Qt::ItemFlags flags = QAbstractTableModel::flags(index);
+    if(column == Column::Name || column == Column::Time) flags |= Qt::ItemIsEditable;
+
+    return flags;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
