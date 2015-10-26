@@ -24,6 +24,11 @@ EditWindow::EditWindow(QWidget* parent) : QWidget(parent),
     connect(save, &QToolButton::clicked, this, &EditWindow::save_clicked);
     connect(save_as, &QToolButton::clicked, this, &EditWindow::save_as_clicked);
 
+    QHeaderView* header = sections->horizontalHeader();
+    header->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+    header->setSectionResizeMode(1, QHeaderView::Stretch);
+    header->setSectionResizeMode(2, QHeaderView::ResizeToContents);
+
     dialog->setConfirmOverwrite(true);
     dialog->setDefaultSuffix("xml");
     dialog->setNameFilters(QStringList() << "Event files (*.xml)" << "All files (*)");
