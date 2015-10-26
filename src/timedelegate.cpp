@@ -30,7 +30,7 @@ void TimeDelegate::setEditorData(QWidget* editor, const QModelIndex& index) cons
 ////////////////////////////////////////////////////////////////////////////////
 void TimeDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
 {
-    model->setData(index, static_cast<QTimeEdit*>(editor)->time(), Qt::DisplayRole);
+    model->setData(index, static_cast<QTimeEdit*>(editor)->time(), Qt::EditRole);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
