@@ -13,6 +13,7 @@ HEADERS +=                  \
     src/eventmodel.hpp      \
     src/mainwindow.hpp      \
     src/section.hpp         \
+    src/timedelegate.hpp    \
 
 ################################################################################
 SOURCES +=                  \
@@ -22,6 +23,7 @@ SOURCES +=                  \
     src/main.cpp            \
     src/mainwindow.cpp      \
     src/section.cpp         \
+    src/timedelegate.cpp    \
 
 ################################################################################
 FORMS +=                    \
