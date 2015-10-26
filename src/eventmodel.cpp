@@ -4,9 +4,6 @@
 #include <QFile>
 
 ////////////////////////////////////////////////////////////////////////////////
-enum Column { Num, Name, Time, Size };
-
-////////////////////////////////////////////////////////////////////////////////
 EventModel* EventModel::get_model()
 {
     static EventModel model;
@@ -35,12 +32,22 @@ int EventModel::rowCount(const QModelIndex& parent) const
 ////////////////////////////////////////////////////////////////////////////////
 QVariant EventModel::data(const QModelIndex& index, int role) const
 {
+    int row = index.row();
+    int column = index.column();
+
     if(role == Qt::DisplayRole)
     {
-        int row = index.row();
-        switch(index.column())
+        switch(column)
         {
         case Column::Num : return row + 1;
+        case Column::Name: return _event.section(row).name();
+        case Column::Time: return _event.section(row).time().toString("h:mm:ss");
+        }
+    }
+    else if(role == Qt::EditRole)
+    {
+        switch(column)
+        {
         case Column::Name: return _event.section(row).name();
         case Column::Time: return _event.section(row).time();
         }
