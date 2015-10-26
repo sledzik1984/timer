@@ -126,6 +126,9 @@
       </item>
       <item>
        <widget class="QToolButton" name="save">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="minimumSize">
          <size>
           <width>70</width>
@@ -155,6 +158,9 @@
       </item>
       <item>
        <widget class="QToolButton" name="save_as">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="minimumSize">
          <size>
           <width>70</width>

@@ -10,22 +10,29 @@ EditWindow::EditWindow(QWidget* parent) : QWidget(parent),
 {
     setupUi(this);
 
-    connect(clear  , &QToolButton::clicked, this, &EditWindow::  clear_clicked);
-    connect(open   , &QToolButton::clicked, this, &EditWindow::   open_clicked);
-    connect(save   , &QToolButton::clicked, this, &EditWindow::   save_clicked);
+    sections->setModel(model);
+
+    connect(name, &QLineEdit::textChanged, model, &EventModel::set_name);
+    connect(model, &EventModel::name_changed, name, &QLineEdit::setText);
+
+    connect(model, &EventModel::filename_changed, this, &EditWindow::set_button);
+    connect(model, &EventModel::name_changed, this, &EditWindow::set_button);
+    connect(model, &EventModel::dataChanged, this, &EditWindow::set_button);
+
+    connect(clear, &QToolButton::clicked, this, &EditWindow::clear_clicked);
+    connect(open, &QToolButton::clicked, this, &EditWindow::open_clicked);
+    connect(save, &QToolButton::clicked, this, &EditWindow::save_clicked);
     connect(save_as, &QToolButton::clicked, this, &EditWindow::save_as_clicked);
 
     dialog->setConfirmOverwrite(true);
     dialog->setDefaultSuffix("xml");
     dialog->setNameFilters(QStringList() << "Event files (*.xml)" << "All files (*)");
-
-    sections->setModel(EventModel::get_model());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void EditWindow::clear_clicked()
 {
-    EventModel::get_model()->clear();
+    model->clear();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -36,7 +43,7 @@ try
     dialog->setAcceptMode(QFileDialog::AcceptOpen);
 
     if(dialog->exec() == QDialog::Accepted)
-        EventModel::get_model()->open(dialog->selectedFiles().at(0));
+        model->open(dialog->selectedFiles().at(0));
 }
 catch(const QString& e)
 {
@@ -47,7 +54,7 @@ catch(const QString& e)
 void EditWindow::save_clicked()
 try
 {
-    EventModel::get_model()->save();
+    model->save();
 }
 catch(const QString& e)
 {
@@ -62,9 +69,16 @@ try
     dialog->setAcceptMode(QFileDialog::AcceptSave);
 
     if(dialog->exec() == QDialog::Accepted)
-        EventModel::get_model()->save_as(dialog->selectedFiles().at(0));
+        model->save_as(dialog->selectedFiles().at(0));
 }
 catch(const QString& e)
 {
     QMessageBox::critical(this, "Error", e);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void EditWindow::set_button()
+{
+    save->setEnabled(model->filename().size());
+    save_as->setEnabled(model->name().size());
 }

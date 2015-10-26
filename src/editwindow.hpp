@@ -2,6 +2,8 @@
 #ifndef EDITWINDOW_HPP
 #define EDITWINDOW_HPP
 
+#include "eventmodel.hpp"
+
 #include "ui_editwindow.h"
 
 #include <QFileDialog>
@@ -17,12 +19,16 @@ public:
     explicit EditWindow(QWidget* parent = nullptr);
 
 private:
+    EventModel* model = EventModel::get_model();
+
     void   clear_clicked();
     void    open_clicked();
     void    save_clicked();
     void save_as_clicked();
 
     QFileDialog* dialog = nullptr;
+
+    void set_button();
 };
 
 ////////////////////////////////////////////////////////////////////////////////
