@@ -89,7 +89,10 @@ void EventModel::clear()
     beginResetModel();
 
     _filename.clear();
+    emit filename_changed(_filename);
+
     _event.clear();
+    emit name_changed(_event.name());
 
     endResetModel();
 }
@@ -103,8 +106,11 @@ void EventModel::open(QString filename)
     beginResetModel();
 
     _filename = std::move(filename);
+    emit filename_changed(_filename);
+
     QXmlStreamReader reader(&file);
     _event.read(reader);
+    emit name_changed(_event.name());
 
     endResetModel();
 
@@ -135,6 +141,7 @@ void EventModel::save_as(QString filename)
     try
     {
         save();
+        emit filename_changed(_filename);
     }
     catch(...)
     {

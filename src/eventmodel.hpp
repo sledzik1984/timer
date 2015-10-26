@@ -10,9 +10,13 @@
 #include <QString>
 #include <QVariant>
 
+#include <utility>
+
 ////////////////////////////////////////////////////////////////////////////////
 class EventModel : public QAbstractTableModel
 {
+    Q_OBJECT
+
 public:
     explicit EventModel(QObject* parent = nullptr);
 
@@ -32,11 +36,25 @@ public:
     void save_as(QString filename);
 
     ////////////////////
+    void set_name(QString name)
+    {
+        _event.set_name(std::move(name));
+        emit name_changed(_event.name());
+    }
+    const QString& name() const noexcept { return _event.name(); }
+
+    const QString& filename() const noexcept { return _filename; }
+
+    ////////////////////
     static EventModel* get_model();
 
+signals:
+    void filename_changed(const QString&);
+    void name_changed(const QString&);
+
 private:
-    Event _event;
     QString _filename;
+    Event _event;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
