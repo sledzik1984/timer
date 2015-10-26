@@ -3,16 +3,8 @@
 
 #include <QFile>
 
-#include <utility>
-#include <vector>
-
 ////////////////////////////////////////////////////////////////////////////////
-enum Column { Num, Name, Time, Color };
-
-const std::vector<QString> headers
-{
-    "#", "Name", "Time", ""
-};
+enum Column { Num, Name, Time, Size };
 
 ////////////////////////////////////////////////////////////////////////////////
 EventModel* EventModel::get_model()
@@ -31,7 +23,7 @@ EventModel::EventModel(QObject* parent) :
 ////////////////////////////////////////////////////////////////////////////////
 int EventModel::columnCount(const QModelIndex& parent) const
 {
-    return parent.isValid() ? 0 : headers.size();
+    return parent.isValid() ? 0 : Column::Size;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -48,14 +40,9 @@ QVariant EventModel::data(const QModelIndex& index, int role) const
         int row = index.row();
         switch(index.column())
         {
-        case Column::Num:
-            return row + 1;
-
-        case Column::Name:
-            return _event.section(row).name();
-
-        case Column::Time:
-            return _event.section(row).time();
+        case Column::Num : return row + 1;
+        case Column::Name: return _event.section(row).name();
+        case Column::Time: return _event.section(row).time();
         }
     }
 
@@ -65,10 +52,15 @@ QVariant EventModel::data(const QModelIndex& index, int role) const
 ////////////////////////////////////////////////////////////////////////////////
 QVariant EventModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    return orientation == Qt::Horizontal
-        && role == Qt::DisplayRole
-        && (size_t)section < headers.size() ? headers[section]
-                                            : QVariant();
+    if(orientation == Qt::Horizontal && role == Qt::DisplayRole)
+        switch(section)
+        {
+        case Column::Num : return "#";
+        case Column::Name: return "Name";
+        case Column::Time: return "Time";
+        }
+
+    return QVariant();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
