@@ -76,21 +76,26 @@ bool EventModel::setData(const QModelIndex& index, const QVariant& value, int ro
     int row = index.row();
     int column = index.column();
 
+    bool changed = false;
+
     if(role == Qt::EditRole)
     {
         switch(column)
         {
         case Column::Name:
             _event.section(row).set_name(value.toString());
-            return true;
+            changed = true;
+            break;
 
         case Column::Time:
             _event.section(row).set_time(value.toTime());
-            return true;
+            changed = true;
+            break;
         }
     }
 
-    return false;
+    if(changed) emit dataChanged(index, index);
+    return changed;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
