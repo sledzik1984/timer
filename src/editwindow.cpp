@@ -49,7 +49,10 @@ try
     dialog->setAcceptMode(QFileDialog::AcceptOpen);
 
     if(dialog->exec() == QDialog::Accepted)
+    {
         model->open(dialog->selectedFiles().at(0));
+        save->setEnabled(false);
+    }
 }
 catch(const QString& e)
 {
