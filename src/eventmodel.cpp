@@ -35,22 +35,33 @@ QVariant EventModel::data(const QModelIndex& index, int role) const
     int row = index.row();
     int column = index.column();
 
-    if(role == Qt::DisplayRole)
+    switch(role)
     {
+    case Qt::DisplayRole:
         switch(column)
         {
         case Column::Num : return row + 1;
         case Column::Name: return _event.section(row).name();
         case Column::Time: return _event.section(row).time().toString("h:mm:ss");
         }
-    }
-    else if(role == Qt::EditRole)
-    {
+        break;
+
+    case Qt::EditRole:
         switch(column)
         {
         case Column::Name: return _event.section(row).name();
         case Column::Time: return _event.section(row).time();
         }
+        break;
+
+    case Qt::TextAlignmentRole:
+        switch(column)
+        {
+        case Column::Num : return Qt::AlignCenter;
+        case Column::Name: return Qt::AlignLeft;
+        case Column::Time: return Qt::AlignRight;
+        }
+        break;
     }
 
     return QVariant();
