@@ -79,7 +79,7 @@ QTableView::item
        <widget class="QToolButton" name="clear">
         <property name="minimumSize">
          <size>
-          <width>70</width>
+          <width>60</width>
           <height>0</height>
          </size>
         </property>
@@ -88,7 +88,7 @@ QTableView::item
         </property>
         <property name="icon">
          <iconset resource="../res/resource.qrc">
-          <normaloff>:/new.png</normaloff>:/new.png</iconset>
+          <normaloff>:/new.svg</normaloff>:/new.svg</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -108,7 +108,7 @@ QTableView::item
        <widget class="QToolButton" name="open">
         <property name="minimumSize">
          <size>
-          <width>70</width>
+          <width>60</width>
           <height>0</height>
          </size>
         </property>
@@ -117,7 +117,7 @@ QTableView::item
         </property>
         <property name="icon">
          <iconset resource="../res/resource.qrc">
-          <normaloff>:/open.png</normaloff>:/open.png</iconset>
+          <normaloff>:/open.svg</normaloff>:/open.svg</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -140,7 +140,7 @@ QTableView::item
         </property>
         <property name="minimumSize">
          <size>
-          <width>70</width>
+          <width>60</width>
           <height>0</height>
          </size>
         </property>
@@ -149,7 +149,7 @@ QTableView::item
         </property>
         <property name="icon">
          <iconset resource="../res/resource.qrc">
-          <normaloff>:/save.png</normaloff>:/save.png</iconset>
+          <normaloff>:/save.svg</normaloff>:/save.svg</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -172,7 +172,7 @@ QTableView::item
         </property>
         <property name="minimumSize">
          <size>
-          <width>70</width>
+          <width>60</width>
           <height>0</height>
          </size>
         </property>
@@ -181,7 +181,7 @@ QTableView::item
         </property>
         <property name="icon">
          <iconset resource="../res/resource.qrc">
-          <normaloff>:/save-as.png</normaloff>:/save-as.png</iconset>
+          <normaloff>:/save.svg</normaloff>:/save.svg</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -209,6 +209,193 @@ QTableView::item
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QToolButton" name="add">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Add</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/resource.qrc">
+          <normaloff>:/add.svg</normaloff>:/add.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextUnderIcon</enum>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="insert">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Insert</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/resource.qrc">
+          <normaloff>:/insert.svg</normaloff>:/insert.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextUnderIcon</enum>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="remove">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Delete</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/resource.qrc">
+          <normaloff>:/delete.svg</normaloff>:/delete.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextUnderIcon</enum>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="up">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Move</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/resource.qrc">
+          <normaloff>:/arrow-up.svg</normaloff>:/arrow-up.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextUnderIcon</enum>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="down">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Move</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/resource.qrc">
+          <normaloff>:/arrow-down.svg</normaloff>:/arrow-down.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextUnderIcon</enum>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="spacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QToolButton" name="event">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Event</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/resource.qrc">
+          <normaloff>:/play.svg</normaloff>:/play.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextUnderIcon</enum>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
