@@ -41,6 +41,9 @@ public:
     const Section& section(size_type n) const { return _sections.at(n); }
     Section& section(size_type n) { return _sections.at(n); }
 
+    Section& insert(size_type n);
+    void erase(size_type n);
+
     ////////////////////
     void clear();
 

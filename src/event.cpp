@@ -56,3 +56,29 @@ void Event::write(QXmlStreamWriter& writer) const
     for(const Section& section: _sections) section.write(writer);
     writer.writeEndElement();
 }
+
+////////////////////////////////////////////////////////////////////////////////
+Section& Event::insert(size_type n)
+{
+    if(n < _sections.size())
+    {
+        auto ri = _sections.insert(_sections.begin() + n, Section());
+        return *ri;
+    }
+    else if(n == _sections.size())
+    {
+        _sections.push_back(Section());
+        return *_sections.rbegin();
+    }
+    else throw QString("Section number out of range (insert)");
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Event::erase(size_type n)
+{
+    if(n < _sections.size())
+    {
+        _sections.erase(_sections.begin() + n);
+    }
+    else throw QString("Section number out of range (erase)");
+}
