@@ -33,6 +33,8 @@ EditWindow::EditWindow(QWidget* parent) : QWidget(parent),
     dialog->setConfirmOverwrite(true);
     dialog->setDefaultSuffix("xml");
     dialog->setNameFilters(QStringList() << "Event files (*.xml)" << "All files (*)");
+
+    connect(add, &QToolButton::clicked, this, &EditWindow::add_clicked);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -90,4 +92,15 @@ void EditWindow::set_button()
 {
     save->setEnabled(model->filename().size());
     save_as->setEnabled(model->name().size());
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void EditWindow::add_clicked()
+{
+    if(model->insertRow(model->rowCount()))
+    {
+        auto index = sections->model()->index(model->rowCount() - 1, Column::Name);
+        sections->setCurrentIndex(index);
+        sections->edit(index);
+    }
 }

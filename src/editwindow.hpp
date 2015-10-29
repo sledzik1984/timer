@@ -32,6 +32,8 @@ private:
     void set_button();
 
     TimeDelegate delegate;
+
+    void     add_clicked();
 };
 
 ////////////////////////////////////////////////////////////////////////////////
