@@ -49,6 +49,9 @@ public:
     const QString& filename() const noexcept { return _filename; }
 
     ////////////////////
+    virtual bool insertRows(int row, int count, const QModelIndex& parent) override;
+
+    ////////////////////
     static EventModel* get_model();
 
 signals:

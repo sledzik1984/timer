@@ -186,3 +186,19 @@ void EventModel::save_as(QString filename)
         throw;
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+bool EventModel::insertRows(int row, int count, const QModelIndex& parent)
+{
+    if(parent.isValid() || row < 0 || row > (int)_event.sections().size()) return false;
+
+    beginInsertRows(parent, row, row + count - 1);
+    for(; count; --count)
+    {
+        _event.insert(row);
+        emit dataChanged(index(row, 0, parent), index(row, columnCount(parent) - 1));
+    }
+    endInsertRows();
+
+    return true;
+}
