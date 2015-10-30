@@ -125,11 +125,11 @@ void EventModel::clear()
 {
     beginResetModel();
 
-    _filename.clear();
-    emit filename_changed(_filename);
-
     _event.clear();
     emit name_changed(_event.name());
+
+    _filename.clear();
+    emit filename_changed(_filename);
 
     endResetModel();
 }
