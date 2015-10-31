@@ -16,9 +16,10 @@ EditWindow::EditWindow(QWidget* parent) : QWidget(parent),
     connect(name, &QLineEdit::textChanged, model, &EventModel::set_name);
     connect(model, &EventModel::name_changed, name, &QLineEdit::setText);
 
-    connect(model, &EventModel::filename_changed, this, &EditWindow::set_button);
-    connect(model, &EventModel::name_changed, this, &EditWindow::set_button);
-    connect(model, &EventModel::dataChanged, this, &EditWindow::set_button);
+    connect(model, &EventModel::filename_changed, this, &EditWindow::update_save);
+    connect(model, &EventModel::name_changed, this, &EditWindow::update_save);
+    connect(model, &EventModel::dataChanged, this, &EditWindow::update_save);
+    connect(model, &EventModel::rowsRemoved, this, &EditWindow::update_save);
 
     connect(clear, &QToolButton::clicked, this, &EditWindow::clear_clicked);
     connect(open, &QToolButton::clicked, this, &EditWindow::open_clicked);
@@ -66,6 +67,7 @@ void EditWindow::save_clicked()
 try
 {
     model->save();
+    save->setEnabled(false);
 }
 catch(const QString& e)
 {
@@ -88,10 +90,10 @@ catch(const QString& e)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void EditWindow::set_button()
+void EditWindow::update_save()
 {
     save->setEnabled(model->filename().size());
-    save_as->setEnabled(model->name().size());
+    save_as->setEnabled(model->name().size() || model->rowCount());
 }
 
 ////////////////////////////////////////////////////////////////////////////////

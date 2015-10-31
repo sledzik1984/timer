@@ -29,7 +29,7 @@ private:
 
     QFileDialog* dialog = nullptr;
 
-    void set_button();
+    void update_save();
 
     TimeDelegate delegate;
 
