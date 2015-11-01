@@ -116,7 +116,7 @@ void EditWindow::add_clicked()
     {
         auto index = sections->model()->index(model->rowCount() - 1, Column::Name);
         sections->setCurrentIndex(index);
-        sections->edit(index);
+        sections->setFocus();
     }
 }
 
