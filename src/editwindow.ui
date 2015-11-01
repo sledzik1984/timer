@@ -382,6 +382,9 @@ QTableView::item
      <property name="horizontalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
+     <property name="tabKeyNavigation">
+      <bool>false</bool>
+     </property>
      <property name="alternatingRowColors">
       <bool>true</bool>
      </property>
