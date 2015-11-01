@@ -14,6 +14,9 @@
    <string>Edit Event</string>
   </property>
   <layout class="QGridLayout" name="layout">
+   <property name="spacing">
+    <number>9</number>
+   </property>
    <item row="1" column="1">
     <widget class="QLineEdit" name="name">
      <property name="styleSheet">
@@ -23,6 +26,9 @@
    </item>
    <item row="2" column="0">
     <widget class="QWidget" name="widget" native="true">
+     <property name="styleSheet">
+      <string notr="true">font: 10pt</string>
+     </property>
      <layout class="QGridLayout" name="layout_2">
       <property name="leftMargin">
        <number>0</number>
@@ -45,7 +51,7 @@
          </size>
         </property>
         <property name="text">
-         <string>&amp;New</string>
+         <string>New</string>
         </property>
         <property name="icon">
          <iconset resource="../res/resource.qrc">
@@ -74,7 +80,7 @@
          </size>
         </property>
         <property name="text">
-         <string>&amp;Open</string>
+         <string>Open</string>
         </property>
         <property name="icon">
          <iconset resource="../res/resource.qrc">
@@ -106,7 +112,7 @@
          </size>
         </property>
         <property name="text">
-         <string>&amp;Save</string>
+         <string>Save</string>
         </property>
         <property name="icon">
          <iconset resource="../res/resource.qrc">
@@ -192,6 +198,9 @@
    </item>
    <item row="2" column="2">
     <widget class="QWidget" name="widget_2" native="true">
+     <property name="styleSheet">
+      <string notr="true">font: 10pt</string>
+     </property>
      <layout class="QGridLayout" name="layout_3">
       <property name="leftMargin">
        <number>0</number>
@@ -214,7 +223,7 @@
          </size>
         </property>
         <property name="text">
-         <string>&amp;Add</string>
+         <string>Add</string>
         </property>
         <property name="icon">
          <iconset resource="../res/resource.qrc">
@@ -246,7 +255,7 @@
          </size>
         </property>
         <property name="text">
-         <string>&amp;Insert</string>
+         <string>Insert</string>
         </property>
         <property name="icon">
          <iconset resource="../res/resource.qrc">
@@ -278,7 +287,7 @@
          </size>
         </property>
         <property name="text">
-         <string>&amp;Delete</string>
+         <string>Delete</string>
         </property>
         <property name="icon">
          <iconset resource="../res/resource.qrc">
@@ -368,10 +377,8 @@
    <item row="2" column="1">
     <widget class="QTableView" name="sections">
      <property name="styleSheet">
-      <string notr="true">*
-{
-  font: 18pt
-}
+      <string notr="true">* { font: 18pt; }
+
 QTableView::item
 {
   border: 0px;
@@ -402,7 +409,7 @@ QTableView::item
       <string notr="true">font: 18pt</string>
      </property>
      <property name="text">
-      <string>&amp;Event</string>
+      <string>Event</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
