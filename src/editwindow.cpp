@@ -12,6 +12,7 @@ EditWindow::EditWindow(QWidget* parent) : QWidget(parent),
 
     sections->setModel(model);
     sections->setItemDelegateForColumn(Column::Time, &delegate);
+    connect(sections->selectionModel(), &QItemSelectionModel::currentChanged, this, &EditWindow::update_current);
 
     connect(name, &QLineEdit::textChanged, model, &EventModel::set_name);
     connect(model, &EventModel::name_changed, name, &QLineEdit::setText);
@@ -36,6 +37,7 @@ EditWindow::EditWindow(QWidget* parent) : QWidget(parent),
     dialog->setNameFilters(QStringList() << "Event files (*.xml)" << "All files (*)");
 
     connect(add, &QToolButton::clicked, this, &EditWindow::add_clicked);
+    connect(remove, &QToolButton::clicked, this, &EditWindow::remove_clicked);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -97,6 +99,17 @@ void EditWindow::update_save()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+void EditWindow::update_current(const QModelIndex& current)
+{
+    bool valid = current.isValid();
+    remove->setEnabled(valid);
+    insert->setEnabled(valid);
+
+    up->setEnabled(valid && current.row());
+    down->setEnabled(valid && current.row() < model->rowCount(current.parent()) - 1);
+}
+
+////////////////////////////////////////////////////////////////////////////////
 void EditWindow::add_clicked()
 {
     if(model->insertRow(model->rowCount()))
@@ -105,4 +118,11 @@ void EditWindow::add_clicked()
         sections->setCurrentIndex(index);
         sections->edit(index);
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void EditWindow::remove_clicked()
+{
+    auto index = sections->currentIndex();
+    if(index.isValid()) model->removeRow(index.row(), index.parent());
 }

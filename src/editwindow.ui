@@ -236,6 +236,9 @@
       </item>
       <item row="1" column="0">
        <widget class="QToolButton" name="insert">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="minimumSize">
          <size>
           <width>75</width>
@@ -265,6 +268,9 @@
       </item>
       <item row="2" column="0">
        <widget class="QToolButton" name="remove">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="minimumSize">
          <size>
           <width>75</width>
@@ -294,6 +300,9 @@
       </item>
       <item row="3" column="0">
        <widget class="QToolButton" name="up">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="minimumSize">
          <size>
           <width>75</width>
@@ -323,6 +332,9 @@
       </item>
       <item row="4" column="0">
        <widget class="QToolButton" name="down">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="minimumSize">
          <size>
           <width>75</width>

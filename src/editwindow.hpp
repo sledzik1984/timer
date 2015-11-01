@@ -8,6 +8,7 @@
 #include "ui_editwindow.h"
 
 #include <QFileDialog>
+#include <QModelIndex>
 #include <QObject>
 #include <QWidget>
 
@@ -30,10 +31,12 @@ private:
     QFileDialog* dialog = nullptr;
 
     void update_save();
+    void update_current(const QModelIndex& current);
 
     TimeDelegate delegate;
 
     void     add_clicked();
+    void  remove_clicked();
 };
 
 ////////////////////////////////////////////////////////////////////////////////
