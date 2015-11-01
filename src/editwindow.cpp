@@ -37,6 +37,7 @@ EditWindow::EditWindow(QWidget* parent) : QWidget(parent),
     dialog->setNameFilters(QStringList() << "Event files (*.xml)" << "All files (*)");
 
     connect(add, &QToolButton::clicked, this, &EditWindow::add_clicked);
+    connect(insert, &QToolButton::clicked, this, &EditWindow::insert_clicked);
     connect(remove, &QToolButton::clicked, this, &EditWindow::remove_clicked);
 }
 
@@ -44,6 +45,9 @@ EditWindow::EditWindow(QWidget* parent) : QWidget(parent),
 void EditWindow::clear_clicked()
 {
     model->clear();
+
+    name->setFocus();
+    update_current(QModelIndex());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -56,6 +60,9 @@ try
     if(dialog->exec() == QDialog::Accepted)
     {
         model->open(dialog->selectedFiles().at(0));
+
+        name->setFocus();
+        sections->setCurrentIndex(model->index(model->rowCount() - 1, Column::Name));
         save->setEnabled(false);
     }
 }
@@ -69,6 +76,7 @@ void EditWindow::save_clicked()
 try
 {
     model->save();
+
     save->setEnabled(false);
 }
 catch(const QString& e)
@@ -114,9 +122,19 @@ void EditWindow::add_clicked()
 {
     if(model->insertRow(model->rowCount()))
     {
-        auto index = sections->model()->index(model->rowCount() - 1, Column::Name);
-        sections->setCurrentIndex(index);
         sections->setFocus();
+        sections->setCurrentIndex(model->index(model->rowCount() - 1, Column::Name));
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void EditWindow::insert_clicked()
+{
+    auto index = sections->currentIndex();
+    if(model->insertRow(index.row(), index.parent()))
+    {
+        sections->setFocus();
+        sections->setCurrentIndex(model->index(index.row(), Column::Name, index.parent()));
     }
 }
 

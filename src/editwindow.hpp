@@ -36,6 +36,7 @@ private:
     TimeDelegate delegate;
 
     void     add_clicked();
+    void  insert_clicked();
     void  remove_clicked();
 };
 
