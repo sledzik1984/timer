@@ -411,6 +411,20 @@ QTableView::item
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>name</tabstop>
+  <tabstop>sections</tabstop>
+  <tabstop>clear</tabstop>
+  <tabstop>open</tabstop>
+  <tabstop>save</tabstop>
+  <tabstop>save_as</tabstop>
+  <tabstop>event</tabstop>
+  <tabstop>add</tabstop>
+  <tabstop>insert</tabstop>
+  <tabstop>remove</tabstop>
+  <tabstop>up</tabstop>
+  <tabstop>down</tabstop>
+ </tabstops>
  <resources>
   <include location="../res/resource.qrc"/>
  </resources>
