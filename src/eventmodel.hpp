@@ -50,6 +50,7 @@ public:
 
     ////////////////////
     virtual bool insertRows(int row, int count, const QModelIndex& parent) override;
+    virtual bool removeRows(int row, int count, const QModelIndex& parent) override;
 
     ////////////////////
     static EventModel* get_model();

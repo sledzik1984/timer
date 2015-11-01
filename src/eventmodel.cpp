@@ -202,3 +202,15 @@ bool EventModel::insertRows(int row, int count, const QModelIndex& parent)
 
     return true;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+bool EventModel::removeRows(int row, int count, const QModelIndex& parent)
+{
+    if(parent.isValid() || row < 0 || row >= (int)_event.sections().size()) return false;
+
+    beginRemoveRows(parent, row, row + count - 1);
+    for(; count; --count) _event.erase(row);
+    endRemoveRows();
+
+    return true;
+}
