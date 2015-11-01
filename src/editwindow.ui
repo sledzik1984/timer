@@ -11,83 +11,41 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Edit</string>
+   <string>Edit Event</string>
   </property>
-  <layout class="QVBoxLayout" name="layout">
-   <item>
-    <widget class="QLabel" name="name_label">
-     <property name="styleSheet">
-      <string notr="true">font: 18pt</string>
-     </property>
-     <property name="text">
-      <string>Event Name</string>
-     </property>
-    </widget>
-   </item>
-   <item>
+  <layout class="QGridLayout" name="layout">
+   <item row="1" column="1">
     <widget class="QLineEdit" name="name">
      <property name="styleSheet">
       <string notr="true">font: 18pt</string>
      </property>
     </widget>
    </item>
-   <item>
-    <widget class="QLabel" name="sections_label">
-     <property name="styleSheet">
-      <string notr="true">font: 18pt</string>
-     </property>
-     <property name="text">
-      <string>Sections</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QTableView" name="sections">
-     <property name="styleSheet">
-      <string notr="true">*
-{
-  font: 18pt
-}
-QTableView::item
-{
-  border: 0px;
-  padding-left: 20px;
-  padding-right: 20px;
-}</string>
-     </property>
-     <property name="verticalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOn</enum>
-     </property>
-     <property name="horizontalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOff</enum>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-     <property name="selectionMode">
-      <enum>QAbstractItemView::SingleSelection</enum>
-     </property>
-     <attribute name="verticalHeaderVisible">
-      <bool>false</bool>
-     </attribute>
-    </widget>
-   </item>
-   <item>
+   <item row="2" column="0">
     <widget class="QWidget" name="widget" native="true">
-     <property name="styleSheet">
-      <string notr="true">font: 10pt</string>
-     </property>
-     <layout class="QHBoxLayout" name="layout_2">
-      <item>
+     <layout class="QGridLayout" name="layout_2">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
        <widget class="QToolButton" name="clear">
         <property name="minimumSize">
          <size>
-          <width>60</width>
+          <width>75</width>
           <height>0</height>
          </size>
         </property>
         <property name="text">
-         <string>New</string>
+         <string>&amp;New</string>
         </property>
         <property name="icon">
          <iconset resource="../res/resource.qrc">
@@ -107,16 +65,16 @@ QTableView::item
         </property>
        </widget>
       </item>
-      <item>
+      <item row="1" column="0">
        <widget class="QToolButton" name="open">
         <property name="minimumSize">
          <size>
-          <width>60</width>
+          <width>75</width>
           <height>0</height>
          </size>
         </property>
         <property name="text">
-         <string>Open</string>
+         <string>&amp;Open</string>
         </property>
         <property name="icon">
          <iconset resource="../res/resource.qrc">
@@ -136,19 +94,19 @@ QTableView::item
         </property>
        </widget>
       </item>
-      <item>
+      <item row="2" column="0">
        <widget class="QToolButton" name="save">
         <property name="enabled">
          <bool>false</bool>
         </property>
         <property name="minimumSize">
          <size>
-          <width>60</width>
+          <width>75</width>
           <height>0</height>
          </size>
         </property>
         <property name="text">
-         <string>Save</string>
+         <string>&amp;Save</string>
         </property>
         <property name="icon">
          <iconset resource="../res/resource.qrc">
@@ -168,14 +126,14 @@ QTableView::item
         </property>
        </widget>
       </item>
-      <item>
+      <item row="3" column="0">
        <widget class="QToolButton" name="save_as">
         <property name="enabled">
          <bool>false</bool>
         </property>
         <property name="minimumSize">
          <size>
-          <width>60</width>
+          <width>75</width>
           <height>0</height>
          </size>
         </property>
@@ -200,182 +158,11 @@ QTableView::item
         </property>
        </widget>
       </item>
-      <item>
-       <spacer name="spacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QToolButton" name="add">
-        <property name="minimumSize">
-         <size>
-          <width>60</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Add</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../res/resource.qrc">
-          <normaloff>:/add.svg</normaloff>:/add.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="toolButtonStyle">
-         <enum>Qt::ToolButtonTextUnderIcon</enum>
-        </property>
-        <property name="autoRaise">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QToolButton" name="insert">
-        <property name="minimumSize">
-         <size>
-          <width>60</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Insert</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../res/resource.qrc">
-          <normaloff>:/insert.svg</normaloff>:/insert.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="toolButtonStyle">
-         <enum>Qt::ToolButtonTextUnderIcon</enum>
-        </property>
-        <property name="autoRaise">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QToolButton" name="remove">
-        <property name="minimumSize">
-         <size>
-          <width>60</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Delete</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../res/resource.qrc">
-          <normaloff>:/delete.svg</normaloff>:/delete.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="toolButtonStyle">
-         <enum>Qt::ToolButtonTextUnderIcon</enum>
-        </property>
-        <property name="autoRaise">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QToolButton" name="up">
-        <property name="minimumSize">
-         <size>
-          <width>60</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Move</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../res/resource.qrc">
-          <normaloff>:/arrow-up.svg</normaloff>:/arrow-up.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="toolButtonStyle">
-         <enum>Qt::ToolButtonTextUnderIcon</enum>
-        </property>
-        <property name="autoRaise">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QToolButton" name="down">
-        <property name="minimumSize">
-         <size>
-          <width>60</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Move</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../res/resource.qrc">
-          <normaloff>:/arrow-down.svg</normaloff>:/arrow-down.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="toolButtonStyle">
-         <enum>Qt::ToolButtonTextUnderIcon</enum>
-        </property>
-        <property name="autoRaise">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="spacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
+      <item row="4" column="0">
        <widget class="QToolButton" name="event">
         <property name="minimumSize">
          <size>
-          <width>60</width>
+          <width>75</width>
           <height>0</height>
          </size>
         </property>
@@ -401,6 +188,213 @@ QTableView::item
        </widget>
       </item>
      </layout>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QWidget" name="widget_2" native="true">
+     <layout class="QGridLayout" name="layout_3">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QToolButton" name="add">
+        <property name="minimumSize">
+         <size>
+          <width>75</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>&amp;Add</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/resource.qrc">
+          <normaloff>:/add.svg</normaloff>:/add.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextUnderIcon</enum>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QToolButton" name="insert">
+        <property name="minimumSize">
+         <size>
+          <width>75</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>&amp;Insert</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/resource.qrc">
+          <normaloff>:/insert.svg</normaloff>:/insert.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextUnderIcon</enum>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QToolButton" name="remove">
+        <property name="minimumSize">
+         <size>
+          <width>75</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>&amp;Delete</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/resource.qrc">
+          <normaloff>:/delete.svg</normaloff>:/delete.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextUnderIcon</enum>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QToolButton" name="up">
+        <property name="minimumSize">
+         <size>
+          <width>75</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Move</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/resource.qrc">
+          <normaloff>:/arrow-up.svg</normaloff>:/arrow-up.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextUnderIcon</enum>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QToolButton" name="down">
+        <property name="minimumSize">
+         <size>
+          <width>75</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Move</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../res/resource.qrc">
+          <normaloff>:/arrow-down.svg</normaloff>:/arrow-down.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextUnderIcon</enum>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QTableView" name="sections">
+     <property name="styleSheet">
+      <string notr="true">*
+{
+  font: 18pt
+}
+QTableView::item
+{
+  border: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+}</string>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label">
+     <property name="styleSheet">
+      <string notr="true">font: 18pt</string>
+     </property>
+     <property name="text">
+      <string>&amp;Event</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>name</cstring>
+     </property>
     </widget>
    </item>
   </layout>
