@@ -39,6 +39,8 @@ EditWindow::EditWindow(QWidget* parent) : QWidget(parent),
     connect(add, &QToolButton::clicked, this, &EditWindow::add_clicked);
     connect(insert, &QToolButton::clicked, this, &EditWindow::insert_clicked);
     connect(remove, &QToolButton::clicked, this, &EditWindow::remove_clicked);
+    connect(up, &QToolButton::clicked, this, &EditWindow::up_clicked);
+    connect(down, &QToolButton::clicked, this, &EditWindow::down_clicked);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -143,4 +145,40 @@ void EditWindow::remove_clicked()
 {
     auto index = sections->currentIndex();
     if(index.isValid()) model->removeRow(index.row(), index.parent());
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void EditWindow::up_clicked()
+{
+    auto index = sections->currentIndex();
+
+    for(int column = Column::Name; column < Column::Size; ++column)
+    {
+        auto index1 = model->index(index.row(), column, index.parent());
+        auto index2 = model->index(index.row() - 1, column, index.parent());
+
+        QVariant value = model->data(index1, Qt::EditRole);
+        model->setData(index1, index2.data(Qt::EditRole), Qt::EditRole);
+        model->setData(index2, value, Qt::EditRole);
+    }
+
+    sections->setCurrentIndex(model->index(index.row() - 1, index.column(), index.parent()));
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void EditWindow::down_clicked()
+{
+    auto index = sections->currentIndex();
+
+    for(int column = Column::Name; column < Column::Size; ++column)
+    {
+        auto index1 = model->index(index.row(), column, index.parent());
+        auto index2 = model->index(index.row() + 1, column, index.parent());
+
+        QVariant value = model->data(index1, Qt::EditRole);
+        model->setData(index1, index2.data(Qt::EditRole), Qt::EditRole);
+        model->setData(index2, value, Qt::EditRole);
+    }
+
+    sections->setCurrentIndex(model->index(index.row() + 1, index.column(), index.parent()));
 }

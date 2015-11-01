@@ -38,6 +38,8 @@ private:
     void     add_clicked();
     void  insert_clicked();
     void  remove_clicked();
+    void      up_clicked();
+    void    down_clicked();
 };
 
 ////////////////////////////////////////////////////////////////////////////////
