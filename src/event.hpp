@@ -5,8 +5,6 @@
 #include "section.hpp"
 
 #include <QString>
-#include <QXmlStreamReader>
-#include <QXmlStreamWriter>
 
 #include <utility>
 #include <vector>
@@ -37,18 +35,14 @@ public:
 
     ////////////////////
     const Sections& sections() const noexcept { return _sections; }
-
-    const Section& section(size_type n) const { return _sections.at(n); }
-    Section& section(size_type n) { return _sections.at(n); }
-
-    Section& insert(size_type n);
-    void erase(size_type n);
+    Sections& sections() noexcept { return _sections; }
 
     ////////////////////
-    void clear();
-
-    void read(QXmlStreamReader&);
-    void write(QXmlStreamWriter&) const;
+    void clear()
+    {
+        _name.clear();
+        _sections.clear();
+    }
 
 private:
     QString _name;

@@ -4,8 +4,6 @@
 
 #include <QString>
 #include <QTime>
-#include <QXmlStreamReader>
-#include <QXmlStreamWriter>
 
 #include <utility>
 
@@ -36,12 +34,6 @@ public:
     ////////////////////
     void set_time(QTime time) { _time = std::move(time); }
     const QTime& time() const noexcept { return _time; }
-
-protected:
-    ////////////////////
-    void read(QXmlStreamReader&);
-    void write(QXmlStreamWriter&) const;
-    friend class Event;
 
 private:
     QString _name;
