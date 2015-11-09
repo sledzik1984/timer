@@ -3,6 +3,7 @@
 #define SECTIONREADER_HPP
 
 #include "section.hpp"
+#include <QString>
 
 ////////////////////////////////////////////////////////////////////////////////
 class QXmlStreamReader;
@@ -12,6 +13,10 @@ class SectionReader
 {
 public:
     static Section read(QXmlStreamReader&);
+
+private:
+    static Section::Duration to_duration(const QString&);
+    static Section::Timepoint to_timepoint(const QString&);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
