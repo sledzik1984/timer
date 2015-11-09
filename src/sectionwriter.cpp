@@ -2,11 +2,6 @@
 #include "sectionwriter.hpp"
 #include <QXmlStreamReader>
 
-#include <chrono>
-#include <ctime>
-#include <iomanip>
-#include <sstream>
-
 ////////////////////////////////////////////////////////////////////////////////
 void SectionWriter::write(QXmlStreamWriter& writer, const Section& section)
 {
@@ -22,26 +17,4 @@ void SectionWriter::write(QXmlStreamWriter& writer, const Section& section)
     if(section.is_ended()) writer.writeAttribute("ended", to_string(section.ended()));
 
     writer.writeEndElement();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-QString SectionWriter::to_string(const Section::Duration& duration)
-{
-    std::time_t time = Section::Clock::to_time_t(Section::Timepoint(duration));
-
-    std::stringstream ss;
-    ss << std::put_time(std::localtime(&time), "%X");
-
-    return ss.str().data();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-QString SectionWriter::to_string(const Section::Timepoint& timepoint)
-{
-    std::time_t time = Section::Clock::to_time_t(timepoint);
-
-    std::stringstream ss;
-    ss << std::put_time(std::localtime(&time), "%c");
-
-    return ss.str().data();
 }

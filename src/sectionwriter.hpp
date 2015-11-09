@@ -3,7 +3,6 @@
 #define SECTIONWRITER_HPP
 
 #include "section.hpp"
-#include <QString>
 
 ////////////////////////////////////////////////////////////////////////////////
 class QXmlStreamWriter;
@@ -13,10 +12,6 @@ class SectionWriter
 {
 public:
     static void write(QXmlStreamWriter&, const Section&);
-
-private:
-    static QString to_string(const Section::Duration&);
-    static QString to_string(const Section::Timepoint&);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
