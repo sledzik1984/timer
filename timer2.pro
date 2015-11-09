@@ -11,6 +11,7 @@ TEMPLATE = app
 ################################################################################
 HEADERS +=                  \
     src/editwindow.hpp      \
+    src/error.hpp           \
     src/event.hpp           \
     src/eventmodel.hpp      \
     src/eventreader.hpp     \
@@ -20,7 +21,6 @@ HEADERS +=                  \
     src/sectionreader.hpp   \
     src/sectionwriter.hpp   \
     src/timedelegate.hpp    \
-    src/xmlerror.hpp        \
 
 ################################################################################
 SOURCES +=                  \
