@@ -9,9 +9,9 @@ Event::Event(QString name)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-const Section::Duration Event::duration() const
+const Duration Event::duration() const
 {
-    Section::Duration duration { 0 };
+    Duration duration { 0 };
 
     for(const auto& section : _sections) duration += section.duration();
     return duration;
@@ -32,9 +32,9 @@ void Event::next()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-const Section::Duration Event::overage() const
+const Duration Event::overage() const
 {
-    Section::Duration overage { 0 };
+    Duration overage { 0 };
 
     for(const auto& section : _sections) overage += section.overage();
     return overage;

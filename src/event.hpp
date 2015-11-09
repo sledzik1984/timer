@@ -10,11 +10,12 @@
 #include <vector>
 
 ////////////////////////////////////////////////////////////////////////////////
+using Sections = std::vector<Section>;
+
+////////////////////////////////////////////////////////////////////////////////
 class Event
 {
 public:
-    using Sections = std::vector<Section>;
-
     ////////////////////
     Event() { reset(); }
     explicit Event(QString name);
@@ -30,7 +31,7 @@ public:
     void set_name(QString name) { _name = std::move(name); }
     const QString& name() const noexcept { return _name; }
 
-    const Section::Duration duration() const;
+    const Duration duration() const;
 
     ////////////////////
     size_t size() const noexcept { return _sections.size(); }
@@ -44,13 +45,13 @@ public:
     void reset();
     void next();
 
-    const Section::Timepoint& started() const noexcept { return section(0).started(); }
-    const Section::Timepoint& ended() const noexcept { return section(size() - 1).ended(); }
+    const Timepoint& started() const noexcept { return section(0).started(); }
+    const Timepoint& ended() const noexcept { return section(size() - 1).ended(); }
 
     bool is_started() const noexcept { return section(0).is_started(); }
     bool is_ended() const noexcept { return section(size() - 1).is_ended(); }
 
-    const Section::Duration overage() const;
+    const Duration overage() const;
 
 private:
     QString _name;
