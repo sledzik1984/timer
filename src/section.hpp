@@ -8,14 +8,15 @@
 #include <utility>
 
 ////////////////////////////////////////////////////////////////////////////////
+using Duration = std::chrono::seconds;
+
+using Clock = std::chrono::system_clock;
+using Timepoint = std::chrono::time_point<Clock>;
+
+////////////////////////////////////////////////////////////////////////////////
 class Section
 {
 public:
-    using Duration = std::chrono::seconds;
-
-    using Clock = std::chrono::system_clock;
-    using Timepoint = std::chrono::time_point<Clock>;
-
     ////////////////////
     Section() { reset(); }
 
@@ -74,6 +75,13 @@ private:
     friend class SectionReader;
     friend class SectionWriter;
 };
+
+////////////////////////////////////////////////////////////////////////////////
+QString to_string(const Duration&);
+QString to_string(const Timepoint&);
+
+Duration to_duration(const QString&);
+Timepoint to_timepoint(const QString&);
 
 ////////////////////////////////////////////////////////////////////////////////
 #endif // SECTION_HPP

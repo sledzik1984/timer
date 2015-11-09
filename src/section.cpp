@@ -1,9 +1,14 @@
 ////////////////////////////////////////////////////////////////////////////////
+#include "error.hpp"
 #include "section.hpp"
-#include <stdexcept>
+
+#include <ctime>
+#include <iomanip>
+#include <sstream>
+
 
 ////////////////////////////////////////////////////////////////////////////////
-Section::Section(QString name, Section::Duration duration)
+Section::Section(QString name, Duration duration)
 {
     set_name(std::move(name));
     set_duration(std::move(duration));
@@ -23,10 +28,60 @@ void Section::end()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Section::Duration Section::overage() const
+Duration Section::overage() const
 {
     return is_started() ? std::chrono::duration_cast<Duration>(
                               (started() + duration()) - (is_ended() ? ended() : Clock::now())
                           )
                         : Duration(0);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+QString to_string(const Duration& duration)
+{
+    std::time_t time = Clock::to_time_t(Timepoint(duration));
+
+    std::stringstream ss;
+    ss << std::put_time(std::localtime(&time), "%X");
+
+    return ss.str().data();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+QString to_string(const Timepoint& timepoint)
+{
+    std::time_t time = Clock::to_time_t(timepoint);
+
+    std::stringstream ss;
+    ss << std::put_time(std::localtime(&time), "%c");
+
+    return ss.str().data();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+Duration to_duration(const QString& string)
+{
+    std::tm tm { };
+
+    std::stringstream ss(string.toLatin1().data());
+    ss >> std::get_time(&tm, "%X");
+
+    if(ss.fail()) throw FormatError("Invalid duration format");
+
+    using namespace std::chrono;
+    return hours(tm.tm_hour) + minutes(tm.tm_min) + seconds(tm.tm_sec);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+Timepoint to_timepoint(const QString& string)
+{
+    std::tm tm { };
+
+    std::stringstream ss(string.toLatin1().data());
+    ss >> std::get_time(&tm, "%c");
+
+    if(ss.fail()) throw FormatError("Invalid date/time format");
+
+    return Clock::from_time_t(std::mktime(&tm));
 }
