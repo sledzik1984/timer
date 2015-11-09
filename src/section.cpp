@@ -30,10 +30,19 @@ void Section::end()
 ////////////////////////////////////////////////////////////////////////////////
 Duration Section::overage() const
 {
-    return is_started() ? std::chrono::duration_cast<Duration>(
-                              (started() + duration()) - (is_ended() ? ended() : Clock::now())
-                          )
-                        : Duration(0);
+    if(is_started())
+    {
+        if(!is_ended())
+        {
+            Duration overage = std::chrono::duration_cast<Duration>(
+                started() + duration() - Clock::now()
+            );
+            if(overage > Duration(0)) return overage;
+        }
+        else return std::chrono::duration_cast<Duration>(started() + duration() - ended());
+    }
+
+    return Duration(0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
