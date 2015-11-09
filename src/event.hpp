@@ -10,17 +10,14 @@
 #include <vector>
 
 ////////////////////////////////////////////////////////////////////////////////
-typedef std::vector<Section> Sections;
-
-////////////////////////////////////////////////////////////////////////////////
 class Event
 {
 public:
-    typedef Sections::size_type size_type;
+    using Sections = std::vector<Section>;
 
     ////////////////////
-    Event() = default;
-    explicit Event(QString name) { set_name(std::move(name)); }
+    Event() { reset(); }
+    explicit Event(QString name);
 
     ////////////////////
     Event(const Event&) = default;
@@ -33,20 +30,39 @@ public:
     void set_name(QString name) { _name = std::move(name); }
     const QString& name() const noexcept { return _name; }
 
-    ////////////////////
-    const Sections& sections() const noexcept { return _sections; }
-    Sections& sections() noexcept { return _sections; }
+    const Section::Duration duration() const;
 
     ////////////////////
-    void clear()
-    {
-        _name.clear();
-        _sections.clear();
-    }
+    size_t size() const noexcept { return _sections.size(); }
+    bool empty() const noexcept { return _sections.empty(); }
+    void clear() { _sections.clear(); }
+
+    const Section& section(size_t n) const noexcept { return _sections.at(n); }
+    size_t current() const noexcept { return _current; }
+
+    ////////////////////
+    void reset();
+    void next();
+
+    const Section::Timepoint& started() const noexcept { return section(0).started(); }
+    const Section::Timepoint& ended() const noexcept { return section(size() - 1).ended(); }
+
+    bool is_started() const noexcept { return section(0).is_started(); }
+    bool is_ended() const noexcept { return section(size() - 1).is_ended(); }
+
+    const Section::Duration overage() const;
 
 private:
     QString _name;
     Sections _sections;
+
+    friend class EventReader;
+    friend class EventWriter;
+    friend class EventModel;
+
+    size_t _current = none;
+
+    static constexpr size_t none = -1;
 };
 
 ////////////////////////////////////////////////////////////////////////////////

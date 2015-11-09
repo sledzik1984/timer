@@ -1,2 +1,41 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "event.hpp"
+
+////////////////////////////////////////////////////////////////////////////////
+Event::Event(QString name)
+{
+    set_name(std::move(name));
+    reset();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+const Section::Duration Event::duration() const
+{
+    Section::Duration duration { 0 };
+
+    for(const auto& section : _sections) duration += section.duration();
+    return duration;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Event::reset()
+{
+    _current = none;
+    for(auto& section : _sections) section.reset();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Event::next()
+{
+    _sections.at(current()).end();
+    if(++_current < size()) _sections.at(current()).start();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+const Section::Duration Event::overage() const
+{
+    Section::Duration overage { 0 };
+
+    for(const auto& section : _sections) overage += section.overage();
+    return overage;
+}
