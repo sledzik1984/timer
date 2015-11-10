@@ -36,7 +36,7 @@ public:
     void set_date(QDate date) { _date = std::move(date); }
     const QDate& date() const noexcept { return _date; }
 
-    Duration duration() const;
+    Section::Duration duration() const;
 
     ////////////////////
     size_t size() const noexcept { return _sections.size(); }
@@ -66,7 +66,7 @@ public:
     bool is_started() const noexcept { return section(0).is_started(); }
     bool is_ended() const noexcept { return section(size() - 1).is_ended(); }
 
-    Duration overage() const;
+    Section::Duration overage() const;
 
 private:
     QString _name;

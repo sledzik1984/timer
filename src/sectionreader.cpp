@@ -7,7 +7,7 @@
 #include <QTime>
 
 ////////////////////////////////////////////////////////////////////////////////
-static inline Duration to_duration(const QString& string)
+static inline Section::Duration to_duration(const QString& string)
 {
     return QTime(0, 0).secsTo(QTime::fromString(string, "H:mm:ss"));
 }

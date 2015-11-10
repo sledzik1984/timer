@@ -3,7 +3,7 @@
 #include "section.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
-Section::Section(QString name, Duration duration)
+Section::Section(QString name, Section::Duration duration)
 {
     set_name(std::move(name));
     set_duration(std::move(duration));
@@ -23,7 +23,7 @@ void Section::end()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Duration Section::overage() const
+Section::Duration Section::overage() const
 {
     if(is_started())
     {
