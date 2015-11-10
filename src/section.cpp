@@ -2,10 +2,8 @@
 #include "error.hpp"
 #include "section.hpp"
 
-#include <QTime>
-
 ////////////////////////////////////////////////////////////////////////////////
-Section::Section(QString name, Section::Duration duration)
+Section::Section(QString name, Duration duration)
 {
     set_name(std::move(name));
     set_duration(std::move(duration));
@@ -25,7 +23,7 @@ void Section::end()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Section::Duration Section::overage() const
+Duration Section::overage() const
 {
     if(is_started())
     {
@@ -39,28 +37,4 @@ Section::Duration Section::overage() const
     }
 
     return 0;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-QString Section::to_string(const Duration& duration)
-{
-    return QTime(0, 0).addSecs(duration).toString("H:mm:ss");
-}
-
-////////////////////////////////////////////////////////////////////////////////
-QString Section::to_string(const QDateTime& datetime)
-{
-    return datetime.toString("MMM d h:mm:ss yyyy");
-}
-
-////////////////////////////////////////////////////////////////////////////////
-Section::Duration Section::to_duration(const QString& string)
-{
-    return QTime(0, 0).secsTo(QTime::fromString(string, "H:mm:ss"));
-}
-
-////////////////////////////////////////////////////////////////////////////////
-QDateTime Section::to_datetime(const QString& string)
-{
-    return QDateTime::fromString(string, "MMM d h:mm:ss yyyy");
 }

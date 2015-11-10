@@ -8,11 +8,12 @@
 #include <utility>
 
 ////////////////////////////////////////////////////////////////////////////////
+typedef int Duration;
+
+////////////////////////////////////////////////////////////////////////////////
 class Section
 {
 public:
-    typedef int Duration;
-
     ////////////////////
     Section() { reset(); }
 
@@ -52,18 +53,11 @@ private:
     QDateTime _started;
     QDateTime _ended;
 
+    ////////////////////
     void set_started(QDateTime datetime) { _started = std::move(datetime); }
     void set_ended(QDateTime datetime) { _ended = std::move(datetime); }
 
     friend class SectionReader;
-    friend class SectionWriter;
-
-    ////////////////////
-    static QString to_string(const Duration&);
-    static QString to_string(const QDateTime&);
-
-    static Duration to_duration(const QString&);
-    static QDateTime to_datetime(const QString&);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
