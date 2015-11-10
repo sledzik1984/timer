@@ -2,7 +2,7 @@
 #include "event.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
-Event::Event(QString name, QDate date)
+Event::Event(QString name, Timepoint date)
 {
     set_name(std::move(name));
     set_date(std::move(date));

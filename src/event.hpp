@@ -3,15 +3,17 @@
 #define EVENT_HPP
 
 #include "section.hpp"
-
-#include <QDate>
 #include <QString>
 
+#include <chrono>
 #include <utility>
 #include <vector>
 
 ////////////////////////////////////////////////////////////////////////////////
 using Sections = std::vector<Section>;
+
+using Clock = std::chrono::system_clock;
+using Timepoint = std::chrono::time_point<Clock>;
 
 ////////////////////////////////////////////////////////////////////////////////
 class Event
@@ -19,7 +21,7 @@ class Event
 public:
     ////////////////////
     Event() { reset(); }
-    Event(QString name, QDate date);
+    Event(QString name, Timepoint date);
 
     ////////////////////
     Event(const Event&) = default;
@@ -32,8 +34,8 @@ public:
     void set_name(QString name) { _name = std::move(name); }
     const QString& name() const noexcept { return _name; }
 
-    void set_date(QDate date) { _date = std::move(date); }
-    const QDate& date() const noexcept { return _date; }
+    void set_date(Timepoint date) { _date = std::move(date); }
+    const Timepoint& date() const noexcept { return _date; }
 
     const Duration duration() const;
 
@@ -59,11 +61,10 @@ public:
 
 private:
     QString _name;
-    QDate _date;
+    Timepoint _date;
     Sections _sections;
 
     friend class EventReader;
-    friend class EventWriter;
     friend class EventModel;
 
     size_t _current = none;
