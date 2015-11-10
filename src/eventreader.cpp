@@ -3,8 +3,14 @@
 #include "sectionreader.hpp"
 #include "error.hpp"
 
+#include <QDate>
 #include <QString>
-#include <QXmlStreamReader>
+
+////////////////////////////////////////////////////////////////////////////////
+static inline QDate to_date(const QString& string)
+{
+    return QDate::fromString(string, "MMM d yyyy");
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 static inline QString value(const QXmlStreamAttributes& attrs, const QString& name)
@@ -42,12 +48,12 @@ Event EventReader::read(QXmlStreamReader& reader)
     event.set_name(value(attrs, "name"));
 
     if(!attrs.hasAttribute("date")) throw XmlError("Missing date attribute");
-    event.set_date(Event::to_date(value(attrs, "name")));
+    event.set_date(to_date(value(attrs, "name")));
 
     ////////////////////
     // read sections
     while(reader.readNextStartElement())
-        event._sections.push_back(SectionReader::read(reader));
+        event.insert(SectionReader::read(reader));
 
     ////////////////////
     // check closing tag
