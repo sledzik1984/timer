@@ -1,9 +1,16 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "eventreader.hpp"
 #include "sectionreader.hpp"
-#include "xmlerror.hpp"
+#include "error.hpp"
 
+#include <QString>
 #include <QXmlStreamReader>
+
+////////////////////////////////////////////////////////////////////////////////
+static inline QString value(const QXmlStreamAttributes& attrs, const QString& name)
+{
+    return attrs.value(name).toString();
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 Event EventReader::read(QXmlStreamReader& reader)
@@ -14,7 +21,6 @@ Event EventReader::read(QXmlStreamReader& reader)
     //     <section name="bar" duration="x:xx:xx"/>
     //     ...
     //   </event>
-    Event event;
 
     ////////////////////
     // fast forward until opening tag
@@ -29,15 +35,19 @@ Event EventReader::read(QXmlStreamReader& reader)
 
     ////////////////////
     // get event name
-    auto attributes = reader.attributes();
+    Event event;
+    auto attrs = reader.attributes();
 
-    if(!attributes.hasAttribute("name")) throw XmlError("Missing name attribute");
-    event.set_name(attributes.value("name").toString());
+    if(!attrs.hasAttribute("name")) throw XmlError("Missing name attribute");
+    event.set_name(value(attrs, "name"));
+
+    if(!attrs.hasAttribute("date")) throw XmlError("Missing date attribute");
+    event.set_date(Event::to_date(value(attrs, "name")));
 
     ////////////////////
     // read sections
     while(reader.readNextStartElement())
-        event.push_back(SectionReader::read(reader));
+        event._sections.push_back(SectionReader::read(reader));
 
     ////////////////////
     // check closing tag
