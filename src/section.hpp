@@ -73,7 +73,6 @@ private:
     void set_ended(Timepoint timepoint) { _ended = std::move(timepoint); }
 
     friend class SectionReader;
-    friend class SectionWriter;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
