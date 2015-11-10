@@ -4,6 +4,7 @@
 
 #include "section.hpp"
 
+#include <QDate>
 #include <QString>
 
 #include <utility>
@@ -18,7 +19,7 @@ class Event
 public:
     ////////////////////
     Event() { reset(); }
-    explicit Event(QString name);
+    Event(QString name, QDate date);
 
     ////////////////////
     Event(const Event&) = default;
@@ -30,6 +31,9 @@ public:
     ////////////////////
     void set_name(QString name) { _name = std::move(name); }
     const QString& name() const noexcept { return _name; }
+
+    void set_date(QDate date) { _date = std::move(date); }
+    const QDate& date() const noexcept { return _date; }
 
     const Duration duration() const;
 
@@ -55,6 +59,7 @@ public:
 
 private:
     QString _name;
+    QDate _date;
     Sections _sections;
 
     friend class EventReader;

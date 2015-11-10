@@ -2,9 +2,10 @@
 #include "event.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
-Event::Event(QString name)
+Event::Event(QString name, QDate date)
 {
     set_name(std::move(name));
+    set_date(std::move(date));
     reset();
 }
 
