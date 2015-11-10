@@ -11,10 +11,10 @@ void SectionWriter::write(QXmlStreamWriter& writer, const Section& section)
     writer.writeStartElement("section");
 
     writer.writeAttribute("name", section.name());
-    writer.writeAttribute("duration", to_string(section.duration()));
+    writer.writeAttribute("duration", Section::to_string(section.duration()));
 
-    if(section.is_started()) writer.writeAttribute("started", to_string(section.started()));
-    if(section.is_ended()) writer.writeAttribute("ended", to_string(section.ended()));
+    if(section.is_started()) writer.writeAttribute("started", Section::to_string(section.started()));
+    if(section.is_ended()) writer.writeAttribute("ended", Section::to_string(section.ended()));
 
     writer.writeEndElement();
 }
