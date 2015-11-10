@@ -32,13 +32,13 @@ Section SectionReader::read(QXmlStreamReader& reader)
     section.set_name(value(attrs, "name"));
 
     if(!attrs.hasAttribute("duration")) throw XmlError("Missing duration attribute");
-    section.set_duration(to_duration(value(attrs, "duration")));
+    section.set_duration(Section::to_duration(value(attrs, "duration")));
 
     if(attrs.hasAttribute("started"))
-        section.set_started(to_timepoint(value(attrs, "started")));
+        section.set_started(Section::to_datetime(value(attrs, "started")));
 
     if(attrs.hasAttribute("ended"))
-        section.set_ended(to_timepoint(value(attrs, "ended")));
+        section.set_ended(Section::to_datetime(value(attrs, "ended")));
 
     ////////////////////
     // check closing tag
