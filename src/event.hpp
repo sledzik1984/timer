@@ -5,6 +5,7 @@
 #include "section.hpp"
 
 #include <QDate>
+#include <QDateTime>
 #include <QString>
 
 #include <utility>
@@ -35,19 +36,29 @@ public:
     void set_date(QDate date) { _date = std::move(date); }
     const QDate& date() const noexcept { return _date; }
 
-    Section::Duration duration() const;
+    Duration duration() const;
 
     ////////////////////
     size_t size() const noexcept { return _sections.size(); }
-    bool empty() const noexcept { return _sections.empty(); }
-    void clear() { _sections.clear(); }
 
     const Section& section(size_t n) const noexcept { return _sections.at(n); }
-    size_t current() const noexcept { return _current; }
+    Section& section(size_t n) noexcept { return _sections.at(n); }
+
+    void clear() { _sections.clear(); }
+
+    void insert(size_t n, Section section)
+    {
+        _sections.insert(_sections.begin() + n, std::move(section));
+    }
+    void insert(Section section) { insert(size(), std::move(section)); }
+
+    void erase(size_t n) { _sections.erase(_sections.begin() + n); }
 
     ////////////////////
     void reset();
     void next();
+
+    size_t current() const noexcept { return _current; }
 
     const QDateTime& started() const noexcept { return section(0).started(); }
     const QDateTime& ended() const noexcept { return section(size() - 1).ended(); }
@@ -55,7 +66,7 @@ public:
     bool is_started() const noexcept { return section(0).is_started(); }
     bool is_ended() const noexcept { return section(size() - 1).is_ended(); }
 
-    Section::Duration overage() const;
+    Duration overage() const;
 
 private:
     QString _name;
@@ -63,15 +74,7 @@ private:
     Sections _sections;
 
     size_t _current = none;
-
     static constexpr size_t none = -1;
-
-    friend class EventReader;
-    friend class EventWriter;
-
-    ////////////////////
-    static QString to_string(const QDate&);
-    static QDate to_date(const QString&);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
