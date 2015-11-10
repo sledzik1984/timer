@@ -2,13 +2,10 @@
 #include "error.hpp"
 #include "section.hpp"
 
-#include <ctime>
-#include <iomanip>
-#include <sstream>
-
+#include <QTime>
 
 ////////////////////////////////////////////////////////////////////////////////
-Section::Section(QString name, Duration duration)
+Section::Section(QString name, Section::Duration duration)
 {
     set_name(std::move(name));
     set_duration(std::move(duration));
@@ -18,79 +15,52 @@ Section::Section(QString name, Duration duration)
 ////////////////////////////////////////////////////////////////////////////////
 void Section::start()
 {
-    if(!is_started()) _started = Clock::now();
+    if(!is_started()) _started = QDateTime::currentDateTime();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Section::end()
 {
-    if(is_started() && !is_ended()) _ended = Clock::now();
+    if(is_started() && !is_ended()) _ended = QDateTime::currentDateTime();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Duration Section::overage() const
+Section::Duration Section::overage() const
 {
     if(is_started())
     {
+        QDateTime end = started().addSecs(duration());
         if(!is_ended())
         {
-            Duration overage = std::chrono::duration_cast<Duration>(
-                started() + duration() - Clock::now()
-            );
-            if(overage > Duration(0)) return overage;
+            int overage = end.secsTo(QDateTime::currentDateTime());
+            if(overage > 0) return overage;
         }
-        else return std::chrono::duration_cast<Duration>(started() + duration() - ended());
+        else return end.secsTo(ended());
     }
 
-    return Duration(0);
+    return 0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-QString to_string(const Duration& duration)
+QString Section::to_string(const Duration& duration)
 {
-    std::time_t time = Clock::to_time_t(Timepoint(duration));
-
-    std::stringstream ss;
-    ss << std::put_time(std::localtime(&time), "%X");
-
-    return ss.str().data();
+    return QTime(0, 0).addSecs(duration).toString("H:mm:ss");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-QString to_string(const Timepoint& timepoint)
+QString Section::to_string(const QDateTime& datetime)
 {
-    std::time_t time = Clock::to_time_t(timepoint);
-
-    std::stringstream ss;
-    ss << std::put_time(std::localtime(&time), "%c");
-
-    return ss.str().data();
+    return datetime.toString("MMM d h:mm:ss yyyy");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Duration to_duration(const QString& string)
+Section::Duration Section::to_duration(const QString& string)
 {
-    std::tm tm { };
-
-    std::stringstream ss(string.toLatin1().data());
-    ss >> std::get_time(&tm, "%X");
-
-    if(ss.fail()) throw FormatError("Invalid duration format");
-
-    using namespace std::chrono;
-    return hours(tm.tm_hour) + minutes(tm.tm_min) + seconds(tm.tm_sec);
+    return QTime(0, 0).secsTo(QTime::fromString(string, "H:mm:ss"));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Timepoint to_timepoint(const QString& string)
+QDateTime Section::to_datetime(const QString& string)
 {
-    std::tm tm { };
-
-    std::stringstream ss(string.toLatin1().data());
-    ss >> std::get_time(&tm, "%c");
-
-    if(ss.fail()) throw FormatError("Invalid date/time format");
-
-    return Clock::from_time_t(std::mktime(&tm));
+    return QDateTime::fromString("MMM d h:mm:ss yyyy");
 }
