@@ -28,8 +28,11 @@ void Event::reset()
 ////////////////////////////////////////////////////////////////////////////////
 void Event::next()
 {
-    _sections.at(current()).end();
-    if(++_current < size()) _sections.at(current()).start();
+    if(current() < size())
+    {
+        _sections.at(current()).end();
+        if(++_current < size()) _sections.at(current()).start();
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
