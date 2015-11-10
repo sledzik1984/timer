@@ -2,7 +2,7 @@
 #include "event.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
-Event::Event(QString name, Timepoint date)
+Event::Event(QString name, QDate date)
 {
     set_name(std::move(name));
     set_date(std::move(date));
@@ -10,9 +10,9 @@ Event::Event(QString name, Timepoint date)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-const Duration Event::duration() const
+Section::Duration Event::duration() const
 {
-    Duration duration { 0 };
+    Section::Duration duration { 0 };
 
     for(const auto& section : _sections) duration += section.duration();
     return duration;
@@ -36,10 +36,22 @@ void Event::next()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-const Duration Event::overage() const
+Section::Duration Event::overage() const
 {
-    Duration overage { 0 };
+    Section::Duration overage { 0 };
 
     for(const auto& section : _sections) overage += section.overage();
     return overage;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+QString Event::to_string(const QDate& date)
+{
+    return date.toString("MMM d yyyy");
+}
+
+////////////////////////////////////////////////////////////////////////////////
+QDate Event::to_date(const QString& string)
+{
+    return QDate::fromString(string, "MMM d yyyy");
 }
