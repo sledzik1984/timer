@@ -62,5 +62,5 @@ Section::Duration Section::to_duration(const QString& string)
 ////////////////////////////////////////////////////////////////////////////////
 QDateTime Section::to_datetime(const QString& string)
 {
-    return QDateTime::fromString("MMM d h:mm:ss yyyy");
+    return QDateTime::fromString(string, "MMM d h:mm:ss yyyy");
 }
