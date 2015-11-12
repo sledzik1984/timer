@@ -64,7 +64,10 @@ void NumberWidget::set_min_max_digits(size_t min, size_t max)
 ////////////////////////////////////////////////////////////////////////////////
 void NumberWidget::reload()
 {
-    size_t digits = std::min(_max_digits, std::max(_min_digits, std::log10((double)_number) + 1));
+    size_t digits = std::min(_max_digits,
+                             std::max(_min_digits,
+                                      1 + (_number ? std::log10((double)_number)
+                                                  : 0)));
     size_t number = _number;
 
     size_t count = _layout->count();
