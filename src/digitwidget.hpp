@@ -21,7 +21,6 @@ class DigitWidget : public SvgWidget
     Q_OBJECT
 
 public:
-    ////////////////////
     explicit DigitWidget(Digit digit, const QColor& color = Qt::black, QWidget* parent = nullptr);
 
     ////////////////////
@@ -34,6 +33,7 @@ public:
     void reload();
 
 signals:
+    ////////////////////
     void digit_changed(Digit);
     void color_changed(const QColor&);
 

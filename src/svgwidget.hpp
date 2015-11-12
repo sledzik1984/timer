@@ -15,7 +15,6 @@ class SvgWidget : public QSvgWidget
     Q_OBJECT
 
 public:
-    ////////////////////
     explicit SvgWidget(QWidget* parent = nullptr);
 
     virtual int heightForWidth(int width) const override;
@@ -33,6 +32,7 @@ protected:
     virtual void mouseReleaseEvent(QMouseEvent*) override;
 
 private:
+    ////////////////////
     QTimer _long_press;
 };
 

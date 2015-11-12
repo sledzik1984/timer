@@ -15,7 +15,6 @@ class NumberWidget : public QWidget
     Q_OBJECT
 
 public:
-    ////////////////////
     explicit NumberWidget(size_t number, const QColor& color = Qt::black, QWidget* parent = nullptr);
 
     ////////////////////
@@ -25,14 +24,12 @@ public:
     void set_color(const QColor& color);
     const QColor& color() const noexcept{ return _color; }
 
-    ////////////////////
     void set_min_digits(size_t n);
     size_t min_digits() const noexcept { return _min_digits; }
 
     void set_max_digits(size_t n);
     size_t max_digits() const noexcept { return _max_digits; }
 
-    ////////////////////
     void reload();
 
 signals:
