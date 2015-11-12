@@ -15,13 +15,13 @@ class NumberWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit NumberWidget(size_t number, const QColor& color = Qt::black, QWidget* parent = nullptr);
+    explicit NumberWidget(size_t number, QColor color = Qt::black, QWidget* parent = nullptr);
 
     ////////////////////
     void set_number(size_t number);
     size_t number() const noexcept { return _number; }
 
-    void set_color(const QColor& color);
+    void set_color(QColor color);
     const QColor& color() const noexcept{ return _color; }
 
     void set_min_digits(size_t n);

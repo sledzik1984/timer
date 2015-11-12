@@ -5,14 +5,14 @@
 #include <cmath>
 
 ////////////////////////////////////////////////////////////////////////////////
-NumberWidget::NumberWidget(size_t number, const QColor& color, QWidget* parent) :
+NumberWidget::NumberWidget(size_t number, QColor color, QWidget* parent) :
     QWidget(parent),
     _layout(new QHBoxLayout(this))
 {
     _layout->setContentsMargins(0, 0, 0, 0);
 
     set_number(number);
-    set_color(color);
+    set_color(std::move(color));
     reload();
 
     connect(this, &NumberWidget::number_changed, this, &NumberWidget::reload);
@@ -30,9 +30,9 @@ void NumberWidget::set_number(size_t number)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void NumberWidget::set_color(const QColor& color)
+void NumberWidget::set_color(QColor color)
 {
-    _color = color;
+    _color = std::move(color);
     emit color_changed(_color);
 }
 
