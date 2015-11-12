@@ -22,6 +22,7 @@ HEADERS +=                  \
     src/sectionreader.hpp   \
     src/sectionwriter.hpp   \
     src/svgwidget.hpp       \
+    src/timewidget.hpp      \
 
 ################################################################################
 SOURCES +=                  \
@@ -36,6 +37,7 @@ SOURCES +=                  \
     src/sectionreader.cpp   \
     src/sectionwriter.cpp   \
     src/svgwidget.cpp       \
+    src/timewidget.cpp      \
 
 ################################################################################
 FORMS +=                    \
