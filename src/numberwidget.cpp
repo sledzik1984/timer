@@ -1,4 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
+#include "block.hpp"
 #include "digitwidget.hpp"
 #include "numberwidget.hpp"
 
@@ -10,9 +11,11 @@ NumberWidget::NumberWidget(size_t number, QColor color, QWidget* parent) :
     _layout(new QHBoxLayout(this))
 {
     _layout->setContentsMargins(0, 0, 0, 0);
-
-    set_number(number);
-    set_color(std::move(color));
+    {
+        Block _(this);
+        set_number(number);
+        set_color(std::move(color));
+    }
     reload();
 
     connect(this, &NumberWidget::number_changed, this, &NumberWidget::reload);
@@ -79,11 +82,12 @@ void NumberWidget::reload()
         else
         {
             auto widget = static_cast<DigitWidget*>(_layout->itemAt(count - index)->widget());
-
-            widget->blockSignals(true);
-            widget->set_digit(digit);
-            widget->set_color(_color);
-            widget->blockSignals(false);
+            {
+                Block _(widget);
+                widget->set_digit(digit);
+                widget->set_color(_color);
+            }
+            widget->reload();
         }
 
         ++index;
