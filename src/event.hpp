@@ -44,15 +44,12 @@ public:
     const Section& section(size_t n) const noexcept { return _sections.at(n); }
     Section& section(size_t n) noexcept { return _sections.at(n); }
 
-    void clear() { _sections.clear(); }
+    void clear();
 
-    void insert(size_t n, Section section)
-    {
-        _sections.insert(_sections.begin() + n, std::move(section));
-    }
+    void insert(size_t n, Section section);
     void insert(Section section) { insert(size(), std::move(section)); }
 
-    void erase(size_t n) { _sections.erase(_sections.begin() + n); }
+    void erase(size_t n);
 
     ////////////////////
     void reset();
