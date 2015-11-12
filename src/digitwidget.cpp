@@ -1,4 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
+#include "block.hpp"
 #include "digitwidget.hpp"
 
 #include <QByteArray>
@@ -41,8 +42,11 @@ static const QByteArray digit[]
 DigitWidget::DigitWidget(Digit digit, QColor color, QWidget* parent) :
     SvgWidget(parent)
 {
-    set_digit(digit);
-    set_color(std::move(color));
+    {
+        Block _(this);
+        set_digit(digit);
+        set_color(std::move(color));
+    }
     reload();
 
     connect(this, &DigitWidget::digit_changed, this, &DigitWidget::reload);
