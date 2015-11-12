@@ -17,9 +17,7 @@ class SvgWidget : public QSvgWidget
 public:
     ////////////////////
     explicit SvgWidget(QWidget* parent = nullptr);
-    explicit SvgWidget(const QString& filename, QWidget* parent = nullptr);
 
-    ////////////////////
     virtual int heightForWidth(int width) const override;
 
 signals:

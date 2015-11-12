@@ -19,13 +19,6 @@ SvgWidget::SvgWidget(QWidget* parent) :
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-SvgWidget::SvgWidget(const QString& filename, QWidget* parent) :
-    SvgWidget(parent)
-{
-    load(filename);
-}
-
-////////////////////////////////////////////////////////////////////////////////
 int SvgWidget::heightForWidth(int width) const
 {
     return width * sizeHint().height() / sizeHint().width();
