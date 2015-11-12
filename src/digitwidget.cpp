@@ -38,11 +38,11 @@ static const QByteArray digit[]
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-DigitWidget::DigitWidget(Digit digit, const QColor& color, QWidget* parent) :
+DigitWidget::DigitWidget(Digit digit, QColor color, QWidget* parent) :
     SvgWidget(parent)
 {
-    set_color(color);
     set_digit(digit);
+    set_color(std::move(color));
     reload();
 
     connect(this, &DigitWidget::digit_changed, this, &DigitWidget::reload);
@@ -57,9 +57,9 @@ void DigitWidget::set_digit(Digit digit)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void DigitWidget::set_color(const QColor& color)
+void DigitWidget::set_color(QColor color)
 {
-    _color = color;
+    _color = std::move(color);
     emit color_changed(_color);
 }
 

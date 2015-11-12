@@ -21,13 +21,13 @@ class DigitWidget : public SvgWidget
     Q_OBJECT
 
 public:
-    explicit DigitWidget(Digit digit, const QColor& color = Qt::black, QWidget* parent = nullptr);
+    explicit DigitWidget(Digit digit, QColor color = Qt::black, QWidget* parent = nullptr);
 
     ////////////////////
     void set_digit(Digit digit);
     Digit digit() const noexcept { return _digit; }
 
-    void set_color(const QColor& color);
+    void set_color(QColor color);
     const QColor& color() const noexcept { return _color; }
 
     void reload();
