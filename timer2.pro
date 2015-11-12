@@ -11,6 +11,7 @@ TEMPLATE = app
 ################################################################################
 HEADERS +=                  \
     src/block.hpp           \
+    src/clockwidget.hpp     \
     src/digitwidget.hpp     \
     src/error.hpp           \
     src/event.hpp           \
@@ -26,6 +27,7 @@ HEADERS +=                  \
 
 ################################################################################
 SOURCES +=                  \
+    src/clockwidget.cpp     \
     src/digitwidget.cpp     \
     src/event.cpp           \
     src/eventreader.cpp     \

@@ -1,0 +1,18 @@
+////////////////////////////////////////////////////////////////////////////////
+#include "clockwidget.hpp"
+
+////////////////////////////////////////////////////////////////////////////////
+ClockWidget::ClockWidget(QColor color, QWidget* parent) :
+    TimeWidget(QTime(0, 0), std::move(color), parent)
+{
+    connect(&_update, &QTimer::timeout, this, &ClockWidget::update);
+
+    _update.setInterval(100);
+    _update.start();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void ClockWidget::update()
+{
+    set_time(QTime::currentTime());
+}
