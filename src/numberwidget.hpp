@@ -32,8 +32,6 @@ public:
     void set_max_digits(size_t n);
     size_t max_digits() const noexcept { return _max_digits; }
 
-    size_t digits() const noexcept { return _digits; }
-
     ////////////////////
     void reload();
 
@@ -57,7 +55,6 @@ private:
 
     double _min_digits = 0;
     double _max_digits = std::numeric_limits<size_t>::max();
-    size_t _digits;
 
     QHBoxLayout* _layout;
 };

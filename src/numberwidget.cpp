@@ -53,18 +53,18 @@ void NumberWidget::set_max_digits(size_t n)
 ////////////////////////////////////////////////////////////////////////////////
 void NumberWidget::reload()
 {
-    _digits = std::min(_max_digits, std::max(_min_digits, std::log10((double)_number) + 1));
-
-    size_t widgets = _layout->count();
+    size_t digits = std::min(_max_digits, std::max(_min_digits, std::log10((double)_number) + 1));
     size_t number = _number;
-    size_t index = 0;
 
-    while(index < _digits)
+    size_t count = _layout->count();
+    size_t index = 1;
+
+    while(index <= digits)
     {
         Digit digit = static_cast<Digit>(number % 10);
         number /= 10;
 
-        if(index >= widgets)
+        if(index > count)
         {
             DigitWidget* widget = new DigitWidget(digit, _color);
 
@@ -74,11 +74,11 @@ void NumberWidget::reload()
             connect(widget, &DigitWidget::released    , this, &NumberWidget::released    );
 
             _layout->insertWidget(0, widget, widget->sizeHint().width());
-            widgets = _layout->count();
+            ++count;
         }
         else
         {
-            auto widget = static_cast<DigitWidget*>(_layout->itemAt(widgets - index - 1)->widget());
+            auto widget = static_cast<DigitWidget*>(_layout->itemAt(count - index)->widget());
 
             widget->blockSignals(true);
             widget->set_digit(digit);
@@ -89,9 +89,13 @@ void NumberWidget::reload()
         ++index;
     }
 
-    while(index < widgets)
+    while(index <= count)
     {
-        delete _layout->takeAt(0);
+        auto item = _layout->takeAt(0);
+
+        delete item->widget();
+        delete item;
+
         ++index;
     }
 }
