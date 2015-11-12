@@ -16,6 +16,7 @@ HEADERS +=                  \
     src/eventreader.hpp     \
     src/eventwriter.hpp     \
     src/mainwindow.hpp      \
+    src/numberwidget.hpp    \
     src/section.hpp         \
     src/sectionreader.hpp   \
     src/sectionwriter.hpp   \
@@ -29,6 +30,7 @@ SOURCES +=                  \
     src/eventwriter.cpp     \
     src/main.cpp            \
     src/mainwindow.cpp      \
+    src/numberwidget.cpp    \
     src/section.cpp         \
     src/sectionreader.cpp   \
     src/sectionwriter.cpp   \
