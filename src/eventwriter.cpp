@@ -1,13 +1,36 @@
+////////////////////////////////////////////////////////////////////////////////
 #include "eventwriter.hpp"
 #include "sectionwriter.hpp"
+#include "error.hpp"
 
-#include <QString>
 #include <QDate>
+#include <QFile>
 
 ////////////////////////////////////////////////////////////////////////////////
 static inline QString to_string(const QDate& date)
 {
     return date.toString("MMM d yyyy");
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+void EventWriter::write(const QString& filename, const Event& event)
+{
+    QFile file(filename);
+    if(!file.open(QFile::WriteOnly)) throw XmlError(file.errorString());
+
+    EventWriter::write(&file, event);
+    if(file.error()) throw XmlError(file.errorString());
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void EventWriter::write(QIODevice* device, const Event& event)
+{
+    QXmlStreamWriter writer(device);
+    writer.setAutoFormatting(true);
+
+    EventWriter::write(writer, event);
+    if(writer.hasError()) throw XmlError(device->errorString());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
