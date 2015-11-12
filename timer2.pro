@@ -10,6 +10,7 @@ TEMPLATE = app
 
 ################################################################################
 HEADERS +=                  \
+    src/block.hpp           \
     src/digitwidget.hpp     \
     src/error.hpp           \
     src/event.hpp           \
