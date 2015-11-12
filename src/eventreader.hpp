@@ -3,12 +3,17 @@
 #define EVENTREADER_HPP
 
 #include "event.hpp"
+
+#include <QIODevice>
+#include <QString>
 #include <QXmlStreamReader>
 
 ////////////////////////////////////////////////////////////////////////////////
 class EventReader
 {
 public:
+    static Event read(const QString& filename);
+    static Event read(QIODevice*);
     static Event read(QXmlStreamReader&);
 };
 
