@@ -10,6 +10,7 @@ TEMPLATE = app
 
 ################################################################################
 HEADERS +=                  \
+    src/digitwidget.hpp     \
     src/error.hpp           \
     src/event.hpp           \
     src/eventreader.hpp     \
@@ -22,6 +23,7 @@ HEADERS +=                  \
 
 ################################################################################
 SOURCES +=                  \
+    src/digitwidget.cpp     \
     src/event.cpp           \
     src/eventreader.cpp     \
     src/eventwriter.cpp     \
