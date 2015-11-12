@@ -1,12 +1,15 @@
 ////////////////////////////////////////////////////////////////////////////////
+#include "error.hpp"
 #include "mainwindow.hpp"
 
 #include <QApplication>
 #include <QColor>
+#include <QDebug>
 #include <QPalette>
 
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char* argv[])
+try
 {
     QApplication a(argc, argv);
 
@@ -37,4 +40,8 @@ int main(int argc, char* argv[])
     w.show();
 
     return a.exec();
+}
+catch(const Error& e)
+{
+    qCritical() << e.message();
 }
