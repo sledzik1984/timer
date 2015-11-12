@@ -11,11 +11,9 @@ NumberWidget::NumberWidget(size_t number, QColor color, QWidget* parent) :
     _layout(new QHBoxLayout(this))
 {
     _layout->setContentsMargins(0, 0, 0, 0);
-    {
-        Block _(this);
-        set_number(number);
-        set_color(std::move(color));
-    }
+
+    set_number(number);
+    set_color(std::move(color));
     reload();
 
     connect(this, &NumberWidget::    number_changed, this, &NumberWidget::reload);
