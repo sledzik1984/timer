@@ -51,6 +51,17 @@ void NumberWidget::set_max_digits(size_t n)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+void NumberWidget::set_min_max_digits(size_t min, size_t max)
+{
+    {
+        Block _(this);
+        set_min_digits(min);
+        set_max_digits(max);
+    }
+    reload();
+}
+
+////////////////////////////////////////////////////////////////////////////////
 void NumberWidget::reload()
 {
     size_t digits = std::min(_max_digits, std::max(_min_digits, std::log10((double)_number) + 1));

@@ -30,6 +30,8 @@ public:
     void set_max_digits(size_t n);
     size_t max_digits() const noexcept { return _max_digits; }
 
+    void set_min_max_digits(size_t min, size_t max);
+
     void reload();
 
 signals:
