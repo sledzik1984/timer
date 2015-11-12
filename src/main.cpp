@@ -4,44 +4,57 @@
 
 #include <QApplication>
 #include <QColor>
-#include <QDebug>
 #include <QPalette>
+
+#include <iostream>
+
+////////////////////////////////////////////////////////////////////////////////
+void set_dark_palette(QApplication& application)
+{
+    QPalette palette;
+
+    palette.setColor(QPalette::Window, QColor(53,53,53));
+    palette.setColor(QPalette::WindowText, Qt::white);
+    palette.setColor(QPalette::Base, QColor(25,25,25));
+    palette.setColor(QPalette::AlternateBase, QColor(53,53,53));
+    palette.setColor(QPalette::ToolTipBase, Qt::white);
+    palette.setColor(QPalette::ToolTipText, Qt::white);
+    palette.setColor(QPalette::Text, Qt::white);
+    palette.setColor(QPalette::Button, QColor(53,53,53));
+    palette.setColor(QPalette::ButtonText, Qt::white);
+    palette.setColor(QPalette::BrightText, Qt::red);
+    palette.setColor(QPalette::Link, QColor(42, 130, 218));
+    palette.setColor(QPalette::Highlight, QColor(42, 130, 218));
+    palette.setColor(QPalette::HighlightedText, Qt::black);
+
+    application.setPalette(palette);
+    application.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char* argv[])
 try
 {
-    QApplication a(argc, argv);
+    QApplication application(argc, argv);
 
-    for(const auto& arg : a.arguments())
+    auto options = application.arguments();
+    options.removeAt(0); // application name
+
+    for(const QString& option : options)
     {
-        if(arg == "--dark")
+        if(option == "--dark")
         {
-            QPalette p;
-            p.setColor(QPalette::Window, QColor(53,53,53));
-            p.setColor(QPalette::WindowText, Qt::white);
-            p.setColor(QPalette::Base, QColor(25,25,25));
-            p.setColor(QPalette::AlternateBase, QColor(53,53,53));
-            p.setColor(QPalette::ToolTipBase, Qt::white);
-            p.setColor(QPalette::ToolTipText, Qt::white);
-            p.setColor(QPalette::Text, Qt::white);
-            p.setColor(QPalette::Button, QColor(53,53,53));
-            p.setColor(QPalette::ButtonText, Qt::white);
-            p.setColor(QPalette::BrightText, Qt::red);
-            p.setColor(QPalette::Link, QColor(42, 130, 218));
-            p.setColor(QPalette::Highlight, QColor(42, 130, 218));
-            p.setColor(QPalette::HighlightedText, Qt::black);
-            a.setPalette(p);
-            a.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
+            set_dark_palette(application);
         }
+        else throw InvalidError("Invalid option " + option);
     }
 
-    MainWindow w;
-    w.show();
+    MainWindow window;
+    window.show();
 
-    return a.exec();
+    return application.exec();
 }
 catch(const Error& e)
 {
-    qCritical() << e.message();
+    std::cerr << e.message().toLatin1().data() << std::endl;
 }
