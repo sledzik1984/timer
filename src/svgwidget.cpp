@@ -13,9 +13,9 @@ SvgWidget::SvgWidget(QWidget* parent) :
     setSizePolicy(policy);
 
     ////////////////////
-    _long_press.setSingleShot(true);
-    _long_press.setInterval(1000);
-    connect(&_long_press, &QTimer::timeout, this, &SvgWidget::long_pressed);
+    _long.setSingleShot(true);
+    _long.setInterval(1000);
+    connect(&_long, &QTimer::timeout, this, &SvgWidget::long_pressed);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -31,7 +31,7 @@ void SvgWidget::mousePressEvent(QMouseEvent* event)
 
     if(!event->isAccepted())
     {
-        _long_press.start();
+        _long.start();
         emit pressed();
 
         event->accept();
@@ -45,9 +45,9 @@ void SvgWidget::mouseReleaseEvent(QMouseEvent* event)
 
     if(!event->isAccepted())
     {
-        if(_long_press.isActive())
+        if(_long.isActive())
         {
-            _long_press.stop();
+            _long.stop();
             emit clicked();
         }
 
