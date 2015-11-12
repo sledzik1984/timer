@@ -18,9 +18,8 @@ NumberWidget::NumberWidget(size_t number, QColor color, QWidget* parent) :
     }
     reload();
 
-    connect(this, &NumberWidget::number_changed, this, &NumberWidget::reload);
-    connect(this, &NumberWidget::color_changed, this, &NumberWidget::reload);
-
+    connect(this, &NumberWidget::    number_changed, this, &NumberWidget::reload);
+    connect(this, &NumberWidget::     color_changed, this, &NumberWidget::reload);
     connect(this, &NumberWidget::min_digits_changed, this, &NumberWidget::reload);
     connect(this, &NumberWidget::max_digits_changed, this, &NumberWidget::reload);
 }
