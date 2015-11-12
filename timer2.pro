@@ -10,23 +10,18 @@ TEMPLATE = app
 
 ################################################################################
 HEADERS +=                  \
-    src/editwindow.hpp      \
     src/error.hpp           \
     src/event.hpp           \
-    src/eventmodel.hpp      \
     src/eventreader.hpp     \
     src/eventwriter.hpp     \
     src/mainwindow.hpp      \
     src/section.hpp         \
     src/sectionreader.hpp   \
     src/sectionwriter.hpp   \
-    src/timedelegate.hpp    \
 
 ################################################################################
 SOURCES +=                  \
-    src/editwindow.cpp      \
     src/event.cpp           \
-    src/eventmodel.cpp      \
     src/eventreader.cpp     \
     src/eventwriter.cpp     \
     src/main.cpp            \
@@ -34,11 +29,9 @@ SOURCES +=                  \
     src/section.cpp         \
     src/sectionreader.cpp   \
     src/sectionwriter.cpp   \
-    src/timedelegate.cpp    \
 
 ################################################################################
 FORMS +=                    \
-    src/editwindow.ui       \
     src/mainwindow.ui       \
 
 ################################################################################
