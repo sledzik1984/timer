@@ -18,6 +18,7 @@ HEADERS +=                  \
     src/section.hpp         \
     src/sectionreader.hpp   \
     src/sectionwriter.hpp   \
+    src/svgwidget.hpp       \
 
 ################################################################################
 SOURCES +=                  \
@@ -29,6 +30,7 @@ SOURCES +=                  \
     src/section.cpp         \
     src/sectionreader.cpp   \
     src/sectionwriter.cpp   \
+    src/svgwidget.cpp       \
 
 ################################################################################
 FORMS +=                    \
