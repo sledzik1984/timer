@@ -27,17 +27,17 @@ TimeWidget::TimeWidget(QTime time, QColor color, QWidget* parent) :
 
     ////////////////////
     connect(_hours  , &NumberWidget::clicked     , this, &TimeWidget::hours_clicked       );
-    connect(_hours  , &NumberWidget::pressed     , this, &TimeWidget::hours_long_pressed  );
+    connect(_hours  , &NumberWidget::pressed     , this, &TimeWidget::hours_pressed       );
     connect(_hours  , &NumberWidget::long_pressed, this, &TimeWidget::hours_long_pressed  );
     connect(_hours  , &NumberWidget::released    , this, &TimeWidget::hours_released      );
 
     connect(_minutes, &NumberWidget::clicked     , this, &TimeWidget::minutes_clicked     );
-    connect(_minutes, &NumberWidget::pressed     , this, &TimeWidget::minutes_long_pressed);
+    connect(_minutes, &NumberWidget::pressed     , this, &TimeWidget::minutes_pressed     );
     connect(_minutes, &NumberWidget::long_pressed, this, &TimeWidget::minutes_long_pressed);
     connect(_minutes, &NumberWidget::released    , this, &TimeWidget::minutes_released    );
 
     connect(_seconds, &NumberWidget::clicked     , this, &TimeWidget::seconds_clicked     );
-    connect(_seconds, &NumberWidget::pressed     , this, &TimeWidget::seconds_long_pressed);
+    connect(_seconds, &NumberWidget::pressed     , this, &TimeWidget::seconds_pressed     );
     connect(_seconds, &NumberWidget::long_pressed, this, &TimeWidget::seconds_long_pressed);
     connect(_seconds, &NumberWidget::released    , this, &TimeWidget::seconds_released    );
 
