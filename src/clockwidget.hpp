@@ -17,10 +17,14 @@ class ClockWidget : public TimeWidget
 public:
     explicit ClockWidget(QColor color = Qt::red, QWidget* parent = nullptr);
 
+    void reset() { _offset = 0; }
+
 private:
     ////////////////////
-    QTimer _update;
+    int _offset = 0;
+    void add_offset(int amount);
 
+    QTimer _update;
     void update();
 };
 
