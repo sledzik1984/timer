@@ -2,6 +2,8 @@
 #include "block.hpp"
 #include "timewidget.hpp"
 
+#include <QCursor>
+
 ////////////////////////////////////////////////////////////////////////////////
 TimeWidget::TimeWidget(QTime time, QColor color, QWidget* parent) :
     QWidget(parent),
@@ -89,4 +91,18 @@ void TimeWidget::reload()
         _seconds->set_color(_color);
     }
     _seconds->reload();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+TimeWidget::Location TimeWidget::location() const
+{
+    QPoint cursor = mapFromGlobal(QCursor::pos());
+
+    if(cursor.y() <= height() / 4)
+        return Location::top;
+
+    else if(cursor.y() >= height() * 3 / 4)
+        return Location::bottom;
+
+    else return Location::middle;
 }

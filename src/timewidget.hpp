@@ -49,6 +49,11 @@ signals:
     void time_changed(const QTime&);
     void color_changed(const QColor&);
 
+protected:
+    ////////////////////
+    enum class Location { top, middle, bottom };
+    Location location() const;
+
 private:
     ////////////////////
     QTime _time;
