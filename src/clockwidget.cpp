@@ -21,9 +21,10 @@ ClockWidget::ClockWidget(QColor color, QWidget* parent) :
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void ClockWidget::update()
+void ClockWidget::set_offset(int offset)
 {
-    set_time(QTime::currentTime().addSecs(_offset));
+    _offset = offset;
+    emit offset_changed(_offset);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -32,13 +33,19 @@ void ClockWidget::add_offset(int amount)
     switch(location())
     {
     case Location::top:
-        _offset += amount;
+        set_offset(offset() + amount);
         break;
 
     case Location::bottom:
-        _offset -= amount;
+        set_offset(offset() - amount);
         break;
 
     default: break;
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void ClockWidget::update()
+{
+    set_time(QTime::currentTime().addSecs(offset()));
 }

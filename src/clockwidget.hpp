@@ -17,8 +17,11 @@ class ClockWidget : public TimeWidget
 public:
     explicit ClockWidget(QColor color = Qt::red, QWidget* parent = nullptr);
 
-    void set_offset(int offset) { _offset = offset; }
+    void set_offset(int);
     int offset() const noexcept { return _offset;}
+
+signals:
+    void offset_changed(int);
 
 private:
     ////////////////////
