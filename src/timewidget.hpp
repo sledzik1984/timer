@@ -13,6 +13,12 @@
 #include <QWidget>
 
 ////////////////////////////////////////////////////////////////////////////////
+enum class Unit
+{
+    Hours, Minutes, Seconds
+};
+
+////////////////////////////////////////////////////////////////////////////////
 class TimeWidget : public QWidget, public FreezingWidget
 {
     Q_OBJECT
@@ -45,6 +51,12 @@ signals:
     void seconds_pressed();
     void seconds_long_pressed();
     void seconds_released();
+
+    ////////////////////
+    void clicked(Unit);
+    void pressed(Unit);
+    void long_pressed(Unit);
+    void released(Unit);
 
     ////////////////////
     void time_changed(const QTime&);

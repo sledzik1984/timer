@@ -43,6 +43,22 @@ TimeWidget::TimeWidget(QTime time, QColor color, QWidget* parent) :
     connect(_seconds, &NumberWidget::released    , this, &TimeWidget::seconds_released    );
 
     ////////////////////
+    connect(_hours  , &NumberWidget::clicked     , [this](){ emit clicked     (Unit::Hours  ); });
+    connect(_hours  , &NumberWidget::pressed     , [this](){ emit pressed     (Unit::Hours  ); });
+    connect(_hours  , &NumberWidget::long_pressed, [this](){ emit long_pressed(Unit::Hours  ); });
+    connect(_hours  , &NumberWidget::released    , [this](){ emit released    (Unit::Hours  ); });
+
+    connect(_minutes, &NumberWidget::clicked     , [this](){ emit clicked     (Unit::Minutes); });
+    connect(_minutes, &NumberWidget::pressed     , [this](){ emit pressed     (Unit::Minutes); });
+    connect(_minutes, &NumberWidget::long_pressed, [this](){ emit long_pressed(Unit::Minutes); });
+    connect(_minutes, &NumberWidget::released    , [this](){ emit released    (Unit::Minutes); });
+
+    connect(_seconds, &NumberWidget::clicked     , [this](){ emit clicked     (Unit::Seconds); });
+    connect(_seconds, &NumberWidget::pressed     , [this](){ emit pressed     (Unit::Seconds); });
+    connect(_seconds, &NumberWidget::long_pressed, [this](){ emit long_pressed(Unit::Seconds); });
+    connect(_seconds, &NumberWidget::released    , [this](){ emit released    (Unit::Seconds); });
+
+    ////////////////////
     set_time(std::move(time));
     set_color(std::move(color));
     reload();
