@@ -23,8 +23,11 @@ ClockWidget::ClockWidget(QColor color, QWidget* parent) :
 ////////////////////////////////////////////////////////////////////////////////
 void ClockWidget::set_offset(int offset)
 {
-    _offset = offset;
-    emit offset_changed(_offset);
+    if(offset != _offset)
+    {
+        _offset = offset;
+        emit offset_changed(_offset);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
