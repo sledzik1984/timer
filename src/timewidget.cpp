@@ -1,5 +1,4 @@
 ////////////////////////////////////////////////////////////////////////////////
-#include "block.hpp"
 #include "timewidget.hpp"
 
 #include <QCursor>
@@ -55,22 +54,28 @@ TimeWidget::TimeWidget(QTime time, QColor color, QWidget* parent) :
 ////////////////////////////////////////////////////////////////////////////////
 void TimeWidget::set_time(QTime time)
 {
-    _time = std::move(time);
-    emit time_changed(_time);
+    if(time != _time)
+    {
+        _time = std::move(time);
+        emit time_changed(_time);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void TimeWidget::set_color(QColor color)
 {
-    _color = std::move(color);
-    emit color_changed(_color);
+    if(color != _color)
+    {
+        _color = std::move(color);
+        emit color_changed(_color);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void TimeWidget::reload()
 {
     {
-        Block _(_hours);
+        NumberWidget::Freeze _(_hours);
         _hours->set_number(_time.hour());
         _hours->set_color(_color);
     }
@@ -78,7 +83,7 @@ void TimeWidget::reload()
 
     _colon0->set_color(_color);
     {
-        Block _(_minutes);
+        NumberWidget::Freeze _(_minutes);
         _minutes->set_number(_time.minute());
         _minutes->set_color(_color);
     }
@@ -86,7 +91,7 @@ void TimeWidget::reload()
 
     _colon1->set_color(_color);
     {
-        Block _(_seconds);
+        NumberWidget::Freeze _(_seconds);
         _seconds->set_number(_time.second());
         _seconds->set_color(_color);
     }

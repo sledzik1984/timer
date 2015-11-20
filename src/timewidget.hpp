@@ -4,6 +4,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 #include "digitwidget.hpp"
+#include "freeze.hpp"
 #include "numberwidget.hpp"
 
 #include <QColor>
@@ -12,7 +13,7 @@
 #include <QWidget>
 
 ////////////////////////////////////////////////////////////////////////////////
-class TimeWidget : public QWidget
+class TimeWidget : public QWidget, public FreezingWidget
 {
     Q_OBJECT
 
