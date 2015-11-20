@@ -3,6 +3,8 @@
 #define NUMBERWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
+#include "freeze.hpp"
+
 #include <QColor>
 #include <QHBoxLayout>
 #include <QWidget>
@@ -10,7 +12,7 @@
 #include <climits>
 
 ////////////////////////////////////////////////////////////////////////////////
-class NumberWidget : public QWidget
+class NumberWidget : public QWidget, public FreezingWidget
 {
     Q_OBJECT
 

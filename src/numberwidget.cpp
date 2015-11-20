@@ -1,5 +1,4 @@
 ////////////////////////////////////////////////////////////////////////////////
-#include "block.hpp"
 #include "digitwidget.hpp"
 #include "numberwidget.hpp"
 
@@ -25,36 +24,48 @@ NumberWidget::NumberWidget(size_t number, QColor color, QWidget* parent) :
 ////////////////////////////////////////////////////////////////////////////////
 void NumberWidget::set_number(size_t number)
 {
-    _number = number;
-    emit number_changed(_number);
+    if(number != _number)
+    {
+        _number = number;
+        emit number_changed(_number);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void NumberWidget::set_color(QColor color)
 {
-    _color = std::move(color);
-    emit color_changed(_color);
+    if(color != _color)
+    {
+        _color = std::move(color);
+        emit color_changed(_color);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void NumberWidget::set_min_digits(size_t n)
 {
-    _min_digits = n;
-    emit min_digits_changed(n);
+    if(n != _min_digits)
+    {
+        _min_digits = n;
+        emit min_digits_changed(n);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void NumberWidget::set_max_digits(size_t n)
 {
-    _max_digits = n;
-    emit max_digits_changed(n);
+    if(n != _max_digits)
+    {
+        _max_digits = n;
+        emit max_digits_changed(n);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void NumberWidget::set_min_max_digits(size_t min, size_t max)
 {
     {
-        Block _(this);
+        Freeze _(this);
         set_min_digits(min);
         set_max_digits(max);
     }
@@ -64,53 +75,56 @@ void NumberWidget::set_min_max_digits(size_t min, size_t max)
 ////////////////////////////////////////////////////////////////////////////////
 void NumberWidget::reload()
 {
-    size_t digits = std::min(_max_digits,
-                             std::max(_min_digits,
-                                      1 + (_number ? std::log10((double)_number)
-                                                  : 0)));
-    size_t number = _number;
-
-    size_t count = _layout->count();
-    size_t index = 1;
-
-    while(index <= digits)
+    if(!_frozen)
     {
-        Digit digit = static_cast<Digit>(number % 10);
-        number /= 10;
+        size_t digits = std::min(_max_digits,
+                                 std::max(_min_digits,
+                                          1 + (_number ? std::log10((double)_number)
+                                                       : 0)));
+        size_t number = _number;
 
-        if(index > count)
+        size_t count = _layout->count();
+        size_t index = 1;
+
+        while(index <= digits)
         {
-            DigitWidget* widget = new DigitWidget(digit, _color);
+            Digit digit = static_cast<Digit>(number % 10);
+            number /= 10;
 
-            connect(widget, &DigitWidget::clicked     , this, &NumberWidget::clicked     );
-            connect(widget, &DigitWidget::pressed     , this, &NumberWidget::pressed     );
-            connect(widget, &DigitWidget::long_pressed, this, &NumberWidget::long_pressed);
-            connect(widget, &DigitWidget::released    , this, &NumberWidget::released    );
-
-            _layout->insertWidget(0, widget, widget->sizeHint().width());
-            ++count;
-        }
-        else
-        {
-            auto widget = static_cast<DigitWidget*>(_layout->itemAt(count - index)->widget());
+            if(index > count)
             {
-                Block _(widget);
-                widget->set_digit(digit);
-                widget->set_color(_color);
+                DigitWidget* widget = new DigitWidget(digit, _color);
+
+                connect(widget, &DigitWidget::clicked     , this, &NumberWidget::clicked     );
+                connect(widget, &DigitWidget::pressed     , this, &NumberWidget::pressed     );
+                connect(widget, &DigitWidget::long_pressed, this, &NumberWidget::long_pressed);
+                connect(widget, &DigitWidget::released    , this, &NumberWidget::released    );
+
+                _layout->insertWidget(0, widget, widget->sizeHint().width());
+                ++count;
             }
-            widget->reload();
+            else
+            {
+                auto widget = static_cast<DigitWidget*>(_layout->itemAt(count - index)->widget());
+                {
+                    DigitWidget::Freeze _(widget);
+                    widget->set_digit(digit);
+                    widget->set_color(_color);
+                }
+                widget->reload();
+            }
+
+            ++index;
         }
 
-        ++index;
-    }
+        while(index <= count)
+        {
+            auto item = _layout->takeAt(0);
 
-    while(index <= count)
-    {
-        auto item = _layout->takeAt(0);
+            delete item->widget();
+            delete item;
 
-        delete item->widget();
-        delete item;
-
-        ++index;
+            ++index;
+        }
     }
 }
