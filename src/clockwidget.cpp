@@ -5,14 +5,8 @@
 ClockWidget::ClockWidget(QColor color, QWidget* parent) :
     TimeWidget(QTime(0, 0), std::move(color), parent)
 {
-    connect(this, &ClockWidget::hours_clicked       , [this](){ add_offset(3600); });
-    connect(this, &ClockWidget::hours_long_pressed  , [this](){ set_offset(   0); });
-
-    connect(this, &ClockWidget::minutes_clicked     , [this](){ add_offset(  60); });
-    connect(this, &ClockWidget::minutes_long_pressed, [this](){ set_offset(   0); });
-
-    connect(this, &ClockWidget::seconds_clicked     , [this](){ add_offset(   1); });
-    connect(this, &ClockWidget::seconds_long_pressed, [this](){ set_offset(   0); });
+    connect(this, &ClockWidget::clicked, this, &ClockWidget::proc_clicked);
+    connect(this, &ClockWidget::long_pressed, [this](){ set_offset(0); });
 
     connect(&_update, &QTimer::timeout, this, &ClockWidget::update);
 
@@ -31,19 +25,28 @@ void ClockWidget::set_offset(int offset)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void ClockWidget::add_offset(int amount)
+void ClockWidget::proc_clicked(Unit unit)
 {
+    int value = 0;
+    switch(unit)
+    {
+    case Unit::Hours  : value = 3600; break;
+    case Unit::Minutes: value =   60; break;
+    case Unit::Seconds: value =    1; break;
+    }
+
     switch(location())
     {
     case Location::top:
-        set_offset(offset() + amount);
+        set_offset(offset() + value);
         break;
 
     case Location::bottom:
-        set_offset(offset() - amount);
+        set_offset(offset() - value);
         break;
 
-    default: break;
+    case Location::middle:
+        break;
     }
 }
 

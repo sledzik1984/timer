@@ -26,7 +26,8 @@ signals:
 private:
     ////////////////////
     int _offset = 0;
-    void add_offset(int amount);
+
+    void proc_clicked(Unit unit);
 
     QTimer _update;
     void update();
