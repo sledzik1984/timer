@@ -10,13 +10,13 @@ TEMPLATE = app
 
 ################################################################################
 HEADERS +=                  \
-    src/block.hpp           \
     src/clockwidget.hpp     \
     src/digitwidget.hpp     \
     src/error.hpp           \
     src/event.hpp           \
     src/eventreader.hpp     \
     src/eventwriter.hpp     \
+    src/freeze.hpp          \
     src/mainwindow.hpp      \
     src/numberwidget.hpp    \
     src/section.hpp         \
