@@ -3,6 +3,7 @@
 #define DIGITWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
+#include "freeze.hpp"
 #include "svgwidget.hpp"
 
 #include <QColor>
@@ -16,7 +17,7 @@ enum class Digit
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-class DigitWidget : public SvgWidget
+class DigitWidget : public SvgWidget, public FreezingWidget
 {
     Q_OBJECT
 

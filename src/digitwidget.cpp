@@ -52,21 +52,30 @@ DigitWidget::DigitWidget(Digit digit, QColor color, QWidget* parent) :
 ////////////////////////////////////////////////////////////////////////////////
 void DigitWidget::set_digit(Digit digit)
 {
-    _digit = digit;
-    emit digit_changed(_digit);
+    if(digit != _digit)
+    {
+        _digit = digit;
+        emit digit_changed(_digit);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void DigitWidget::set_color(QColor color)
 {
-    _color = std::move(color);
-    emit color_changed(_color);
+    if(color != _color)
+    {
+        _color = std::move(color);
+        emit color_changed(_color);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void DigitWidget::reload()
 {
-    QByteArray contents = ::digit[static_cast<size_t>(_digit)];
-    contents.replace("%color%", _color.name().toLatin1());
-    load(contents);
+    if(!_frozen)
+    {
+        QByteArray contents = ::digit[static_cast<size_t>(_digit)];
+        contents.replace("%color%", _color.name().toLatin1());
+        load(contents);
+    }
 }
