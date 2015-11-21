@@ -9,7 +9,6 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 typedef int Seconds;
-constexpr Seconds operator"" _s(unsigned long long seconds) { return seconds; }
 
 ////////////////////////////////////////////////////////////////////////////////
 class Clock : public QObject
@@ -20,13 +19,13 @@ public:
     Clock(QObject* parent = nullptr);
 
     ////////////////////
-    QDateTime datetime() const noexcept { return _datetime; }
+    const QDateTime& datetime() const noexcept { return _datetime; }
     QDate date() const { return datetime().date(); }
     QTime time() const { return datetime().time(); }
 
     ////////////////////
     void set_offset(Seconds);
-    Seconds offset() const noexcept { return _offset;}
+    const Seconds& offset() const noexcept { return _offset;}
 
     void add_offset(Seconds);
 
@@ -34,7 +33,7 @@ public:
     static Clock& instance();
 
 signals:
-    void offset_changed(Seconds);
+    void offset_changed(const Seconds&);
     void datetime_changed(const QDateTime&);
 
 private:

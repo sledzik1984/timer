@@ -16,7 +16,7 @@ void Clock::set_offset(Seconds seconds)
 {
     if(seconds != offset())
     {
-        _offset = seconds;
+        _offset = std::move(seconds);
         emit offset_changed(offset());
     }
 }
@@ -24,7 +24,7 @@ void Clock::set_offset(Seconds seconds)
 ////////////////////////////////////////////////////////////////////////////////
 void Clock::add_offset(Seconds seconds)
 {
-    set_offset(offset() + seconds);
+    set_offset(offset() + std::move(seconds));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +37,7 @@ void Clock::update()
 
     if(current != datetime())
     {
-        _datetime = current;
+        _datetime = std::move(current);
         emit datetime_changed(datetime());
     }
 }
