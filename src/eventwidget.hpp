@@ -15,6 +15,9 @@ class EventWidget : public TimeWidget
 
 public:
     explicit EventWidget(QColor color = Qt::red, QWidget* parent = nullptr);
+
+private:
+    void update();
 };
 
 ////////////////////////////////////////////////////////////////////////////////
