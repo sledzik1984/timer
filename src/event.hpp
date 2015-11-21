@@ -20,14 +20,13 @@ class Event
 {
 public:
     ////////////////////
-    Event() { reset(); }
+    Event() = default;
     Event(QString name, QDate date);
 
-    ////////////////////
-    Event(const Event&) = default;
+    Event(const Event&) = delete;
     Event(Event&&) = default;
 
-    Event& operator=(const Event&) = default;
+    Event& operator=(const Event&) = delete;
     Event& operator=(Event&&) = default;
 
     ////////////////////
@@ -67,9 +66,11 @@ public:
 
     Seconds overage() const;
 
+    ////////////////////
     static Event& instance();
 
 private:
+    ////////////////////
     QString _name;
     QDate _date;
     Sections _sections;
