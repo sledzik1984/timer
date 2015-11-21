@@ -16,6 +16,7 @@ class Clock : public QObject
     Q_OBJECT
 
 public:
+    ////////////////////
     Clock(QObject* parent = nullptr);
 
     ////////////////////
@@ -24,16 +25,16 @@ public:
     QTime time() const { return datetime().time(); }
 
     ////////////////////
-    void set_offset(Seconds);
+    void set_offset(Seconds seconds) { _offset = std::move(seconds); }
     const Seconds& offset() const noexcept { return _offset;}
 
-    void add_offset(Seconds);
+    void add_offset(Seconds seconds) { set_offset(offset() + std::move(seconds)); }
 
     ////////////////////
     static Clock& instance();
 
 signals:
-    void offset_changed(const Seconds&);
+    ////////////////////
     void datetime_changed(const QDateTime&);
 
 private:
