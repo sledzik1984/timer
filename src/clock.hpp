@@ -30,6 +30,9 @@ public:
 
     void add_offset(Seconds);
 
+    ////////////////////
+    static Clock& instance();
+
 signals:
     void offset_changed(Seconds);
     void datetime_changed(const QDateTime&);

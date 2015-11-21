@@ -41,3 +41,10 @@ void Clock::update()
         emit datetime_changed(datetime());
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+Clock& Clock::instance()
+{
+    static Clock clock;
+    return clock;
+}
