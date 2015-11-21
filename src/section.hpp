@@ -2,6 +2,9 @@
 #ifndef SECTION_HPP
 #define SECTION_HPP
 
+////////////////////////////////////////////////////////////////////////////////
+#include "clock.hpp"
+
 #include <QDateTime>
 #include <QString>
 
@@ -11,12 +14,8 @@
 class Section
 {
 public:
-    typedef int Duration;
-
-    ////////////////////
     Section() { reset(); }
-
-    Section(QString name, Duration duration);
+    Section(QString name, Seconds duration);
 
     ////////////////////
     Section(const Section&) = default;
@@ -29,8 +28,8 @@ public:
     void set_name(QString name) { _name = std::move(name); }
     const QString& name() const noexcept { return _name; }
 
-    void set_duration(Duration duration) { _duration = std::move(duration); }
-    const Duration& duration() const noexcept { return _duration; }
+    void set_duration(Seconds seconds) { _duration = std::move(seconds); }
+    const Seconds& duration() const noexcept { return _duration; }
 
     ////////////////////
     void start();
@@ -43,11 +42,11 @@ public:
     bool is_started() const noexcept { return _started.isValid(); }
     bool is_ended() const noexcept { return _ended.isValid(); }
 
-    Duration overage() const;
+    Seconds overage() const;
 
 private:
     QString _name;
-    Duration _duration { 0 };
+    Seconds _duration { 0 };
 
     QDateTime _started;
     QDateTime _ended;

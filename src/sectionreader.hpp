@@ -2,6 +2,7 @@
 #ifndef SECTIONREADER_HPP
 #define SECTIONREADER_HPP
 
+////////////////////////////////////////////////////////////////////////////////
 #include "section.hpp"
 #include <QXmlStreamReader>
 

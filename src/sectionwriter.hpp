@@ -2,6 +2,7 @@
 #ifndef SECTIONWRITER_HPP
 #define SECTIONWRITER_HPP
 
+////////////////////////////////////////////////////////////////////////////////
 #include "section.hpp"
 #include <QXmlStreamWriter>
 

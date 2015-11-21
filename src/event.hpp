@@ -2,6 +2,7 @@
 #ifndef EVENT_HPP
 #define EVENT_HPP
 
+////////////////////////////////////////////////////////////////////////////////
 #include "section.hpp"
 
 #include <QDate>
@@ -36,7 +37,7 @@ public:
     void set_date(QDate date) { _date = std::move(date); }
     const QDate& date() const noexcept { return _date; }
 
-    Section::Duration duration() const;
+    Seconds duration() const;
 
     ////////////////////
     size_t size() const noexcept { return _sections.size(); }
@@ -63,7 +64,7 @@ public:
     bool is_started() const noexcept { return section(0).is_started(); }
     bool is_ended() const noexcept { return section(size() - 1).is_ended(); }
 
-    Section::Duration overage() const;
+    Seconds overage() const;
 
 private:
     QString _name;
