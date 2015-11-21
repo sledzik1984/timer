@@ -6,6 +6,7 @@
 #include <QColor>
 #include <QPalette>
 
+#include <exception>
 #include <iostream>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -54,7 +55,15 @@ try
 
     return application.exec();
 }
-catch(const Error& e)
+catch(Error& e)
 {
     std::cerr << e.message().toLatin1().data() << std::endl;
+}
+catch(std::exception& e)
+{
+    std::cerr << e.what() << std::endl;
+}
+catch(...)
+{
+    std::cerr << "Unknown error" << std::endl;
 }
