@@ -72,3 +72,10 @@ Seconds Event::overage() const
     for(const auto& section : _sections) overage += section.overage();
     return overage;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+Event& Event::instance()
+{
+    static Event event;
+    return event;
+}

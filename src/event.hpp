@@ -66,6 +66,8 @@ public:
 
     Seconds overage() const;
 
+    static Event& instance();
+
 private:
     QString _name;
     QDate _date;
