@@ -26,11 +26,11 @@ void ClockWidget::change_offset(Unit unit)
     switch(location())
     {
     case Location::top:
-        Clock::instance().add_offset(seconds);
+        Clock::instance().add_offset( std::move(seconds));
         break;
 
     case Location::bottom:
-        Clock::instance().add_offset(-seconds);
+        Clock::instance().add_offset(-std::move(seconds));
         break;
 
     case Location::middle:
