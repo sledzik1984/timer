@@ -1,48 +1,36 @@
 ////////////////////////////////////////////////////////////////////////////////
+#include "clock.hpp"
 #include "clockwidget.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 ClockWidget::ClockWidget(QColor color, QWidget* parent) :
     TimeWidget(QTime(0, 0), std::move(color), parent)
 {
-    connect(this, &ClockWidget::clicked, this, &ClockWidget::proc_clicked);
-    connect(this, &ClockWidget::long_pressed, [this](){ set_offset(0); });
+    connect(this, &ClockWidget::clicked, this, &ClockWidget::change_offset);
+    connect(this, &ClockWidget::long_pressed, [this](){ Clock::instance().set_offset(0); });
 
-    connect(&_update, &QTimer::timeout, this, &ClockWidget::update);
-
-    _update.setInterval(100);
-    _update.start();
+    connect(&Clock::instance(), &Clock::datetime_changed, this, &ClockWidget::update);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void ClockWidget::set_offset(int offset)
+void ClockWidget::change_offset(Unit unit)
 {
-    if(offset != _offset)
-    {
-        _offset = offset;
-        emit offset_changed(_offset);
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void ClockWidget::proc_clicked(Unit unit)
-{
-    int value = 0;
+    Seconds seconds = 0;
     switch(unit)
     {
-    case Unit::Hours  : value = 3600; break;
-    case Unit::Minutes: value =   60; break;
-    case Unit::Seconds: value =    1; break;
+    case Unit::Hours  : seconds = 3600; break;
+    case Unit::Minutes: seconds =   60; break;
+    case Unit::Seconds: seconds =    1; break;
     }
 
     switch(location())
     {
     case Location::top:
-        set_offset(offset() + value);
+        Clock::instance().add_offset(seconds);
         break;
 
     case Location::bottom:
-        set_offset(offset() - value);
+        Clock::instance().add_offset(-seconds);
         break;
 
     case Location::middle:
@@ -51,7 +39,7 @@ void ClockWidget::proc_clicked(Unit unit)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void ClockWidget::update()
+void ClockWidget::update(const QDateTime& datetime)
 {
-    set_time(QTime::currentTime().addSecs(offset()));
+    set_time(datetime.time());
 }
