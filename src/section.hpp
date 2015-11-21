@@ -14,14 +14,14 @@
 class Section
 {
 public:
-    Section() { reset(); }
+    ////////////////////
+    Section() = default;
     Section(QString name, Seconds duration);
 
-    ////////////////////
-    Section(const Section&) = default;
+    Section(const Section&) = delete;
     Section(Section&&) = default;
 
-    Section& operator=(const Section&) = default;
+    Section& operator=(const Section&) = delete;
     Section& operator=(Section&&) = default;
 
     ////////////////////
@@ -45,6 +45,7 @@ public:
     Seconds overage() const;
 
 private:
+    ////////////////////
     QString _name;
     Seconds _duration { 0 };
 
