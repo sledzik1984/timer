@@ -42,8 +42,8 @@ public:
     ////////////////////
     size_t size() const noexcept { return _sections.size(); }
 
-    const Section& section(size_t n) const noexcept { return _sections.at(n); }
-    Section& section(size_t n) noexcept { return _sections.at(n); }
+    const Section& section(size_t n) const;
+    Section& section(size_t n);
 
     void clear();
 
@@ -57,12 +57,13 @@ public:
     void next();
 
     size_t current() const noexcept { return _current; }
+    static constexpr size_t none = -1;
 
-    const QDateTime& started() const noexcept { return section(0).started(); }
-    const QDateTime& ended() const noexcept { return section(size() - 1).ended(); }
+    const QDateTime& started() const { return section(0).started(); }
+    const QDateTime& ended() const { return section(size() - 1).ended(); }
 
-    bool is_started() const noexcept { return section(0).is_started(); }
-    bool is_ended() const noexcept { return section(size() - 1).is_ended(); }
+    bool is_started() const { return size() && section(0).is_started(); }
+    bool is_ended() const { return size() && section(size() - 1).is_ended(); }
 
     Seconds overage() const;
 
@@ -74,7 +75,6 @@ private:
     Sections _sections;
 
     size_t _current = none;
-    static constexpr size_t none = -1;
 };
 
 ////////////////////////////////////////////////////////////////////////////////

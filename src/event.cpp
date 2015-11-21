@@ -19,6 +19,20 @@ Seconds Event::duration() const
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+const Section& Event::section(size_t n) const
+{
+    if(n >= size()) throw InvalidError("Subscript out of range");
+    return _sections[0];
+}
+
+////////////////////////////////////////////////////////////////////////////////
+Section& Event::section(size_t n)
+{
+    if(n >= size()) throw InvalidError("Subscript out of range");
+    return _sections[0];
+}
+
+////////////////////////////////////////////////////////////////////////////////
 void Event::clear()
 {
     _sections.clear();
@@ -28,17 +42,17 @@ void Event::clear()
 ////////////////////////////////////////////////////////////////////////////////
 void Event::insert(size_t n, Section section)
 {
-    if(current() == none || current() < n)
-        _sections.insert(_sections.begin() + n, std::move(section));
-    else throw InvalidError("Invalid insert (event in-progress)");
+    if(n <= current() && current() != none)
+        throw InvalidError("Invalid insert (event in-progress)");
+    _sections.insert(_sections.begin() + n, std::move(section));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Event::erase(size_t n)
 {
-    if(current() == none || current() < n)
-        _sections.erase(_sections.begin() + n);
-    else throw InvalidError("Invalid erase (event in-progress)");
+    if(n <= current() && current() != none)
+        throw InvalidError("Invalid erase (event in-progress)");
+    _sections.erase(_sections.begin() + n);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -51,17 +65,19 @@ void Event::reset()
 ////////////////////////////////////////////////////////////////////////////////
 void Event::next()
 {
-    if(current() == none)
+    if(size())
     {
-        _current = 0;
+        if(_current <  size())
+        {
+            _sections.at(_current).end();
+            if(++_current <  size()) _sections.at(_current).start();
+        }
+        else if(_current == none)
+        {
+            _current = 0;
+            _sections.at(_current).start();
+        }
     }
-    else if(current() < size())
-    {
-        _sections.at(current()).end();
-        ++_current;
-    }
-
-    if(current() < size()) _sections.at(current()).start();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
