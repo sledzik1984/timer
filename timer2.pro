@@ -17,7 +17,6 @@ HEADERS +=                  \
     src/error.hpp           \
     src/event.hpp           \
     src/eventreader.hpp     \
-    src/eventwidget.hpp     \
     src/eventwriter.hpp     \
     src/freeze.hpp          \
     src/mainwindow.hpp      \
@@ -38,7 +37,6 @@ SOURCES +=                  \
     src/digitwidget.cpp     \
     src/event.cpp           \
     src/eventreader.cpp     \
-    src/eventwidget.cpp     \
     src/eventwriter.cpp     \
     src/main.cpp            \
     src/mainwindow.cpp      \
