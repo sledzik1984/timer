@@ -22,6 +22,7 @@ HEADERS +=                  \
     src/freeze.hpp          \
     src/mainwindow.hpp      \
     src/numberwidget.hpp    \
+    src/periodwidget.hpp    \
     src/section.hpp         \
     src/sectionreader.hpp   \
     src/sectionwriter.hpp   \
@@ -41,6 +42,7 @@ SOURCES +=                  \
     src/main.cpp            \
     src/mainwindow.cpp      \
     src/numberwidget.cpp    \
+    src/periodwidget.cpp    \
     src/section.cpp         \
     src/sectionreader.cpp   \
     src/sectionwriter.cpp   \
