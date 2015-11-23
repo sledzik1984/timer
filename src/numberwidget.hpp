@@ -3,8 +3,6 @@
 #define NUMBERWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
-#include "freeze.hpp"
-
 #include <QColor>
 #include <QHBoxLayout>
 #include <QWidget>
@@ -12,12 +10,13 @@
 #include <climits>
 
 ////////////////////////////////////////////////////////////////////////////////
-class NumberWidget : public QWidget, public FreezingWidget
+class NumberWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit NumberWidget(size_t number, QColor color = Qt::black, QWidget* parent = nullptr);
+    explicit NumberWidget(QWidget* parent = nullptr);
+    NumberWidget(size_t number, QColor color, QWidget* parent = nullptr);
 
     ////////////////////
     void set_number(size_t number);
@@ -54,8 +53,8 @@ private:
     size_t _number;
     QColor _color;
 
-    double _min_digits = 0;
-    double _max_digits = std::numeric_limits<size_t>::max();
+    size_t _min_digits = 0;
+    size_t _max_digits = 0;
 
     QHBoxLayout* _layout;
 };
