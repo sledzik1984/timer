@@ -12,10 +12,22 @@
 #include <QTime>
 #include <QWidget>
 
+#include <utility>
+
 ////////////////////////////////////////////////////////////////////////////////
 enum class Unit
 {
     Hours, Minutes, Seconds
+};
+
+enum class Display
+{
+    Hrs       = 1,
+       Min    = 2,
+          Sec = 4,
+    HrsMin    = Display::Hrs | Display::Min,
+       MinSec =                Display::Min | Display::Sec,
+    HrsMinSec = Display::Hrs | Display::Min | Display::Sec,
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -24,7 +36,8 @@ class TimeWidget : public QWidget, public FreezingWidget
     Q_OBJECT
 
 public:
-    explicit TimeWidget(QTime time = QTime(0, 0), QColor color = Qt::black, QWidget* parent = nullptr);
+    ////////////////////
+    explicit TimeWidget(QColor color, Display format, QWidget* parent = nullptr);
 
     ////////////////////
     void set_time(QTime time);
@@ -75,11 +88,11 @@ private:
     ////////////////////
     QHBoxLayout* _layout;
 
-    NumberWidget* _hours;
-     DigitWidget* _colon0;
-    NumberWidget* _minutes;
-     DigitWidget* _colon1;
-    NumberWidget* _seconds;
+    NumberWidget* _hours   = nullptr;
+     DigitWidget* _colon0  = nullptr;
+    NumberWidget* _minutes = nullptr;
+     DigitWidget* _colon1  = nullptr;
+    NumberWidget* _seconds = nullptr;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
