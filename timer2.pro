@@ -18,6 +18,7 @@ HEADERS +=                  \
     src/event.hpp           \
     src/eventreader.hpp     \
     src/eventtimewidget.hpp \
+    src/eventtitlewidget.hpp\
     src/eventwriter.hpp     \
     src/freeze.hpp          \
     src/mainwindow.hpp      \
@@ -39,6 +40,7 @@ SOURCES +=                  \
     src/event.cpp           \
     src/eventreader.cpp     \
     src/eventtimewidget.cpp \
+    src/eventtitlewidget.cpp\
     src/eventwriter.cpp     \
     src/main.cpp            \
     src/mainwindow.cpp      \
@@ -54,6 +56,7 @@ SOURCES +=                  \
 ################################################################################
 FORMS +=                    \
     src/eventtimewidget.ui  \
+    src/eventtitlewidget.ui \
     src/mainwindow.ui       \
     src/trucktimewidget.ui  \
 
