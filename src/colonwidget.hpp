@@ -3,19 +3,18 @@
 #define COLONWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
-#include "freeze.hpp"
 #include "svgwidget.hpp"
 
 #include <QColor>
 #include <QWidget>
 
 ////////////////////////////////////////////////////////////////////////////////
-class ColonWidget : public SvgWidget, public FreezingWidget
+class ColonWidget : public SvgWidget
 {
     Q_OBJECT
 
 public:
-    explicit ColonWidget(QWidget* parent = nullptr) : ColonWidget(Qt::black, parent) { }
+    explicit ColonWidget(QWidget* parent = nullptr);
     explicit ColonWidget(QColor color, QWidget* parent = nullptr);
 
     ////////////////////
