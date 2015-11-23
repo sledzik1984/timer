@@ -13,7 +13,7 @@
 enum class Digit
 {
     _0, _1, _2, _3, _4, _5, _6, _7, _8, _9,
-    colon, period,
+    none,
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -22,7 +22,8 @@ class DigitWidget : public SvgWidget, public FreezingWidget
     Q_OBJECT
 
 public:
-    explicit DigitWidget(Digit digit, QColor color = Qt::black, QWidget* parent = nullptr);
+    explicit DigitWidget(QWidget* parent = nullptr) : DigitWidget(Digit::none, Qt::black, parent) { }
+    DigitWidget(Digit digit, QColor color, QWidget* parent = nullptr);
 
     ////////////////////
     void set_digit(Digit digit);

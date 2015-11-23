@@ -1,6 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "digitwidget.hpp"
-
 #include <QByteArray>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -32,9 +31,7 @@ static const QByteArray digit[]
     head + segment[0] + segment[1] + segment[2] +                                                     foot, // 7
     head + segment[0] + segment[1] + segment[2] + segment[3] + segment[4] + segment[5] + segment[6] + foot, // 8
     head + segment[0] + segment[1] + segment[2] + segment[3] +              segment[5] + segment[6] + foot, // 9
-
-    "<svg viewBox=\"0 0 190 790\" fill=\"%color%\"><circle cx=\"95\" cy=\"240\" r=\"35\"/><circle cx=\"95\" cy=\"550\" r=\"35\"/></svg>", // colon
-    "<svg viewBox=\"0 0 190 790\" fill=\"%color%\"><circle cx=\"95\" cy=\"695\" r=\"35\"/></svg>", // period
+    head +                                                                                            foot, // none
 };
 
 ////////////////////////////////////////////////////////////////////////////////
