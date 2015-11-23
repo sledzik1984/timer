@@ -75,13 +75,10 @@ void DigitWidget::set_color(QColor color)
 ////////////////////////////////////////////////////////////////////////////////
 void DigitWidget::reload()
 {
-    if(!_frozen)
-    {
-        size_t index = static_cast<size_t>(_color.isValid() ? _digit : Digit::none);
+    size_t index = static_cast<size_t>(_color.isValid() ? _digit : Digit::none);
 
-        QByteArray contents = ::digit[index];
-        contents.replace("%color%", _color.name().toLatin1());
+    QByteArray contents = ::digit[index];
+    contents.replace("%color%", _color.name().toLatin1());
 
-        load(contents);
-    }
+    load(contents);
 }
