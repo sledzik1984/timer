@@ -3,6 +3,11 @@
 #include <QByteArray>
 
 ////////////////////////////////////////////////////////////////////////////////
+PeriodWidget::PeriodWidget(QWidget* parent) :
+    PeriodWidget(QColor(), parent)
+{ }
+
+////////////////////////////////////////////////////////////////////////////////
 PeriodWidget::PeriodWidget(QColor color, QWidget* parent) :
     SvgWidget(parent)
 {
@@ -25,10 +30,9 @@ void PeriodWidget::set_color(QColor color)
 ////////////////////////////////////////////////////////////////////////////////
 void PeriodWidget::reload()
 {
-    if(!_frozen)
-    {
-        QByteArray contents = "<svg viewBox=\"0 0 190 790\" fill=\"%color%\"><circle cx=\"95\" cy=\"695\" r=\"35\"/></svg>";
-        contents.replace("%color%", _color.name().toLatin1());
-        load(contents);
-    }
+    QByteArray contents = "<svg viewBox=\"0 0 190 790\"";
+    if(_color.isValid())
+        contents += " fill=\"" + _color.name().toLatin1() + "\"><circle cx=\"95\" cy=\"695\" r=\"35\"/";
+    contents += "></svg>";
+    load(contents);
 }

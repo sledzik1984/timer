@@ -2,19 +2,18 @@
 #define PERIODWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
-#include "freeze.hpp"
 #include "svgwidget.hpp"
 
 #include <QColor>
 #include <QWidget>
 
 ////////////////////////////////////////////////////////////////////////////////
-class PeriodWidget : public SvgWidget, public FreezingWidget
+class PeriodWidget : public SvgWidget
 {
     Q_OBJECT
 
 public:
-    explicit PeriodWidget(QWidget* parent = nullptr) : PeriodWidget(Qt::black, parent) { }
+    explicit PeriodWidget(QWidget* parent = nullptr);
     explicit PeriodWidget(QColor color, QWidget* parent = nullptr);
 
     ////////////////////
