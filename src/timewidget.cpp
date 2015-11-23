@@ -4,7 +4,12 @@
 #include <QCursor>
 
 ////////////////////////////////////////////////////////////////////////////////
-TimeWidget::TimeWidget(QColor color, Display format, QWidget* parent) :
+TimeWidget::TimeWidget(Display format, QWidget* parent) :
+    TimeWidget(format, QColor(), parent)
+{ }
+
+////////////////////////////////////////////////////////////////////////////////
+TimeWidget::TimeWidget(Display format, QColor color, QWidget* parent) :
     QWidget(parent),
     _layout (new QHBoxLayout(this))
 {
@@ -13,7 +18,7 @@ TimeWidget::TimeWidget(QColor color, Display format, QWidget* parent) :
     ////////////////////
     if(static_cast<int>(format) & static_cast<int>(Display::Hrs))
     {
-        _hours = new NumberWidget(0);
+        _hours = new NumberWidget();
         _hours->set_min_max_digits(2, 2);
         _layout->addWidget(_hours , _hours ->sizeHint().width());
 
@@ -32,10 +37,10 @@ TimeWidget::TimeWidget(QColor color, Display format, QWidget* parent) :
     ////////////////////
     if(static_cast<int>(format) & static_cast<int>(Display::Min))
     {
-        _minutes = new NumberWidget(0);
+        _minutes = new NumberWidget();
         if(_hours)
         {
-            _colon0 = new DigitWidget(Digit::colon);
+            _colon0 = new ColonWidget();
             _layout->addWidget(_colon0, _colon0->sizeHint().width());
 
             _minutes->set_min_max_digits(2, 2);
@@ -57,10 +62,10 @@ TimeWidget::TimeWidget(QColor color, Display format, QWidget* parent) :
     ////////////////////
     if(static_cast<int>(format) & static_cast<int>(Display::Sec))
     {
-        _seconds = new NumberWidget(0);
+        _seconds = new NumberWidget();
         if(_minutes)
         {
-            _colon1 = new DigitWidget(Digit::colon);
+            _colon1 = new ColonWidget();
             _layout->addWidget(_colon1 , _colon1 ->sizeHint().width());
 
             _seconds->set_min_max_digits(2, 2);
@@ -80,7 +85,6 @@ TimeWidget::TimeWidget(QColor color, Display format, QWidget* parent) :
     }
 
     ////////////////////
-    set_time(QTime(0, 0));
     set_color(std::move(color));
     reload();
 
@@ -111,46 +115,43 @@ void TimeWidget::set_color(QColor color)
 ////////////////////////////////////////////////////////////////////////////////
 void TimeWidget::reload()
 {
-    int value = _time.hour();
+    QTime time(0, 0, 0);
+    QColor color;
+
+    if(_time.isValid())
+    {
+        time = _time;
+        color = _color;
+    }
+
+    int value = time.hour();
     if(_hours)
     {
-        {
-            NumberWidget::Freeze _(_hours);
-            _hours->set_number(value);
-            value = 0;
-            _hours->set_color(_color);
-        }
-        _hours->reload();
+        _hours->set_number(value);
+        value = 0;
+        _hours->set_color(color);
     }
     else value *= 60;
 
-    if(_colon0) _colon0->set_color(_color);
+    if(_colon0) _colon0->set_color(color);
 
-    value += _time.minute();
+    value += time.minute();
     if(_minutes)
     {
-        {
-            NumberWidget::Freeze _(_minutes);
-            _minutes->set_number(value);
-            value = 0;
-            _minutes->set_color(_color);
-        }
-        _minutes->reload();
+        _minutes->set_number(value);
+        value = 0;
+        _minutes->set_color(color);
     }
     else value *= 60;
 
-    if(_colon1) _colon1->set_color(_color);
+    if(_colon1) _colon1->set_color(color);
 
-    value += _time.second();
+    value += time.second();
     if(_seconds)
     {
-        {
-            NumberWidget::Freeze _(_seconds);
-            _seconds->set_number(value);
-            value = 0;
-            _seconds->set_color(_color);
-        }
-        _seconds->reload();
+        _seconds->set_number(value);
+        value = 0;
+        _seconds->set_color(color);
     }
 }
 

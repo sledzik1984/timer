@@ -3,8 +3,8 @@
 #define TIMEWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
+#include "colonwidget.hpp"
 #include "digitwidget.hpp"
-#include "freeze.hpp"
 #include "numberwidget.hpp"
 
 #include <QColor>
@@ -31,13 +31,14 @@ enum class Display
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-class TimeWidget : public QWidget, public FreezingWidget
+class TimeWidget : public QWidget
 {
     Q_OBJECT
 
 public:
     ////////////////////
-    explicit TimeWidget(QColor color, Display format, QWidget* parent = nullptr);
+    explicit TimeWidget(Display format, QWidget* parent = nullptr);
+    TimeWidget(Display format, QColor color, QWidget* parent = nullptr);
 
     ////////////////////
     void set_time(QTime time);
@@ -89,9 +90,9 @@ private:
     QHBoxLayout* _layout;
 
     NumberWidget* _hours   = nullptr;
-     DigitWidget* _colon0  = nullptr;
+     ColonWidget* _colon0  = nullptr;
     NumberWidget* _minutes = nullptr;
-     DigitWidget* _colon1  = nullptr;
+     ColonWidget* _colon1  = nullptr;
     NumberWidget* _seconds = nullptr;
 };
 
