@@ -1,0 +1,12 @@
+////////////////////////////////////////////////////////////////////////////////
+#include "clockwidget.hpp"
+#include "trucktimewidget.hpp"
+
+////////////////////////////////////////////////////////////////////////////////
+TruckTimeWidget::TruckTimeWidget(QWidget* parent) :
+    QWidget(parent)
+{
+    setupUi(this);
+
+    panel->layout()->addWidget(new ClockWidget(Qt::red));
+}

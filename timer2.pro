@@ -28,6 +28,7 @@ HEADERS +=                  \
     src/sectionwriter.hpp   \
     src/svgwidget.hpp       \
     src/timewidget.hpp      \
+    src/trucktimewidget.hpp \
 
 ################################################################################
 SOURCES +=                  \
@@ -48,10 +49,12 @@ SOURCES +=                  \
     src/sectionwriter.cpp   \
     src/svgwidget.cpp       \
     src/timewidget.cpp      \
+    src/trucktimewidget.cpp \
 
 ################################################################################
 FORMS +=                    \
     src/mainwindow.ui       \
+    src/trucktimewidget.ui  \
 
 ################################################################################
 RESOURCES +=                \
