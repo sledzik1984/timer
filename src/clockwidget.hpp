@@ -15,7 +15,7 @@ class ClockWidget : public TimeWidget
     Q_OBJECT
 
 public:
-    explicit ClockWidget(QColor color = Qt::red, QWidget* parent = nullptr);
+    explicit ClockWidget(QColor color, QWidget* parent = nullptr);
 
 private:
     ////////////////////

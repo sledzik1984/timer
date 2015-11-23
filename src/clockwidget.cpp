@@ -4,7 +4,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 ClockWidget::ClockWidget(QColor color, QWidget* parent) :
-    TimeWidget(QTime(0, 0), std::move(color), parent)
+    TimeWidget(Display::HrsMinSec, std::move(color), parent)
 {
     connect(this, &ClockWidget::clicked, this, &ClockWidget::change_offset);
     connect(this, &ClockWidget::long_pressed, [this](){ Clock::instance().set_offset(0); });
