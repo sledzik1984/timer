@@ -5,7 +5,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 EventWidget::EventWidget(QColor color, QWidget* parent) :
-    TimeWidget(QTime(0, 0), std::move(color), parent)
+    TimeWidget(Display::HrsMinSec, std::move(color), parent)
 {
     connect(&Clock::instance(), &Clock::datetime_changed, this, &EventWidget::update);
 }
