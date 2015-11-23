@@ -31,8 +31,14 @@ static const QByteArray digit[]
     head + segment[0] + segment[1] + segment[2] +                                                     foot, // 7
     head + segment[0] + segment[1] + segment[2] + segment[3] + segment[4] + segment[5] + segment[6] + foot, // 8
     head + segment[0] + segment[1] + segment[2] + segment[3] +              segment[5] + segment[6] + foot, // 9
-    head +                                                                                            foot, // none
+
+    "<svg viewBox=\"0 0 500 790\"></svg>", // none
 };
+
+////////////////////////////////////////////////////////////////////////////////
+DigitWidget::DigitWidget(QWidget* parent) :
+    DigitWidget(Digit::none, QColor(), parent)
+{ }
 
 ////////////////////////////////////////////////////////////////////////////////
 DigitWidget::DigitWidget(Digit digit, QColor color, QWidget* parent) :
@@ -71,8 +77,11 @@ void DigitWidget::reload()
 {
     if(!_frozen)
     {
-        QByteArray contents = ::digit[static_cast<size_t>(_digit)];
+        size_t index = static_cast<size_t>(_color.isValid() ? _digit : Digit::none);
+
+        QByteArray contents = ::digit[index];
         contents.replace("%color%", _color.name().toLatin1());
+
         load(contents);
     }
 }

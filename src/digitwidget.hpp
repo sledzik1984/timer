@@ -22,7 +22,7 @@ class DigitWidget : public SvgWidget, public FreezingWidget
     Q_OBJECT
 
 public:
-    explicit DigitWidget(QWidget* parent = nullptr) : DigitWidget(Digit::none, Qt::black, parent) { }
+    explicit DigitWidget(QWidget* parent = nullptr);
     DigitWidget(Digit digit, QColor color, QWidget* parent = nullptr);
 
     ////////////////////
