@@ -21,11 +21,6 @@ public:
     Section() = default;
     Section(QString name, Seconds duration);
 
-    Section(Section&& s) { swap(s); }
-    Section& operator=(Section&& s) { swap(s); return *this; }
-
-    void swap(Section& s);
-
     ////////////////////
     void set_name(QString name);
     const QString& name() const noexcept { return _name; }

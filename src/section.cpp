@@ -10,15 +10,6 @@ Section::Section(QString name, Seconds duration)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Section::swap(Section& s)
-{
-    set_name    (std::move(s._name    ));
-    set_duration(std::move(s._duration));
-    set_started (std::move(s._started ));
-    set_ended   (std::move(s._ended   ));
-}
-
-////////////////////////////////////////////////////////////////////////////////
 void Section::set_name(QString name)
 {
     if(name != _name)
@@ -46,7 +37,7 @@ Seconds Section::overage() const
         auto end = started().addSecs(duration());
         if(!is_ended())
         {
-            int overage = end.secsTo(Clock::instance().datetime());
+            int overage = end.secsTo(Clock::instance()->datetime());
             if(overage > 0) return overage;
         }
         else return end.secsTo(ended());
@@ -58,13 +49,13 @@ Seconds Section::overage() const
 ////////////////////////////////////////////////////////////////////////////////
 void Section::start()
 {
-    if(!is_started()) set_started(Clock::instance().datetime());
+    if(!is_started()) set_started(Clock::instance()->datetime());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Section::end()
 {
-    if(is_started() && !is_ended()) set_ended(Clock::instance().datetime());
+    if(is_started() && !is_ended()) set_ended(Clock::instance()->datetime());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
