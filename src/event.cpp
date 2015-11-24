@@ -10,6 +10,43 @@ Event::Event(QString name, QDate date)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+void Event::swap(Event& e)
+{
+    if(e._name != _name)
+    {
+        std::swap(_name, e._name);
+        emit name_changed(_name);
+    }
+    if(e._date != _date)
+    {
+        std::swap(_date, e._date);
+        emit date_changed(_date);
+    }
+    std::swap(_sections, e._sections);
+    std::swap(_current, e._current);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Event::set_name(QString name)
+{
+    if(name != _name)
+    {
+        _name = std::move(name);
+        emit name_changed(_name);
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Event::set_date(QDate date)
+{
+    if(date != _date)
+    {
+        _date = std::move(date);
+        emit date_changed(_date);
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
 Seconds Event::duration() const
 {
     Seconds duration { 0 };

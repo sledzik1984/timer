@@ -7,6 +7,7 @@
 
 #include <QDate>
 #include <QDateTime>
+#include <QObject>
 #include <QString>
 
 #include <utility>
@@ -16,24 +17,28 @@
 using Sections = std::vector<Section>;
 
 ////////////////////////////////////////////////////////////////////////////////
-class Event
+class Event : public QObject
 {
+    Q_OBJECT
+
 public:
     ////////////////////
     Event() = default;
     Event(QString name, QDate date);
 
     Event(const Event&) = delete;
-    Event(Event&&) = default;
+    Event(Event&& e) { swap(e); }
 
     Event& operator=(const Event&) = delete;
-    Event& operator=(Event&&) = default;
+    Event& operator=(Event&& e) { swap(e); return *this; }
+
+    void swap(Event&);
 
     ////////////////////
-    void set_name(QString name) { _name = std::move(name); }
+    void set_name(QString name);
     const QString& name() const noexcept { return _name; }
 
-    void set_date(QDate date) { _date = std::move(date); }
+    void set_date(QDate date);
     const QDate& date() const noexcept { return _date; }
 
     Seconds duration() const;
@@ -68,6 +73,11 @@ public:
 
     ////////////////////
     static Event& instance();
+
+signals:
+    ////////////////////
+    void name_changed(const QString&);
+    void date_changed(const QDate&);
 
 private:
     ////////////////////
