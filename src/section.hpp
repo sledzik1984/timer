@@ -9,6 +9,7 @@
 #include <QObject>
 #include <QString>
 
+#include <memory>
 #include <utility>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -17,6 +18,9 @@ class Section : public QObject
     Q_OBJECT
 
 public:
+    ////////////////////
+    using Pointer = std::shared_ptr<Section>;
+
     ////////////////////
     Section() = default;
     Section(QString name, Seconds duration);
