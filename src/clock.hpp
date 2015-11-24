@@ -7,6 +7,8 @@
 #include <QObject>
 #include <QTimer>
 
+#include <utility>
+
 ////////////////////////////////////////////////////////////////////////////////
 typedef int Seconds;
 
@@ -18,6 +20,11 @@ class Clock : public QObject
 public:
     ////////////////////
     Clock(QObject* parent = nullptr);
+
+    Clock(Clock&& c) { swap(c); }
+    Clock& operator=(Clock&& c) { swap(c); return *this; }
+
+    void swap(Clock& c);
 
     ////////////////////
     const QDateTime& datetime() const noexcept { return _datetime; }
