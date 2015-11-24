@@ -5,6 +5,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "ui_eventtitlewidget.h"
 
+#include <QDate>
+#include <QString>
+
 ////////////////////////////////////////////////////////////////////////////////
 class EventTitleWidget : public QWidget, private Ui::EventTitleWidget
 {
@@ -12,6 +15,10 @@ class EventTitleWidget : public QWidget, private Ui::EventTitleWidget
 
 public:
     explicit EventTitleWidget(QWidget* parent = nullptr);
+
+private:
+    void set_name(const QString&);
+    void set_date(const QDate&);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
