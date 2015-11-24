@@ -39,6 +39,23 @@ void Section::set_duration(Seconds duration)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+Seconds Section::overage() const
+{
+    if(is_started())
+    {
+        auto end = started().addSecs(duration());
+        if(!is_ended())
+        {
+            int overage = end.secsTo(Clock::instance().datetime());
+            if(overage > 0) return overage;
+        }
+        else return end.secsTo(ended());
+    }
+
+    return 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 void Section::start()
 {
     if(!is_started()) set_started(Clock::instance().datetime());
@@ -55,23 +72,6 @@ void Section::reset()
 {
     set_ended(QDateTime());
     set_started(QDateTime());
-}
-
-////////////////////////////////////////////////////////////////////////////////
-Seconds Section::overage() const
-{
-    if(is_started())
-    {
-        auto end = started().addSecs(duration());
-        if(!is_ended())
-        {
-            int overage = end.secsTo(Clock::instance().datetime());
-            if(overage > 0) return overage;
-        }
-        else return end.secsTo(ended());
-    }
-
-    return 0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

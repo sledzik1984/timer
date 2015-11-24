@@ -34,17 +34,21 @@ public:
     const Seconds& duration() const noexcept { return _duration; }
 
     ////////////////////
+    const QDateTime& started() const noexcept { return _started; }
+    const QDateTime& ended() const noexcept { return _ended; }
+
+    bool is_started() const noexcept { return started().isValid(); }
+    bool is_ended() const noexcept { return ended().isValid(); }
+
+    Seconds overage() const;
+
+protected:
+    ////////////////////
     void start();
     void end();
     void reset();
 
-    const QDateTime& started() const noexcept { return _started; }
-    const QDateTime& ended() const noexcept { return _ended; }
-
-    bool is_started() const noexcept { return _started.isValid(); }
-    bool is_ended() const noexcept { return _ended.isValid(); }
-
-    Seconds overage() const;
+    friend class Event;
 
 signals:
     ////////////////////
