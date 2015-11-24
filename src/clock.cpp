@@ -12,13 +12,6 @@ Clock::Clock(QObject* parent) :
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Clock::swap(Clock& c)
-{
-    std::swap(_offset, c._offset);
-    std::swap(_datetime, c._datetime);
-}
-
-////////////////////////////////////////////////////////////////////////////////
 void Clock::update()
 {
     QDateTime current = QDateTime::currentDateTime().addSecs(offset());
@@ -34,8 +27,8 @@ void Clock::update()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Clock& Clock::instance()
+Clock::Pointer Clock::instance()
 {
-    static Clock clock;
+    static Clock::Pointer clock(new Clock());
     return clock;
 }

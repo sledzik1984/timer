@@ -7,6 +7,7 @@
 #include <QObject>
 #include <QTimer>
 
+#include <memory>
 #include <utility>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -19,12 +20,10 @@ class Clock : public QObject
 
 public:
     ////////////////////
+    using Pointer = std::shared_ptr<Clock>;
+
+    ////////////////////
     Clock(QObject* parent = nullptr);
-
-    Clock(Clock&& c) { swap(c); }
-    Clock& operator=(Clock&& c) { swap(c); return *this; }
-
-    void swap(Clock& c);
 
     ////////////////////
     const QDateTime& datetime() const noexcept { return _datetime; }
@@ -38,7 +37,7 @@ public:
     void add_offset(Seconds seconds) { set_offset(offset() + std::move(seconds)); }
 
     ////////////////////
-    static Clock& instance();
+    static Clock::Pointer instance();
 
 signals:
     ////////////////////
