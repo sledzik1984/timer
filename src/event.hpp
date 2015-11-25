@@ -10,11 +10,12 @@
 #include <QObject>
 #include <QString>
 
+#include <memory>
 #include <utility>
 #include <vector>
 
 ////////////////////////////////////////////////////////////////////////////////
-using Sections = std::vector<Section>;
+using Sections = std::vector<Section::Pointer>;
 
 ////////////////////////////////////////////////////////////////////////////////
 class Event : public QObject
@@ -23,16 +24,13 @@ class Event : public QObject
 
 public:
     ////////////////////
+    using Pointer = std::shared_ptr<Event>;
+
+    ////////////////////
     Event() = default;
     Event(QString name, QDate date);
 
-    Event(const Event&) = delete;
-    Event(Event&& e) { swap(e); }
-
-    Event& operator=(const Event&) = delete;
-    Event& operator=(Event&& e) { swap(e); return *this; }
-
-    void swap(Event&);
+    void replace(Event::Pointer&&);
 
     ////////////////////
     void set_name(QString name);
@@ -46,38 +44,38 @@ public:
     ////////////////////
     size_t size() const noexcept { return _sections.size(); }
 
-    const Section& section(size_t n) const;
-    Section& section(size_t n);
+    const Section::Pointer& section(size_t n) const;
+    Section::Pointer& section(size_t n);
 
     void clear();
 
-    void insert(size_t n, Section section);
-    void insert(Section section) { insert(size(), std::move(section)); }
+    void insert(size_t n, Section::Pointer section);
+    void insert(Section::Pointer section) { insert(size(), std::move(section)); }
 
     void erase(size_t n);
 
     ////////////////////
-    void reset();
-    void next();
+    QDateTime started() const;
+    QDateTime ended() const;
 
-    size_t current() const noexcept { return _current; }
-    static constexpr size_t none = -1;
-
-    const QDateTime& started() const { return section(0).started(); }
-    const QDateTime& ended() const { return section(size() - 1).ended(); }
-
-    bool is_started() const { return size() && section(0).is_started(); }
-    bool is_ended() const { return size() && section(size() - 1).is_ended(); }
+    bool is_started() const { return started().isValid(); }
+    bool is_ended() const { return ended().isValid(); }
 
     Seconds overage() const;
 
+    void start();
+    void next();
+    void reset();
+
     ////////////////////
-    static Event& instance();
+    static Event::Pointer instance();
 
 signals:
     ////////////////////
     void name_changed(const QString&);
     void date_changed(const QDate&);
+
+    void duration_changed(const Seconds&);
 
 private:
     ////////////////////
@@ -85,7 +83,7 @@ private:
     QDate _date;
     Sections _sections;
 
-    size_t _current = none;
+    void update_duration();
 };
 
 ////////////////////////////////////////////////////////////////////////////////
