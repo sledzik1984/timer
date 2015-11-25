@@ -36,9 +36,6 @@ public:
     const QDateTime& started() const noexcept { return _started; }
     const QDateTime& ended() const noexcept { return _ended; }
 
-    bool is_started() const noexcept { return started().isValid(); }
-    bool is_ended() const noexcept { return ended().isValid(); }
-
     QDateTime ending() const;
     Seconds real_period() const;
 

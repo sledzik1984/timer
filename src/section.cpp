@@ -78,7 +78,7 @@ Seconds Section::remain() const
 Seconds Section::overage() const
 {
     Seconds seconds = passed() - period();
-    if(!is_ended() && seconds < 0) seconds = 0;
+    if(!ended().isValid() && seconds < 0) seconds = 0;
 
     return seconds;
 }
@@ -86,13 +86,13 @@ Seconds Section::overage() const
 ////////////////////////////////////////////////////////////////////////////////
 void Section::start()
 {
-    if(!is_started()) set_started(Clock::instance()->datetime());
+    if(!started().isValid()) set_started(Clock::instance()->datetime());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Section::end()
 {
-    if(is_started() && !is_ended()) set_ended(Clock::instance()->datetime());
+    if(started().isValid() && !ended().isValid()) set_ended(Clock::instance()->datetime());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
