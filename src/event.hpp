@@ -59,14 +59,13 @@ public:
     QDateTime started() const;
     QDateTime ended() const;
 
-    bool is_started() const { return started().isValid(); }
-    bool is_ended() const { return ended().isValid(); }
-
     Seconds overage() const;
 
     bool start();
     bool next();
     void reset();
+
+    int current() const noexcept { return _current; }
 
     ////////////////////
     static Event::Pointer instance();
@@ -82,13 +81,20 @@ signals:
     void started_changed(const QDateTime&);
     void ended_changed(const QDateTime&);
 
+    void current_changed(int);
+
 private:
     ////////////////////
     QString _name;
     QDate _date;
     Sections _sections;
 
+    static constexpr int none = -1;
+    int _current = none;
+
     ////////////////////
+    void set_current(int);
+
     void insert(Sections::const_iterator, Section::Pointer section);
     void erase(Sections::const_iterator);
 
