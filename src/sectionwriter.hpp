@@ -10,7 +10,7 @@
 class SectionWriter
 {
 public:
-    static void write(QXmlStreamWriter&, const Section&);
+    static void write(QXmlStreamWriter&, const Section::Pointer&);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
