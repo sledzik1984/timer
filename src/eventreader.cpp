@@ -77,7 +77,7 @@ Event::Pointer EventReader::read(QXmlStreamReader& reader)
     ////////////////////
     // read sections
     while(reader.readNextStartElement())
-        event->insert(SectionReader::read(reader));
+        event->append(SectionReader::read(reader));
 
     ////////////////////
     // check closing tag
