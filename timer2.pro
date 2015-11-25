@@ -25,6 +25,7 @@ HEADERS +=                  \
     src/periodwidget.hpp    \
     src/section.hpp         \
     src/sectionreader.hpp   \
+    src/sectionwidget.hpp   \
     src/sectionwriter.hpp   \
     src/svgwidget.hpp       \
     src/timelinewidget.hpp  \
@@ -48,6 +49,7 @@ SOURCES +=                  \
     src/periodwidget.cpp    \
     src/section.cpp         \
     src/sectionreader.cpp   \
+    src/sectionwidget.cpp   \
     src/sectionwriter.cpp   \
     src/svgwidget.cpp       \
     src/timelinewidget.cpp  \
