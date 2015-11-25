@@ -48,7 +48,7 @@ Event::Pointer EventReader::read(QXmlStreamReader& reader)
     ////////////////////
     // Event format:
     //   <event name="foo">
-    //     <section name="bar" duration="x:xx:xx"/>
+    //     <section name="bar" period="x:xx:xx"/>
     //     ...
     //   </event>
 

@@ -16,7 +16,7 @@ void Event::replace(Event::Pointer&& e)
     set_date(std::move(e->_date));
 
     _sections = std::move(e->_sections);
-    update_duration();
+    update_period();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -40,10 +40,10 @@ void Event::set_date(QDate date)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Seconds Event::duration() const
+Seconds Event::period() const
 {
     Seconds duration = 0;
-    for(const auto& section : _sections) duration += section->duration();
+    for(const auto& section : _sections) duration += section->period();
     return duration;
 }
 
@@ -80,8 +80,8 @@ void Event::insert(size_t n, Section::Pointer section)
     _sections.insert(ri, std::move(section));
     emit section_inserted(n);
 
-    connect(&*section, &Section::duration_changed, this, &Event::update_duration);
-    update_duration();
+    connect(&*section, &Section::period_changed, this, &Event::update_period);
+    update_period();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -95,7 +95,7 @@ void Event::erase(size_t n)
     _sections.erase(ri);
     emit section_erased(n);
 
-    update_duration();
+    update_period();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -140,9 +140,9 @@ void Event::reset()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Event::update_duration()
+void Event::update_period()
 {
-    emit duration_changed(duration());
+    emit period_changed(period());
 }
 
 ////////////////////////////////////////////////////////////////////////////////

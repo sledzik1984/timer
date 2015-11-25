@@ -3,10 +3,10 @@
 #include "section.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
-Section::Section(QString name, Seconds duration)
+Section::Section(QString name, Seconds period)
 {
     set_name(std::move(name));
-    set_duration(std::move(duration));
+    set_period(std::move(period));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -20,12 +20,12 @@ void Section::set_name(QString name)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Section::set_duration(Seconds duration)
+void Section::set_period(Seconds period)
 {
-    if(duration != _duration)
+    if(period != _period)
     {
-        _duration = std::move(duration);
-        emit duration_changed(_duration);
+        _period = std::move(period);
+        emit period_changed(_period);
     }
 }
 
@@ -34,7 +34,7 @@ Seconds Section::overage() const
 {
     if(is_started())
     {
-        auto end = started().addSecs(duration());
+        auto end = started().addSecs(period());
         if(!is_ended())
         {
             int overage = end.secsTo(Clock::instance()->datetime());

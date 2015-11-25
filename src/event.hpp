@@ -39,7 +39,7 @@ public:
     void set_date(QDate date);
     const QDate& date() const noexcept { return _date; }
 
-    Seconds duration() const;
+    Seconds period() const;
 
     ////////////////////
     size_t size() const noexcept { return _sections.size(); }
@@ -75,7 +75,7 @@ signals:
     void name_changed(const QString&);
     void date_changed(const QDate&);
 
-    void duration_changed(const Seconds&);
+    void period_changed(const Seconds&);
 
     void section_inserted(size_t n);
     void section_erased(size_t n);
@@ -86,7 +86,7 @@ private:
     QDate _date;
     Sections _sections;
 
-    void update_duration();
+    void update_period();
 };
 
 ////////////////////////////////////////////////////////////////////////////////

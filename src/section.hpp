@@ -23,14 +23,14 @@ public:
 
     ////////////////////
     Section() = default;
-    Section(QString name, Seconds duration);
+    Section(QString name, Seconds period);
 
     ////////////////////
     void set_name(QString name);
     const QString& name() const noexcept { return _name; }
 
-    void set_duration(Seconds duration);
-    const Seconds& duration() const noexcept { return _duration; }
+    void set_period(Seconds period);
+    const Seconds& period() const noexcept { return _period; }
 
     ////////////////////
     const QDateTime& started() const noexcept { return _started; }
@@ -52,7 +52,7 @@ protected:
 signals:
     ////////////////////
     void name_changed(const QString&);
-    void duration_changed(const Seconds&);
+    void period_changed(const Seconds&);
 
     void started_changed(const QDateTime&);
     void ended_changed(const QDateTime&);
@@ -60,7 +60,7 @@ signals:
 private:
     ////////////////////
     QString _name;
-    Seconds _duration = 0;
+    Seconds _period = 0;
 
     QDateTime _started;
     QDateTime _ended;

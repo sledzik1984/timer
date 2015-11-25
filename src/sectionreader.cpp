@@ -7,7 +7,7 @@
 #include <QTime>
 
 ////////////////////////////////////////////////////////////////////////////////
-static inline Seconds to_duration(const QString& string)
+static inline Seconds to_period(const QString& string)
 {
     return QTime(0, 0).secsTo(QTime::fromString(string, "H:mm:ss"));
 }
@@ -28,7 +28,7 @@ static inline QString value(const QXmlStreamAttributes& attrs, const QString& na
 Section::Pointer SectionReader::read(QXmlStreamReader& reader)
 {
     ////////////////////
-    // format: <section name="foo" duration="<time>" [started="<date/time>"] [ended="date/time"]/>
+    // format: <section name="foo" period="<time>" [started="<date/time>"] [ended="date/time"]/>
 
     ////////////////////
     // check opening tag
@@ -44,8 +44,8 @@ Section::Pointer SectionReader::read(QXmlStreamReader& reader)
     if(!attrs.hasAttribute("name")) throw XmlError("Missing name attribute");
     section->set_name(value(attrs, "name"));
 
-    if(!attrs.hasAttribute("duration")) throw XmlError("Missing duration attribute");
-    section->set_duration(to_duration(value(attrs, "duration")));
+    if(!attrs.hasAttribute("period")) throw XmlError("Missing period attribute");
+    section->set_period(to_period(value(attrs, "period")));
 
     if(attrs.hasAttribute("started"))
         section->set_started(to_datetime(value(attrs, "started")));
