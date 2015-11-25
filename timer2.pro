@@ -28,6 +28,7 @@ HEADERS +=                  \
     src/sectionreader.hpp   \
     src/sectionwriter.hpp   \
     src/svgwidget.hpp       \
+    src/timelinewidget.hpp  \
     src/timewidget.hpp      \
     src/trucktimewidget.hpp \
 
@@ -50,6 +51,7 @@ SOURCES +=                  \
     src/sectionreader.cpp   \
     src/sectionwriter.cpp   \
     src/svgwidget.cpp       \
+    src/timelinewidget.cpp  \
     src/timewidget.cpp      \
     src/trucktimewidget.cpp \
 
