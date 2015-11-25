@@ -8,8 +8,8 @@ EventTitleWidget::EventTitleWidget(QWidget* parent) :
 {
     setupUi(this);
 
-    connect(&Event::instance(), &Event::name_changed, this, &EventTitleWidget::set_name);
-    connect(&Event::instance(), &Event::date_changed, this, &EventTitleWidget::set_date);
+    connect(&*Event::instance(), &Event::name_changed, this, &EventTitleWidget::set_name);
+    connect(&*Event::instance(), &Event::date_changed, this, &EventTitleWidget::set_date);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
