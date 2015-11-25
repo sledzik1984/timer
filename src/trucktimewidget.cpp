@@ -8,5 +8,5 @@ TruckTimeWidget::TruckTimeWidget(QWidget* parent) :
 {
     setupUi(this);
 
-    panel->layout()->addWidget(new ClockWidget(Qt::red));
+    QWidget::layout()->addWidget(new ClockWidget(Qt::red));
 }
