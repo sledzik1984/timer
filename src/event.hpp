@@ -77,6 +77,9 @@ signals:
 
     void duration_changed(const Seconds&);
 
+    void section_inserted(size_t n);
+    void section_erased(size_t n);
+
 private:
     ////////////////////
     QString _name;

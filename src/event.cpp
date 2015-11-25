@@ -64,8 +64,9 @@ Section::Pointer& Event::section(size_t n)
 ////////////////////////////////////////////////////////////////////////////////
 void Event::clear()
 {
-    _sections.clear();
-    update_duration();
+    // erase sections one by one
+    // starting at the end
+    while(size()) erase(size() - 1);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -77,8 +78,9 @@ void Event::insert(size_t n, Section::Pointer section)
     if(n < size() && (*ri)->is_started()) throw InvalidError("Event::insert: Invalid insert");
 
     _sections.insert(ri, std::move(section));
-    connect(&*section, &Section::duration_changed, this, &Event::update_duration);
+    emit section_inserted(n);
 
+    connect(&*section, &Section::duration_changed, this, &Event::update_duration);
     update_duration();
 }
 
@@ -91,6 +93,8 @@ void Event::erase(size_t n)
     if(n < size() && (*ri)->is_started()) throw InvalidError("Event::erase: Invalid erase");
 
     _sections.erase(ri);
+    emit section_erased(n);
+
     update_duration();
 }
 
