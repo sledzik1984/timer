@@ -42,9 +42,17 @@ void Event::set_date(QDate date)
 ////////////////////////////////////////////////////////////////////////////////
 Seconds Event::period() const
 {
-    Seconds duration = 0;
-    for(const auto& section : _sections) duration += section->period();
-    return duration;
+    Seconds seconds = 0;
+    for(const auto& section : _sections) seconds += section->period();
+    return seconds;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+Seconds Event::real_period() const
+{
+    Seconds seconds = 0;
+    for(const auto& section : _sections) seconds += section->real_period();
+    return seconds;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

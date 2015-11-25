@@ -40,6 +40,7 @@ public:
     const QDate& date() const noexcept { return _date; }
 
     Seconds period() const;
+    Seconds real_period() const;
 
     ////////////////////
     size_t size() const noexcept { return _sections.size(); }
