@@ -51,7 +51,7 @@ public:
     void clear();
 
     void insert(size_t n, Section::Pointer section);
-    void insert(Section::Pointer section) { insert(size(), std::move(section)); }
+    void append(Section::Pointer section) { insert(size(), std::move(section)); }
 
     void erase(size_t n);
 
@@ -64,8 +64,8 @@ public:
 
     Seconds overage() const;
 
-    void start();
-    void next();
+    bool start();
+    bool next();
     void reset();
 
     ////////////////////
@@ -76,10 +76,11 @@ signals:
     void name_changed(const QString&);
     void date_changed(const QDate&);
 
-    void period_changed(const Seconds&);
-
     void section_inserted(size_t n);
     void section_erased(size_t n);
+
+    void started_changed(const QDateTime&);
+    void ended_changed(const QDateTime&);
 
 private:
     ////////////////////
@@ -87,7 +88,15 @@ private:
     QDate _date;
     Sections _sections;
 
-    void update_period();
+    ////////////////////
+    void insert(Sections::const_iterator, Section::Pointer section);
+    void erase(Sections::const_iterator);
+
+    Sections::const_iterator begin() const { return _sections.begin(); }
+    Sections::const_iterator end() const { return _sections.end(); }
+
+    Sections::const_reverse_iterator rbegin() const { return _sections.rbegin(); }
+    Sections::const_reverse_iterator rend() const { return _sections.rend(); }
 };
 
 ////////////////////////////////////////////////////////////////////////////////

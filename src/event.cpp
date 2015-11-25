@@ -3,6 +3,23 @@
 #include "event.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
+class ProgressError : public InvalidError
+{
+public:
+    ProgressError(QString proc) :
+        InvalidError(std::move(proc.append(": Event in-progress")))
+    { }
+};
+
+class RangeError : public InvalidError
+{
+public:
+    RangeError(QString proc) :
+        InvalidError(std::move(proc.append(": Index out of range")))
+    { }
+};
+
+////////////////////////////////////////////////////////////////////////////////
 Event::Event(QString name, QDate date)
 {
     set_name(std::move(name));
@@ -12,11 +29,14 @@ Event::Event(QString name, QDate date)
 ////////////////////////////////////////////////////////////////////////////////
 void Event::replace(Event::Pointer&& e)
 {
+    if(is_started() || e->is_started()) throw ProgressError("Event::replace");
+
     set_name(std::move(e->_name));
     set_date(std::move(e->_date));
 
-    _sections = std::move(e->_sections);
-    update_period();
+    clear();
+
+    for(auto ri = e->begin(); ri != e->end(); ++ri) insert(end(), std::move(*ri));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -58,59 +78,52 @@ Seconds Event::real_period() const
 ////////////////////////////////////////////////////////////////////////////////
 const Section::Pointer& Event::section(size_t n) const
 {
-    if(n >= size()) throw InvalidError("Event::Section: Subscript out of range");
+    if(n >= size()) throw RangeError("Event::section");
     return _sections[0];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 Section::Pointer& Event::section(size_t n)
 {
-    if(n >= size()) throw InvalidError("Event::Section: Subscript out of range");
+    if(n >= size()) throw RangeError("Event::section");
     return _sections[0];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Event::clear()
 {
-    // erase sections one by one
-    // starting at the end
-    while(size()) erase(size() - 1);
+    if(is_started()) throw ProgressError("Event::clear");
+
+    while(size()) erase(rbegin().base());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Event::insert(size_t n, Section::Pointer section)
 {
-    if(n > size()) throw InvalidError("Event::insert: Subscript out of range");
+    if(n > size()) throw RangeError("Event::insert");
 
-    auto ri = _sections.begin() + n;
-    if(n < size() && (*ri)->is_started()) throw InvalidError("Event::insert: Invalid insert");
+    auto ri = begin() + n;
+    if(n < size() && (*ri)->is_started()) throw ProgressError("Event::insert");
 
-    _sections.insert(ri, std::move(section));
-    emit section_inserted(n);
-
-    connect(&*section, &Section::period_changed, this, &Event::update_period);
-    update_period();
+    insert(ri, std::move(section));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Event::erase(size_t n)
 {
-    if(n > size()) throw InvalidError("Event::erase: Subscript out of range");
+    if(n >= size()) throw RangeError("Event::erase");
 
-    auto ri = _sections.begin() + n;
-    if(n < size() && (*ri)->is_started()) throw InvalidError("Event::erase: Invalid erase");
+    auto ri = begin() + n;
+    if((*ri)->is_started()) throw ProgressError("Event::erase");
 
-    _sections.erase(ri);
-    emit section_erased(n);
-
-    update_period();
+    erase(ri);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 QDateTime Event::started() const
 {
     QDateTime started;
-    if(size()) started = section(0)->started();
+    if(size()) started = (*begin())->started();
     return started;
 }
 
@@ -118,7 +131,7 @@ QDateTime Event::started() const
 QDateTime Event::ended() const
 {
     QDateTime ended;
-    if(size()) ended = section(size() - 1)->ended();
+    if(size()) ended = (*rbegin())->ended();
     return ended;
 }
 
@@ -131,14 +144,44 @@ Seconds Event::overage() const
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Event::start()
+bool Event::start()
 {
-    if(!is_started() && size()) section(0)->start();
+    if(size())
+    {
+        auto section = *begin();
+        if(!section->is_started())
+        {
+            section->start();
+            emit started_changed(section->started());
+
+            return true;
+        }
+    }
+
+    return false;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Event::next()
+bool Event::next()
 {
+    for(auto ri = begin(); ri != end(); ++ri)
+    {
+        auto section = *ri;
+        if(section->is_started() && !section->is_ended())
+        {
+            section->end();
+            if(++ri != end())
+            {
+                section = *ri;
+                section->start();
+            }
+            else emit ended_changed(section->ended());
+
+            return true;
+        }
+    }
+
+    return false;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -148,9 +191,17 @@ void Event::reset()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Event::update_period()
+void Event::insert(Sections::const_iterator ri, Section::Pointer section)
 {
-    emit period_changed(period());
+    _sections.insert(ri, std::move(section));
+    emit section_inserted(ri - begin());
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Event::erase(Sections::const_iterator ri)
+{
+    ri = _sections.erase(ri);
+    emit section_erased(ri - begin());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
