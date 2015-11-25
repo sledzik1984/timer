@@ -10,7 +10,7 @@
 class SectionReader
 {
 public:
-    static Section read(QXmlStreamReader&);
+    static Section::Pointer read(QXmlStreamReader&);
 };
 
 ////////////////////////////////////////////////////////////////////////////////

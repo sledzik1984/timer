@@ -25,7 +25,7 @@ static inline QString value(const QXmlStreamAttributes& attrs, const QString& na
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Section SectionReader::read(QXmlStreamReader& reader)
+Section::Pointer SectionReader::read(QXmlStreamReader& reader)
 {
     ////////////////////
     // format: <section name="foo" duration="<time>" [started="<date/time>"] [ended="date/time"]/>
@@ -38,20 +38,20 @@ Section SectionReader::read(QXmlStreamReader& reader)
 
     ////////////////////
     // get section attributes
-    Section section;
+    Section::Pointer section(new Section());
     auto attrs = reader.attributes();
 
     if(!attrs.hasAttribute("name")) throw XmlError("Missing name attribute");
-    section.set_name(value(attrs, "name"));
+    section->set_name(value(attrs, "name"));
 
     if(!attrs.hasAttribute("duration")) throw XmlError("Missing duration attribute");
-    section.set_duration(to_duration(value(attrs, "duration")));
+    section->set_duration(to_duration(value(attrs, "duration")));
 
     if(attrs.hasAttribute("started"))
-        section.set_started(to_datetime(value(attrs, "started")));
+        section->set_started(to_datetime(value(attrs, "started")));
 
     if(attrs.hasAttribute("ended"))
-        section.set_ended(to_datetime(value(attrs, "ended")));
+        section->set_ended(to_datetime(value(attrs, "ended")));
 
     ////////////////////
     // check closing tag
