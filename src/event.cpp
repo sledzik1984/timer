@@ -79,14 +79,14 @@ Seconds Event::real_period() const
 const Section::Pointer& Event::section(size_t n) const
 {
     if(n >= size()) throw RangeError("Event::section");
-    return _sections[0];
+    return _sections[n];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 Section::Pointer& Event::section(size_t n)
 {
     if(n >= size()) throw RangeError("Event::section");
-    return _sections[0];
+    return _sections[n];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -193,7 +193,7 @@ void Event::reset()
 ////////////////////////////////////////////////////////////////////////////////
 void Event::insert(Sections::const_iterator ri, Section::Pointer section)
 {
-    _sections.insert(ri, std::move(section));
+    ri = _sections.insert(ri, std::move(section));
     emit section_inserted(ri - begin());
 }
 
