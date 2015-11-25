@@ -39,6 +39,12 @@ public:
     bool is_started() const noexcept { return started().isValid(); }
     bool is_ended() const noexcept { return ended().isValid(); }
 
+    QDateTime ending() const;
+    Seconds real_period() const;
+
+    Seconds passed() const;
+    Seconds remain() const;
+
     Seconds overage() const;
 
 protected:

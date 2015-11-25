@@ -30,20 +30,57 @@ void Section::set_period(Seconds period)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Seconds Section::overage() const
+QDateTime Section::ending() const
 {
-    if(is_started())
+    QDateTime value = started();
+    if(value.isValid()) value = value.addSecs(period());
+
+    return value;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+Seconds Section::real_period() const
+{
+    QDateTime start = started();
+    if(start.isValid())
     {
-        auto end = started().addSecs(period());
-        if(!is_ended())
-        {
-            int overage = end.secsTo(Clock::instance()->datetime());
-            if(overage > 0) return overage;
-        }
-        else return end.secsTo(ended());
+        QDateTime end = ended();
+        if(end.isValid()) return start.secsTo(end);
     }
 
-    return 0;
+    return period();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+Seconds Section::passed() const
+{
+    QDateTime start = started();
+    if(start.isValid())
+    {
+        QDateTime end = ended();
+        if(!end.isValid()) end = Clock::instance()->datetime();
+
+        return start.secsTo(end);
+    }
+    else return 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+Seconds Section::remain() const
+{
+    Seconds seconds = real_period() - passed();
+    if(seconds < 0) seconds = 0;
+
+    return seconds;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+Seconds Section::overage() const
+{
+    Seconds seconds = passed() - period();
+    if(!is_ended() && seconds < 0) seconds = 0;
+
+    return seconds;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
