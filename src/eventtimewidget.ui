@@ -40,7 +40,7 @@
     <widget class="QWidget" name="panel" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>50</horstretch>
+       <horstretch>80</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
@@ -66,7 +66,7 @@
          <string>EVENT RUNNING TIME</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <set>Qt::AlignBottom|Qt::AlignHCenter</set>
         </property>
        </widget>
       </item>
