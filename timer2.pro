@@ -20,7 +20,6 @@ HEADERS +=                  \
     src/eventreader.hpp     \
     src/eventtimewidget.hpp \
     src/eventwriter.hpp     \
-    src/freeze.hpp          \
     src/mainwindow.hpp      \
     src/numberwidget.hpp    \
     src/periodwidget.hpp    \
