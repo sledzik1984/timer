@@ -6,22 +6,22 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
+    <width>1000</width>
     <height>100</height>
    </rect>
   </property>
-  <layout class="QHBoxLayout" name="layout">
+  <layout class="QHBoxLayout">
    <property name="spacing">
     <number>20</number>
    </property>
    <property name="leftMargin">
-    <number>20</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>20</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>20</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
     <number>0</number>
