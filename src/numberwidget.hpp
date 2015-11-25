@@ -15,6 +15,7 @@ class NumberWidget : public QWidget
     Q_OBJECT
 
 public:
+    ////////////////////
     explicit NumberWidget(QWidget* parent = nullptr);
     NumberWidget(size_t number, QColor color, QWidget* parent = nullptr);
 

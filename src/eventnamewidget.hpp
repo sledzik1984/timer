@@ -14,9 +14,11 @@ class EventNameWidget : public QWidget, private Ui::EventNameWidget
     Q_OBJECT
 
 public:
+    ////////////////////
     explicit EventNameWidget(QWidget* parent = nullptr);
 
 private:
+    ////////////////////
     void set_name(const QString&);
     void set_date(const QDate&);
 };

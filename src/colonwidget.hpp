@@ -14,6 +14,7 @@ class ColonWidget : public SvgWidget
     Q_OBJECT
 
 public:
+    ////////////////////
     explicit ColonWidget(QWidget* parent = nullptr);
     explicit ColonWidget(QColor color, QWidget* parent = nullptr);
 

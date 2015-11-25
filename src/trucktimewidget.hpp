@@ -11,6 +11,7 @@ class TruckTimeWidget : public QWidget, private Ui::TruckTimeWidget
     Q_OBJECT
 
 public:
+    ////////////////////
     explicit TruckTimeWidget(QWidget* parent = nullptr);
 };
 

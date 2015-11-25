@@ -13,6 +13,7 @@ class PeriodWidget : public SvgWidget
     Q_OBJECT
 
 public:
+    ////////////////////
     explicit PeriodWidget(QWidget* parent = nullptr);
     explicit PeriodWidget(QColor color, QWidget* parent = nullptr);
 

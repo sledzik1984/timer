@@ -11,6 +11,7 @@ class EventTimeWidget : public QWidget, private Ui::EventTimeWidget
     Q_OBJECT
 
 public:
+    ////////////////////
     explicit EventTimeWidget(QWidget* parent = nullptr);
 };
 

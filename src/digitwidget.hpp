@@ -21,6 +21,7 @@ class DigitWidget : public SvgWidget
     Q_OBJECT
 
 public:
+    ////////////////////
     explicit DigitWidget(QWidget* parent = nullptr);
     DigitWidget(Digit digit, QColor color, QWidget* parent = nullptr);
 
