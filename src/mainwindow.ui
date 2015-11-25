@@ -18,64 +18,121 @@
 color: grey;
 font: 18pt;</string>
   </property>
-  <layout class="QGridLayout" name="layout">
+  <layout class="QGridLayout">
    <property name="leftMargin">
-    <number>0</number>
+    <number>20</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>20</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>20</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>20</number>
    </property>
    <property name="spacing">
     <number>0</number>
    </property>
-   <item row="1" column="0">
-    <widget class="TruckTimeWidget" name="panel_1" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>100</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <widget class="QWidget" name="panel_3" native="true">
+   <item row="1" column="1">
+    <widget class="QWidget" name="main" native="true">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-       <horstretch>0</horstretch>
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>50</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>100</height>
-      </size>
+     <layout class="QVBoxLayout" name="_2">
+      <property name="spacing">
+       <number>20</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="TruckTimeWidget" name="truck" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="EventTimeWidget" name="event" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="spacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0" rowspan="2">
+    <widget class="QWidget" name="left" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>10</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="EventTimeWidget" name="panel_2" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>100</height>
-      </size>
+   <item row="1" column="2" rowspan="2">
+    <widget class="QWidget" name="right" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>10</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
     </widget>
    </item>
-   <item row="0" column="0">
-    <widget class="EventTitleWidget" name="panel_0" native="true"/>
+   <item row="0" column="0" colspan="3">
+    <widget class="EventNameWidget" name="name" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>EventNameWidget</class>
+   <extends>QWidget</extends>
+   <header>src/eventnamewidget.hpp</header>
+   <container>1</container>
+  </customwidget>
   <customwidget>
    <class>TruckTimeWidget</class>
    <extends>QWidget</extends>
@@ -86,12 +143,6 @@ font: 18pt;</string>
    <class>EventTimeWidget</class>
    <extends>QWidget</extends>
    <header>src/eventtimewidget.hpp</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>EventTitleWidget</class>
-   <extends>QWidget</extends>
-   <header>src/eventtitlewidget.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
