@@ -17,9 +17,9 @@ HEADERS +=                  \
     src/digitwidget.hpp     \
     src/error.hpp           \
     src/event.hpp           \
+    src/eventnamewidget.hpp \
     src/eventreader.hpp     \
     src/eventtimewidget.hpp \
-    src/eventtitlewidget.hpp\
     src/eventwriter.hpp     \
     src/freeze.hpp          \
     src/mainwindow.hpp      \
@@ -40,9 +40,9 @@ SOURCES +=                  \
     src/controlwidget.cpp   \
     src/digitwidget.cpp     \
     src/event.cpp           \
+    src/eventnamewidget.cpp \
     src/eventreader.cpp     \
     src/eventtimewidget.cpp \
-    src/eventtitlewidget.cpp\
     src/eventwriter.cpp     \
     src/main.cpp            \
     src/mainwindow.cpp      \
@@ -58,8 +58,8 @@ SOURCES +=                  \
 ################################################################################
 FORMS +=                    \
     src/controlwidget.ui    \
+    src/eventnamewidget.ui  \
     src/eventtimewidget.ui  \
-    src/eventtitlewidget.ui \
     src/mainwindow.ui       \
     src/trucktimewidget.ui  \
 

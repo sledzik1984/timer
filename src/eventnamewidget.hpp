@@ -1,20 +1,20 @@
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef EVENTTITLEWIDGET_HPP
-#define EVENTTITLEWIDGET_HPP
+#ifndef EVENTNAMEWIDGET_HPP
+#define EVENTNAMEWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
-#include "ui_eventtitlewidget.h"
+#include "ui_eventnamewidget.h"
 
 #include <QDate>
 #include <QString>
 
 ////////////////////////////////////////////////////////////////////////////////
-class EventTitleWidget : public QWidget, private Ui::EventTitleWidget
+class EventNameWidget : public QWidget, private Ui::EventNameWidget
 {
     Q_OBJECT
 
 public:
-    explicit EventTitleWidget(QWidget* parent = nullptr);
+    explicit EventNameWidget(QWidget* parent = nullptr);
 
 private:
     void set_name(const QString&);
@@ -22,4 +22,4 @@ private:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-#endif // EVENTTITLEWIDGET_HPP
+#endif // EVENTNAMEWIDGET_HPP
