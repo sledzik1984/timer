@@ -13,6 +13,7 @@ HEADERS +=                  \
     src/clock.hpp           \
     src/clockwidget.hpp     \
     src/colonwidget.hpp     \
+    src/customwidget.hpp    \
     src/digitwidget.hpp     \
     src/error.hpp           \
     src/event.hpp           \
@@ -37,6 +38,7 @@ SOURCES +=                  \
     src/clock.cpp           \
     src/clockwidget.cpp     \
     src/colonwidget.cpp     \
+    src/customwidget.cpp    \
     src/digitwidget.cpp     \
     src/event.cpp           \
     src/eventnamewidget.cpp \
