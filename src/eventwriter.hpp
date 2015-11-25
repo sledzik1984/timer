@@ -13,9 +13,9 @@
 class EventWriter
 {
 public:
-    static void write(const QString& filename, const Event&);
-    static void write(QIODevice*, const Event&);
-    static void write(QXmlStreamWriter&, const Event&);
+    static void write(const QString& filename, const Event::Pointer&);
+    static void write(QIODevice*, const Event::Pointer&);
+    static void write(QXmlStreamWriter&, const Event::Pointer&);
 };
 
 ////////////////////////////////////////////////////////////////////////////////

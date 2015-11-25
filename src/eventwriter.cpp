@@ -14,7 +14,7 @@ static inline QString to_string(const QDate& date)
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-void EventWriter::write(const QString& filename, const Event& event)
+void EventWriter::write(const QString& filename, const Event::Pointer& event)
 {
     QFile file(filename);
     if(!file.open(QFile::WriteOnly)) throw XmlError(file.errorString());
@@ -24,7 +24,7 @@ void EventWriter::write(const QString& filename, const Event& event)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void EventWriter::write(QIODevice* device, const Event& event)
+void EventWriter::write(QIODevice* device, const Event::Pointer& event)
 {
     QXmlStreamWriter writer(device);
     writer.setAutoFormatting(true);
@@ -34,14 +34,14 @@ void EventWriter::write(QIODevice* device, const Event& event)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void EventWriter::write(QXmlStreamWriter& writer, const Event& event)
+void EventWriter::write(QXmlStreamWriter& writer, const Event::Pointer& event)
 {
     writer.writeStartElement("event");
 
-    writer.writeAttribute("name", event.name());
-    writer.writeAttribute("date", to_string(event.date()));
+    writer.writeAttribute("name", event->name());
+    writer.writeAttribute("date", to_string(event->date()));
 
-    for(size_t n = 0; n < event.size(); ++n) SectionWriter::write(writer, event.section(n));
+    for(size_t n = 0; n < event->size(); ++n) SectionWriter::write(writer, event->section(n));
 
     writer.writeEndElement();
 }
