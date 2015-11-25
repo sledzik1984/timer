@@ -28,8 +28,8 @@ void SectionWriter::write(QXmlStreamWriter& writer, const Section::Pointer& sect
     writer.writeAttribute("name", section->name());
     writer.writeAttribute("period", to_string(section->period()));
 
-    if(section->is_started()) writer.writeAttribute("started", to_string(section->started()));
-    if(section->is_ended()) writer.writeAttribute("ended", to_string(section->ended()));
+    if(section->started().isValid()) writer.writeAttribute("started", to_string(section->started()));
+    if(section->ended().isValid()) writer.writeAttribute("ended", to_string(section->ended()));
 
     writer.writeEndElement();
 }
