@@ -13,9 +13,9 @@
 class EventReader
 {
 public:
-    static Event read(const QString& filename);
-    static Event read(QIODevice*);
-    static Event read(QXmlStreamReader&);
+    static Event::Pointer read(const QString& filename);
+    static Event::Pointer read(QIODevice*);
+    static Event::Pointer read(QXmlStreamReader&);
 };
 
 ////////////////////////////////////////////////////////////////////////////////

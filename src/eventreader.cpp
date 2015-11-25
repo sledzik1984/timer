@@ -20,30 +20,30 @@ static inline QString value(const QXmlStreamAttributes& attrs, const QString& na
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-Event EventReader::read(const QString& filename)
+Event::Pointer EventReader::read(const QString& filename)
 {
     QFile file(filename);
     if(!file.open(QFile::ReadOnly)) throw XmlError(file.errorString());
 
-    Event event = EventReader::read(&file);
+    Event::Pointer event = EventReader::read(&file);
     if(file.error()) throw XmlError(file.errorString());
 
     return event;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Event EventReader::read(QIODevice* device)
+Event::Pointer EventReader::read(QIODevice* device)
 {
     QXmlStreamReader reader(device);
 
-    Event event = EventReader::read(reader);
+    Event::Pointer event = EventReader::read(reader);
     if(reader.error()) throw XmlError(reader.errorString());
 
     return event;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Event EventReader::read(QXmlStreamReader& reader)
+Event::Pointer EventReader::read(QXmlStreamReader& reader)
 {
     ////////////////////
     // Event format:
@@ -65,19 +65,19 @@ Event EventReader::read(QXmlStreamReader& reader)
 
     ////////////////////
     // get event name
-    Event event;
+    Event::Pointer event(new Event());
     auto attrs = reader.attributes();
 
     if(!attrs.hasAttribute("name")) throw XmlError("Missing name attribute");
-    event.set_name(value(attrs, "name"));
+    event->set_name(value(attrs, "name"));
 
     if(!attrs.hasAttribute("date")) throw XmlError("Missing date attribute");
-    event.set_date(to_date(value(attrs, "date")));
+    event->set_date(to_date(value(attrs, "date")));
 
     ////////////////////
     // read sections
     while(reader.readNextStartElement())
-        event.insert(SectionReader::read(reader));
+        event->insert(SectionReader::read(reader));
 
     ////////////////////
     // check closing tag
