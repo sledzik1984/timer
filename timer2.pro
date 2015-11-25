@@ -13,6 +13,7 @@ HEADERS +=                  \
     src/clock.hpp           \
     src/clockwidget.hpp     \
     src/colonwidget.hpp     \
+    src/controlwidget.hpp   \
     src/digitwidget.hpp     \
     src/error.hpp           \
     src/event.hpp           \
@@ -36,6 +37,7 @@ SOURCES +=                  \
     src/clock.cpp           \
     src/clockwidget.cpp     \
     src/colonwidget.cpp     \
+    src/controlwidget.cpp   \
     src/digitwidget.cpp     \
     src/event.cpp           \
     src/eventreader.cpp     \
@@ -55,6 +57,7 @@ SOURCES +=                  \
 
 ################################################################################
 FORMS +=                    \
+    src/controlwidget.ui    \
     src/eventtimewidget.ui  \
     src/eventtitlewidget.ui \
     src/mainwindow.ui       \
