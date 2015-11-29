@@ -13,7 +13,6 @@ HEADERS +=                  \
     src/clock.hpp           \
     src/clockwidget.hpp     \
     src/colonwidget.hpp     \
-    src/customwidget.hpp    \
     src/digitwidget.hpp     \
     src/error.hpp           \
     src/event.hpp           \
@@ -28,6 +27,7 @@ HEADERS +=                  \
     src/sectionreader.hpp   \
     src/sectionwidget.hpp   \
     src/sectionwriter.hpp   \
+    src/stylewidget.hpp     \
     src/svgwidget.hpp       \
     src/timelinewidget.hpp  \
     src/timewidget.hpp      \
@@ -38,7 +38,6 @@ SOURCES +=                  \
     src/clock.cpp           \
     src/clockwidget.cpp     \
     src/colonwidget.cpp     \
-    src/customwidget.cpp    \
     src/digitwidget.cpp     \
     src/event.cpp           \
     src/eventnamewidget.cpp \
@@ -53,6 +52,7 @@ SOURCES +=                  \
     src/sectionreader.cpp   \
     src/sectionwidget.cpp   \
     src/sectionwriter.cpp   \
+    src/stylewidget.cpp     \
     src/svgwidget.cpp       \
     src/timelinewidget.cpp  \
     src/timewidget.cpp      \

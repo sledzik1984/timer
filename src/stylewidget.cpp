@@ -1,12 +1,12 @@
 ////////////////////////////////////////////////////////////////////////////////
-#include "customwidget.hpp"
+#include "stylewidget.hpp"
 
 #include <QPainter>
 #include <QStyle>
 #include <QStyleOption>
 
 ////////////////////////////////////////////////////////////////////////////////
-void CustomWidget::paintEvent(QPaintEvent*)
+void StyleWidget::paintEvent(QPaintEvent*)
 {
     QStyleOption option;
     option.initFrom(this);
