@@ -3,34 +3,29 @@
 #define COLONWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
+#include "presswidget.hpp"
 #include "svgwidget.hpp"
 
-#include <QColor>
 #include <QWidget>
 
 ////////////////////////////////////////////////////////////////////////////////
-class ColonWidget : public SvgWidget
+class ColonWidget : public SvgWidget, public PressWidget
 {
     Q_OBJECT
 
 public:
     ////////////////////
-    explicit ColonWidget(QWidget* parent = nullptr);
+    explicit ColonWidget(QWidget* parent = nullptr) : ColonWidget(QColor(), parent) { }
     explicit ColonWidget(QColor color, QWidget* parent = nullptr);
 
-    ////////////////////
-    void set_color(QColor color);
-    const QColor& color() const noexcept { return _color; }
-
-    void reload();
+    using SvgWidget::set_color; // make SvgWidget::set_color public
 
 signals:
     ////////////////////
-    void color_changed(const QColor&);
-
-private:
-    ////////////////////
-    QColor _color;
+    void clicked();
+    void pressed();
+    void long_pressed();
+    void released();
 };
 
 ////////////////////////////////////////////////////////////////////////////////
