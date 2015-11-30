@@ -3,10 +3,11 @@
 #define TRUCKTIMEWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
+#include "stylewidget.hpp"
 #include "ui_trucktimewidget.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-class TruckTimeWidget : public QWidget, private Ui::TruckTimeWidget
+class TruckTimeWidget : public StyleWidget, private Ui::TruckTimeWidget
 {
     Q_OBJECT
 
