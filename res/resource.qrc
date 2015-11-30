@@ -12,5 +12,6 @@
         <file>open.svg</file>
         <file>play.svg</file>
         <file>save.svg</file>
+        <file>panel.png</file>
     </qresource>
 </RCC>
