@@ -3,9 +3,9 @@
 #define DIGITWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
+#include "presswidget.hpp"
 #include "svgwidget.hpp"
 
-#include <QColor>
 #include <QWidget>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -16,33 +16,33 @@ enum class Digit
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-class DigitWidget : public SvgWidget
+class DigitWidget : public SvgWidget, public PressWidget
 {
     Q_OBJECT
 
 public:
     ////////////////////
-    explicit DigitWidget(QWidget* parent = nullptr);
-    DigitWidget(Digit digit, QColor color, QWidget* parent = nullptr);
+    explicit DigitWidget(QWidget* parent = nullptr) : DigitWidget(Digit::none, QColor(), parent) { }
+    explicit DigitWidget(Digit digit, QColor color, QWidget* parent = nullptr);
 
     ////////////////////
     void set_digit(Digit digit);
     Digit digit() const noexcept { return _digit; }
 
-    void set_color(QColor color);
-    const QColor& color() const noexcept { return _color; }
-
-    void reload();
+    using SvgWidget::set_color; // make SvgWidget::set_color public
 
 signals:
     ////////////////////
+    void clicked();
+    void pressed();
+    void long_pressed();
+    void released();
+
     void digit_changed(Digit);
-    void color_changed(const QColor&);
 
 private:
     ////////////////////
     Digit _digit;
-    QColor _color;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
