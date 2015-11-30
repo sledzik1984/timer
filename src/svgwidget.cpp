@@ -9,6 +9,7 @@ SvgWidget::SvgWidget(QRect viewbox, QColor color, QByteArray contents, QWidget* 
     set_viewbox (std::move(viewbox ));
     set_color   (std::move(color   ));
     set_contents(std::move(contents));
+    reload();
 
     connect(this, &SvgWidget:: viewbox_changed, this, &SvgWidget::reload);
     connect(this, &SvgWidget::   color_changed, this, &SvgWidget::reload);

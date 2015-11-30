@@ -37,12 +37,14 @@ protected:
 
     void reload();
 
+private:
     ////////////////////
     QRect _viewbox;
     QColor _color;
     QByteArray _contents;
 
-    using QSvgWidget::load; // protect QSvgWidget::load
+    ////////////////////
+    using QSvgWidget::load; // make QSvgWidget::load private
 };
 
 ////////////////////////////////////////////////////////////////////////////////
