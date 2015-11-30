@@ -3,10 +3,11 @@
 #define EVENTTIMEWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
+#include "stylewidget.hpp"
 #include "ui_eventtimewidget.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-class EventTimeWidget : public QWidget, private Ui::EventTimeWidget
+class EventTimeWidget : public StyleWidget, private Ui::EventTimeWidget
 {
     Q_OBJECT
 

@@ -3,7 +3,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 EventTimeWidget::EventTimeWidget(QWidget* parent) :
-    QWidget(parent)
+    StyleWidget(parent)
 {
     setupUi(this);
 }
