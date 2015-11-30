@@ -23,12 +23,12 @@ HEADERS +=                  \
     src/mainwindow.hpp      \
     src/numberwidget.hpp    \
     src/periodwidget.hpp    \
+    src/presswidget.hpp     \
     src/section.hpp         \
     src/sectionreader.hpp   \
     src/sectionwidget.hpp   \
     src/sectionwriter.hpp   \
     src/stylewidget.hpp     \
-    src/svgwidget.hpp       \
     src/timelinewidget.hpp  \
     src/timewidget.hpp      \
     src/trucktimewidget.hpp \
@@ -48,12 +48,12 @@ SOURCES +=                  \
     src/mainwindow.cpp      \
     src/numberwidget.cpp    \
     src/periodwidget.cpp    \
+    src/presswidget.cpp     \
     src/section.cpp         \
     src/sectionreader.cpp   \
     src/sectionwidget.cpp   \
     src/sectionwriter.cpp   \
     src/stylewidget.cpp     \
-    src/svgwidget.cpp       \
     src/timelinewidget.cpp  \
     src/timewidget.cpp      \
     src/trucktimewidget.cpp \
