@@ -10,6 +10,8 @@
 #include <QWidget>
 
 ////////////////////////////////////////////////////////////////////////////////
+/// \brief QSvgWidget with clicked, pressed, long_pressed and released signals
+///
 class SvgWidget : public QSvgWidget
 {
     Q_OBJECT
@@ -17,8 +19,6 @@ class SvgWidget : public QSvgWidget
 public:
     ////////////////////
     explicit SvgWidget(QWidget* parent = nullptr);
-
-    virtual int heightForWidth(int width) const override;
 
 signals:
     ////////////////////
