@@ -1,35 +1,31 @@
+////////////////////////////////////////////////////////////////////////////////
 #ifndef PERIODWIDGET_HPP
 #define PERIODWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
+#include "presswidget.hpp"
 #include "svgwidget.hpp"
 
-#include <QColor>
 #include <QWidget>
 
 ////////////////////////////////////////////////////////////////////////////////
-class PeriodWidget : public SvgWidget
+class PeriodWidget : public SvgWidget, public PressWidget
 {
     Q_OBJECT
 
 public:
     ////////////////////
-    explicit PeriodWidget(QWidget* parent = nullptr);
+    explicit PeriodWidget(QWidget* parent = nullptr) : PeriodWidget(QColor(), parent) { }
     explicit PeriodWidget(QColor color, QWidget* parent = nullptr);
 
-    ////////////////////
-    void set_color(QColor color);
-    const QColor& color() const noexcept { return _color; }
-
-    void reload();
+    using SvgWidget::set_color; // make SvgWidget::set_color public
 
 signals:
     ////////////////////
-    void color_changed(const QColor&);
-
-private:
-    ////////////////////
-    QColor _color;
+    void clicked();
+    void pressed();
+    void long_pressed();
+    void released();
 };
 
 ////////////////////////////////////////////////////////////////////////////////
