@@ -3,13 +3,14 @@
 #define EVENTNAMEWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
+#include "stylewidget.hpp"
 #include "ui_eventnamewidget.h"
 
 #include <QDate>
 #include <QString>
 
 ////////////////////////////////////////////////////////////////////////////////
-class EventNameWidget : public QWidget, private Ui::EventNameWidget
+class EventNameWidget : public StyleWidget, private Ui::EventNameWidget
 {
     Q_OBJECT
 

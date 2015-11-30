@@ -4,7 +4,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 EventNameWidget::EventNameWidget(QWidget* parent) :
-    QWidget(parent)
+    StyleWidget(parent)
 {
     setupUi(this);
 
@@ -13,13 +13,13 @@ EventNameWidget::EventNameWidget(QWidget* parent) :
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void EventNameWidget::set_name(const QString& _name)
+void EventNameWidget::set_name(const QString& value)
 {
-    name->setText(_name);
+    name->setText(value);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void EventNameWidget::set_date(const QDate& _date)
+void EventNameWidget::set_date(const QDate& value)
 {
-    date->setText(_date.toString("ddd, MMM d, yyyy"));
+    date->setText(value.toString("ddd, MMM d, yyyy"));
 }
