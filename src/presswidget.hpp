@@ -11,7 +11,7 @@ class PressWidget
 {
 public:
     ////////////////////
-    PressWidget(QObject* self);
+    explicit PressWidget(QObject* self);
 
     ////////////////////
     virtual void clicked()      = 0;

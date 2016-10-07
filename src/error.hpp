@@ -10,7 +10,7 @@
 class Error
 {
 public:
-    Error(QString message) : _message(std::move(message)) { }
+    explicit Error(QString message) : _message(std::move(message)) { }
     virtual ~Error() { }
 
     virtual const QString& message() const noexcept { return _message; }

@@ -23,7 +23,7 @@ public:
     using Pointer = std::shared_ptr<Clock>;
 
     ////////////////////
-    Clock(QObject* parent = nullptr);
+    explicit Clock(QObject* parent = nullptr);
 
     ////////////////////
     const QDateTime& datetime() const noexcept { return _datetime; }
