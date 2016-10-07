@@ -15,6 +15,7 @@ HEADERS +=                  \
     src/colonwidget.hpp     \
     src/digitwidget.hpp     \
     src/error.hpp           \
+    src/eventtimewidget.hpp \
     src/mainwindow.hpp      \
     src/numberwidget.hpp    \
     src/periodwidget.hpp    \
@@ -30,6 +31,7 @@ SOURCES +=                  \
     src/clockwidget.cpp     \
     src/colonwidget.cpp     \
     src/digitwidget.cpp     \
+    src/eventtimewidget.cpp \
     src/main.cpp            \
     src/mainwindow.cpp      \
     src/numberwidget.cpp    \
@@ -42,6 +44,7 @@ SOURCES +=                  \
 
 ################################################################################
 FORMS +=                    \
+    src/eventtimewidget.ui  \
     src/mainwindow.ui       \
     src/trucktimewidget.ui  \
 
