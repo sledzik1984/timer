@@ -4,6 +4,8 @@ QT += core gui svg widgets
 QMAKE_CFLAGS += -std=c++14
 QMAKE_CXXFLAGS += -std=c++14
 
+LIBS += -loscpack
+
 ################################################################################
 TARGET = timer
 TEMPLATE = app
@@ -18,6 +20,7 @@ HEADERS +=                  \
     src/eventtimewidget.hpp \
     src/mainwindow.hpp      \
     src/numberwidget.hpp    \
+    src/oscsource.hpp       \
     src/periodwidget.hpp    \
     src/presswidget.hpp     \
     src/stylewidget.hpp     \
@@ -36,6 +39,7 @@ SOURCES +=                  \
     src/main.cpp            \
     src/mainwindow.cpp      \
     src/numberwidget.cpp    \
+    src/oscsource.cpp       \
     src/periodwidget.cpp    \
     src/presswidget.cpp     \
     src/stylewidget.cpp     \
