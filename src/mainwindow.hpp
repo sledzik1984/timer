@@ -6,6 +6,9 @@
 #include "ui_mainwindow.h"
 
 ////////////////////////////////////////////////////////////////////////////////
+enum Panel { TruckTime, EventTime, VideoTime };
+
+////////////////////////////////////////////////////////////////////////////////
 class MainWindow : public QWidget, private Ui::MainWindow
 {
     Q_OBJECT
@@ -13,6 +16,15 @@ class MainWindow : public QWidget, private Ui::MainWindow
 public:
     ////////////////////
     explicit MainWindow(QWidget* parent = nullptr);
+
+    ////////////////////
+    void showPanel(Panel p) { setPanelVisible(p, true); }
+    void hidePanel(Panel p) { setPanelVisible(p, false); }
+
+    void setPanelVisible(Panel p, bool visible) { panel(p)->setVisible(visible); }
+
+private:
+    QWidget* panel(Panel) const;
 };
 
 ////////////////////////////////////////////////////////////////////////////////

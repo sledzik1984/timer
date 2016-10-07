@@ -1,4 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
+#include "error.hpp"
 #include "eventtimewidget.hpp"
 #include "mainwindow.hpp"
 #include "trucktimewidget.hpp"
@@ -9,7 +10,19 @@ MainWindow::MainWindow(QWidget* parent) : QWidget(parent)
 {
     setupUi(this);
 
-    panel_1->layout()->addWidget(new TruckTimeWidget());
-    panel_2->layout()->addWidget(new EventTimeWidget());
-    panel_3->layout()->addWidget(new VideoTimeWidget());
+    panel(TruckTime)->layout()->addWidget(new TruckTimeWidget());
+    panel(EventTime)->layout()->addWidget(new EventTimeWidget());
+    panel(VideoTime)->layout()->addWidget(new VideoTimeWidget());
+}
+
+////////////////////////////////////////////////////////////////////////////////
+QWidget* MainWindow::panel(Panel panel) const
+{
+    switch(panel)
+    {
+    case TruckTime: return panel_1;
+    case EventTime: return panel_2;
+    case VideoTime: return panel_3;
+    }
+    throw InvalidError("Invalid panel index");
 }
