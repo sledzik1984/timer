@@ -34,7 +34,14 @@ void OscSource::ProcessMessage(const osc::ReceivedMessage& m, const IpEndpointNa
         QString addr = m.AddressPattern();
         auto args = m.ArgumentStream();
 
-        if(addr == "/channel/1/stage/layer/10/file/time")
+        if(addr == "/channel/1/stage/layer/10/file/path")
+        {
+            const char* path = nullptr;
+            args >> path >> osc::EndMessage;
+
+            if(path) emit path_changed(path);
+        }
+        else if(addr == "/channel/1/stage/layer/10/file/time")
         {
             float time = -1, total = -1;
             args >> time >> total >> osc::EndMessage;

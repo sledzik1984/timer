@@ -4,6 +4,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 #include <QMetaType>
+#include <QString>
 #include <QThread>
 #include <QTime>
 
@@ -36,6 +37,7 @@ public:
 
 signals:
     ////////////////////
+    void path_changed(const QString&);
     void time_changed(const QTime& time, const QTime& total);
     void status_changed(Status);
 
