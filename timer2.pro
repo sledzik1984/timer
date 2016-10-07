@@ -15,6 +15,7 @@ HEADERS +=                  \
     src/clock.hpp           \
     src/clockwidget.hpp     \
     src/colonwidget.hpp     \
+    src/countdownwidget.hpp \
     src/countupwidget.hpp   \
     src/digitwidget.hpp     \
     src/error.hpp           \
@@ -35,6 +36,7 @@ SOURCES +=                  \
     src/clock.cpp           \
     src/clockwidget.cpp     \
     src/colonwidget.cpp     \
+    src/countdownwidget.cpp \
     src/countupwidget.cpp   \
     src/digitwidget.cpp     \
     src/eventtimewidget.cpp \
