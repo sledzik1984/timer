@@ -1,7 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "error.hpp"
-#include "event.hpp"
-#include "eventreader.hpp"
 #include "mainwindow.hpp"
 
 #include <QApplication>

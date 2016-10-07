@@ -1,17 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>add.svg</file>
-        <file>arrow-down.svg</file>
-        <file>arrow-left.svg</file>
-        <file>arrow-right.svg</file>
-        <file>arrow-up.svg</file>
-        <file>delete.svg</file>
-        <file>gear.svg</file>
-        <file>insert.svg</file>
-        <file>new.svg</file>
-        <file>open.svg</file>
-        <file>play.svg</file>
-        <file>save.svg</file>
         <file>panel.png</file>
     </qresource>
 </RCC>

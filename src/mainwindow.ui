@@ -35,41 +35,8 @@ color: grey;</string>
    <property name="spacing">
     <number>0</number>
    </property>
-   <item row="0" column="0" colspan="3">
-    <widget class="QWidget" name="panel_0" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>40</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">#name {
-	font: 32pt;
-	color: white;
-}</string>
-     </property>
-     <layout class="QHBoxLayout" name="_3">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-     </layout>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QWidget" name="left" native="true">
+   <item row="0" column="2">
+    <widget class="QWidget" name="right" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>10</horstretch>
@@ -78,7 +45,7 @@ color: grey;</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
+   <item row="0" column="1">
     <widget class="QWidget" name="main" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -92,7 +59,7 @@ color: grey;</string>
 	background-clip: padding;
 }
 
-#main &gt; #panel_1,#panel_2 {
+#main &gt; #panel_1,#panel_2,#panel_3 {
 	border-image: url(:/panel.png) stretch;
 	border-width: 20px;
 }
@@ -168,11 +135,38 @@ color: grey;</string>
         </layout>
        </widget>
       </item>
+      <item>
+       <widget class="QWidget" name="panel_3" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <layout class="QHBoxLayout" name="_8">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>40</number>
+         </property>
+         <property name="topMargin">
+          <number>20</number>
+         </property>
+         <property name="rightMargin">
+          <number>40</number>
+         </property>
+         <property name="bottomMargin">
+          <number>40</number>
+         </property>
+        </layout>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
-   <item row="1" column="2">
-    <widget class="QWidget" name="right" native="true">
+   <item row="0" column="0">
+    <widget class="QWidget" name="left" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>10</horstretch>
