@@ -6,6 +6,7 @@
 #include <QByteArray>
 #include <QColor>
 #include <QRect>
+#include <QSize>
 #include <QtSvg/QSvgWidget>
 #include <QWidget>
 
@@ -17,6 +18,8 @@ class SvgWidget : public QSvgWidget
 public:
     ////////////////////
     explicit SvgWidget(QRect viewbox = QRect(), QColor color = QColor(), QByteArray contents = QByteArray(), QWidget* parent = nullptr);
+
+    virtual QSize sizeHint() const override { return _viewbox.size(); }
 
 signals:
     ////////////////////
