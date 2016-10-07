@@ -1,0 +1,35 @@
+////////////////////////////////////////////////////////////////////////////////
+#ifndef COUNTUPWIDGET_HPP
+#define COUNTUPWIDGET_HPP
+
+////////////////////////////////////////////////////////////////////////////////
+#include "timewidget.hpp"
+
+#include <QColor>
+#include <QDateTime>
+#include <QWidget>
+
+////////////////////////////////////////////////////////////////////////////////
+class CountUpWidget : public TimeWidget
+{
+    Q_OBJECT
+
+public:
+    ////////////////////
+    explicit CountUpWidget(QColor color, QWidget* parent = nullptr);
+
+    void start();
+    void stop() { _running = false; }
+    void reset();
+
+private:
+    ////////////////////
+    void proc_clicked(Unit);
+    void update(const QDateTime&);
+
+    bool _running = false;
+    qint64 _epoch;
+};
+
+////////////////////////////////////////////////////////////////////////////////
+#endif // COUNTUPWIDGET_HPP
