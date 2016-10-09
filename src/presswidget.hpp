@@ -7,11 +7,15 @@
 #include <QTimer>
 
 ////////////////////////////////////////////////////////////////////////////////
+// NB: PressWidget does not derive from QObject to avoid
+// multiple inheritance from it. Instead it takes a reference
+// to self as QObject, which is provided by the derived classes
 class PressWidget
 {
 public:
     ////////////////////
     explicit PressWidget(QObject* self);
+    virtual ~PressWidget() { }
 
     ////////////////////
     virtual void clicked()      = 0;
@@ -28,7 +32,8 @@ class Monitor : public QObject
 public:
     ////////////////////
     Monitor(QObject* parent, PressWidget* widget);
-    virtual bool eventFilter(QObject*, QEvent*) override;
+
+    bool eventFilter(QObject*, QEvent*) override;
 
 private:
     ////////////////////
