@@ -1,5 +1,4 @@
 ////////////////////////////////////////////////////////////////////////////////
-#include "osc_event.hpp"
 #include "videotimewidget.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -11,7 +10,9 @@ VideoTimeWidget::VideoTimeWidget(QWidget* parent) :
     reset();
 
     connect(this, &VideoTimeWidget::long_pressed, this, &VideoTimeWidget::reset);
+
     connect(&_video, &Osc::Video::time_changed, this, &VideoTimeWidget::update);
+    connect(&_event, &Osc::Event::status_changed, [this](Osc::Event::Status status){ if(status == Osc::Event::Reset) reset(); });
 
     _timer.setInterval(500);
     connect(&_timer, &QTimer::timeout, [this]() { setVisible(!isVisible()); });

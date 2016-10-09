@@ -3,6 +3,7 @@
 #define VIDEOTIMEWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
+#include "osc_event.hpp"
 #include "osc_video.hpp"
 #include "timewidget.hpp"
 
@@ -30,6 +31,7 @@ private:
     QTime _time_lo;
     QTimer _timer;
 
+    Osc::Event _event;
     Osc::Video _video;
 };
 
