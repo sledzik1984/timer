@@ -22,6 +22,7 @@ HEADERS +=                  \
     src/eventtimewidget.hpp \
     src/mainwindow.hpp      \
     src/numberwidget.hpp    \
+    src/osc_listener.hpp    \
     src/oscsource.hpp       \
     src/periodwidget.hpp    \
     src/presswidget.hpp     \
@@ -43,6 +44,7 @@ SOURCES +=                  \
     src/main.cpp            \
     src/mainwindow.cpp      \
     src/numberwidget.cpp    \
+    src/osc_listener.cpp    \
     src/oscsource.cpp       \
     src/periodwidget.cpp    \
     src/presswidget.cpp     \

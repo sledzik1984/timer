@@ -1,0 +1,55 @@
+////////////////////////////////////////////////////////////////////////////////
+#ifndef OSC_LISTENER_HPP
+#define OSC_LISTENER_HPP
+
+////////////////////////////////////////////////////////////////////////////////
+#include <QList>
+#include <QThread>
+#include <QVariant>
+
+#include <ip/UdpSocket.h>
+#include <osc/OscPacketListener.h>
+#include <osc/OscReceivedElements.h>
+
+#include <memory>
+#include <utility>
+
+////////////////////////////////////////////////////////////////////////////////
+namespace Osc
+{
+
+////////////////////////////////////////////////////////////////////////////////
+class Listener : public QThread, public osc::OscPacketListener
+{
+    Q_OBJECT
+
+public:
+    ////////////////////
+    using Pointer = std::shared_ptr<Listener>;
+
+    ////////////////////
+    explicit Listener(QObject* parent = nullptr);
+    ~Listener() override;
+
+    ////////////////////
+    static Listener::Pointer instance();
+
+signals:
+    void message_received(const QString& addr, const QList<QVariant>& args);
+
+protected:
+    ////////////////////
+    void run() override { _socket.Run(); }
+
+    void ProcessMessage(const osc::ReceivedMessage&, const IpEndpointName&) override;
+
+private:
+    ////////////////////
+    UdpListeningReceiveSocket _socket;
+};
+
+////////////////////////////////////////////////////////////////////////////////
+}
+
+////////////////////////////////////////////////////////////////////////////////
+#endif // OSC_LISTENER_HPP
