@@ -30,7 +30,6 @@ HEADERS +=                  \
     src/stylewidget.hpp     \
     src/svgwidget.hpp       \
     src/timewidget.hpp      \
-    src/trucktimewidget.hpp \
     src/videotimewidget.hpp \
 
 ################################################################################
@@ -53,14 +52,12 @@ SOURCES +=                  \
     src/stylewidget.cpp     \
     src/svgwidget.cpp       \
     src/timewidget.cpp      \
-    src/trucktimewidget.cpp \
     src/videotimewidget.cpp \
 
 ################################################################################
 FORMS +=                    \
     src/eventtimewidget.ui  \
     src/mainwindow.ui       \
-    src/trucktimewidget.ui  \
     src/videotimewidget.ui  \
 
 ################################################################################
