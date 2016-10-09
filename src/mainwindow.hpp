@@ -3,10 +3,13 @@
 #define MAINWINDOW_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
+#include "clockwidget.hpp"
+#include "eventtimewidget.hpp"
 #include "ui_mainwindow.h"
+#include "videotimewidget.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
-enum Panel { TruckTime, EventTime, VideoTime };
+enum class Panel { TruckTime, EventTime, VideoTime };
 
 ////////////////////////////////////////////////////////////////////////////////
 class MainWindow : public QWidget, private Ui::MainWindow
@@ -18,13 +21,17 @@ public:
     explicit MainWindow(QWidget* parent = nullptr);
 
     ////////////////////
-    void showPanel(Panel p) { setPanelVisible(p, true); }
-    void hidePanel(Panel p) { setPanelVisible(p, false); }
+    void show_panel(Panel p) { set_panel_visible(p, true); }
+    void hide_panel(Panel p) { set_panel_visible(p, false); }
 
-    void setPanelVisible(Panel p, bool visible) { panel(p)->setVisible(visible); }
+    void set_panel_visible(Panel p, bool visible) { panel(p)->setVisible(visible); }
+
+    void set_time_lo(QTime time) { _video->set_time_lo(std::move(time)); }
 
 private:
     QWidget* panel(Panel) const;
+
+    VideoTimeWidget* _video;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
