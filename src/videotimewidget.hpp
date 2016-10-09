@@ -3,17 +3,34 @@
 #define VIDEOTIMEWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
-#include "stylewidget.hpp"
-#include "ui_videotimewidget.h"
+#include "osc_video.hpp"
+#include "timewidget.hpp"
+
+#include <QTime>
+#include <QTimer>
+
+#include <utility>
 
 ////////////////////////////////////////////////////////////////////////////////
-class VideoTimeWidget : public StyleWidget, private Ui::VideoTimeWidget
+class VideoTimeWidget : public TimeWidget
 {
     Q_OBJECT
 
 public:
     ////////////////////
     explicit VideoTimeWidget(QWidget* parent = nullptr);
+
+    void reset();
+    void set_time_lo(QTime time) { _time_lo = std::move(time); }
+
+private:
+    ////////////////////
+    void update(const QTime& time, const QTime& total);
+
+    QTime _time_lo;
+    QTimer _timer;
+
+    Osc::Video _video;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
