@@ -19,7 +19,7 @@ public:
     ////////////////////
     explicit SvgWidget(QRect viewbox = QRect(), QColor color = QColor(), QByteArray contents = QByteArray(), QWidget* parent = nullptr);
 
-    virtual QSize sizeHint() const override { return _viewbox.size(); }
+    QSize sizeHint() const override { return _viewbox.size(); }
 
 signals:
     ////////////////////
