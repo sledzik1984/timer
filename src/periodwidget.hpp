@@ -22,10 +22,10 @@ public:
 
 signals:
     ////////////////////
-    void clicked();
-    void pressed();
-    void long_pressed();
-    void released();
+    void clicked() override;
+    void pressed() override;
+    void long_pressed() override;
+    void released() override;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
