@@ -15,7 +15,7 @@ public:
     using QWidget::QWidget;
 
 protected:
-    virtual void paintEvent(QPaintEvent*) override;
+    void paintEvent(QPaintEvent*) override;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
