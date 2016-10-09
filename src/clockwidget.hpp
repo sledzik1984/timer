@@ -16,7 +16,7 @@ class ClockWidget : public TimeWidget
 
 public:
     ////////////////////
-    explicit ClockWidget(QColor color, QWidget* parent = nullptr);
+    explicit ClockWidget(QWidget* parent = nullptr);
 
 private:
     ////////////////////

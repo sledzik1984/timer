@@ -3,8 +3,8 @@
 #include "clockwidget.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
-ClockWidget::ClockWidget(QColor color, QWidget* parent) :
-    TimeWidget(Display::HrsMinSec, std::move(color), parent)
+ClockWidget::ClockWidget(QWidget* parent) :
+    TimeWidget(Display::HrsMinSec, Qt::red, parent)
 {
     connect(this, &ClockWidget::clicked, this, &ClockWidget::change_offset);
     connect(this, &ClockWidget::long_pressed, [](){ Clock::instance()->set_offset(0); });
