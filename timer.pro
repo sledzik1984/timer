@@ -54,7 +54,6 @@ SOURCES +=                  \
 
 ################################################################################
 FORMS +=                    \
-    src/eventtimewidget.ui  \
     src/mainwindow.ui       \
     src/videotimewidget.ui  \
 

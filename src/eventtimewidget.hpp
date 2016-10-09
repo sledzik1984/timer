@@ -3,17 +3,34 @@
 #define EVENTTIMEWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
-#include "stylewidget.hpp"
-#include "ui_eventtimewidget.h"
+#include "osc_event.hpp"
+#include "timewidget.hpp"
+
+#include <QDateTime>
+#include <QWidget>
 
 ////////////////////////////////////////////////////////////////////////////////
-class EventTimeWidget : public StyleWidget, private Ui::EventTimeWidget
+class EventTimeWidget : public TimeWidget
 {
     Q_OBJECT
 
 public:
     ////////////////////
     explicit EventTimeWidget(QWidget* parent = nullptr);
+
+    void start();
+    void stop() { _running = false; }
+    void reset();
+
+private:
+    ////////////////////
+    void proc_clicked(Unit);
+    void update(const QDateTime&);
+
+    bool _running = false;
+    qint64 _epoch;
+
+    Osc::Event _event;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
