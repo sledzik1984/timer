@@ -23,6 +23,7 @@ HEADERS +=                  \
     src/mainwindow.hpp      \
     src/numberwidget.hpp    \
     src/osc_listener.hpp    \
+    src/osc_video.hpp       \
     src/oscsource.hpp       \
     src/periodwidget.hpp    \
     src/presswidget.hpp     \
@@ -45,6 +46,7 @@ SOURCES +=                  \
     src/mainwindow.cpp      \
     src/numberwidget.cpp    \
     src/osc_listener.cpp    \
+    src/osc_video.cpp       \
     src/oscsource.cpp       \
     src/periodwidget.cpp    \
     src/presswidget.cpp     \
