@@ -22,6 +22,7 @@ HEADERS +=                  \
     src/eventtimewidget.hpp \
     src/mainwindow.hpp      \
     src/numberwidget.hpp    \
+    src/osc_event.hpp       \
     src/osc_listener.hpp    \
     src/osc_video.hpp       \
     src/oscsource.hpp       \
@@ -45,6 +46,7 @@ SOURCES +=                  \
     src/main.cpp            \
     src/mainwindow.cpp      \
     src/numberwidget.cpp    \
+    src/osc_event.cpp       \
     src/osc_listener.cpp    \
     src/osc_video.cpp       \
     src/oscsource.cpp       \
