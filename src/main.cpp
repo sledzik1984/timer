@@ -25,6 +25,10 @@ try
         {
             window.setWindowState(window.windowState() | Qt::WindowFullScreen);
         }
+        else if(option == "--blink")
+        {
+            window.set_time_lo(QTime(0, 0, 30));
+        }
         else throw InvalidError("Invalid option " + option);
     }
 
