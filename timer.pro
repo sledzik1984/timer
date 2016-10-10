@@ -25,7 +25,6 @@ HEADERS +=                  \
     src/osc_video.hpp       \
     src/periodwidget.hpp    \
     src/presswidget.hpp     \
-    src/stylewidget.hpp     \
     src/svgwidget.hpp       \
     src/timewidget.hpp      \
     src/videotimewidget.hpp \
@@ -45,7 +44,6 @@ SOURCES +=                  \
     src/osc_video.cpp       \
     src/periodwidget.cpp    \
     src/presswidget.cpp     \
-    src/stylewidget.cpp     \
     src/svgwidget.cpp       \
     src/timewidget.cpp      \
     src/videotimewidget.cpp \
