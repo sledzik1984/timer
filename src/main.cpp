@@ -1,5 +1,4 @@
 ////////////////////////////////////////////////////////////////////////////////
-#include "error.hpp"
 #include "mainwindow.hpp"
 
 #include <QApplication>
@@ -27,16 +26,11 @@ try
         }
         else if(option == "--blink")
         {
-            window.set_time_lo(QTime(0, 0, 30));
+            window.set_threshold(QTime(0, 0, 30));
         }
-        else throw InvalidError("Invalid option " + option);
     }
 
     return application.exec();
-}
-catch(Error& e)
-{
-    std::cerr << e.message().toLatin1().data() << std::endl;
 }
 catch(std::exception& e)
 {
