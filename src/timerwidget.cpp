@@ -1,45 +1,35 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "clock.hpp"
-#include "eventtimewidget.hpp"
+#include "timerwidget.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
-EventTimeWidget::EventTimeWidget(QWidget* parent) :
+TimerWidget::TimerWidget(QWidget* parent) :
     TimeWidget(Display::HrsMinSec, Qt::gray, parent)
 {
     reset();
 
-    connect(this, &EventTimeWidget::clicked, this, &EventTimeWidget::proc_clicked);
-    connect(this, &EventTimeWidget::long_pressed, this, &EventTimeWidget::reset);
+    connect(this, &TimerWidget::clicked, this, &TimerWidget::proc_clicked);
+    connect(this, &TimerWidget::long_pressed, this, &TimerWidget::reset);
 
-    connect(&*Clock::instance(), &Clock::datetime_changed, this, &EventTimeWidget::update);
-
-    connect(&_event, &Osc::Event::status_changed, [this](Osc::Event::Status status)
-    {
-        switch(status)
-        {
-        case Osc::Event::Started: start(); break;
-        case Osc::Event::Stopped: stop() ; break;
-        case Osc::Event::Reset  : reset(); break;
-        }
-    });
+    connect(&*Clock::instance(), &Clock::datetime_changed, this, &TimerWidget::update);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void EventTimeWidget::start()
+void TimerWidget::start()
 {
-    _epoch = Clock::instance()->datetime().toMSecsSinceEpoch();
+    _epoch = Clock::instance()->datetime().addMSecs(-time().msecsSinceStartOfDay()).toMSecsSinceEpoch();
     _running = true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void EventTimeWidget::reset()
+void TimerWidget::reset()
 {
     stop();
     set_time(QTime(0, 0, 0));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void EventTimeWidget::proc_clicked(Unit unit)
+void TimerWidget::proc_clicked(Unit unit)
 {
     qint64 ms = 0;
     switch(unit)
@@ -53,6 +43,7 @@ void EventTimeWidget::proc_clicked(Unit unit)
     {
     case Location::top:
         _epoch -= ms;
+        update(Clock::instance()->datetime());
         break;
 
     case Location::middle:
@@ -61,12 +52,13 @@ void EventTimeWidget::proc_clicked(Unit unit)
 
     case Location::bottom:
         _epoch += ms;
+        update(Clock::instance()->datetime());
         break;
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void EventTimeWidget::update(const QDateTime& datetime)
+void TimerWidget::update(const QDateTime& datetime)
 {
     if(_running) set_time(QTime(0, 0, 0).addMSecs(datetime.toMSecsSinceEpoch() - _epoch));
 }

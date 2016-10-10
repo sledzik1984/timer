@@ -17,7 +17,6 @@ HEADERS +=                  \
     src/colonwidget.hpp     \
     src/digitwidget.hpp     \
     src/error.hpp           \
-    src/eventtimewidget.hpp \
     src/mainwindow.hpp      \
     src/numberwidget.hpp    \
     src/osc_event.hpp       \
@@ -26,6 +25,7 @@ HEADERS +=                  \
     src/periodwidget.hpp    \
     src/presswidget.hpp     \
     src/svgwidget.hpp       \
+    src/timerwidget.hpp     \
     src/timewidget.hpp      \
     src/videotimewidget.hpp \
 
@@ -35,7 +35,6 @@ SOURCES +=                  \
     src/clockwidget.cpp     \
     src/colonwidget.cpp     \
     src/digitwidget.cpp     \
-    src/eventtimewidget.cpp \
     src/main.cpp            \
     src/mainwindow.cpp      \
     src/numberwidget.cpp    \
@@ -45,6 +44,7 @@ SOURCES +=                  \
     src/periodwidget.cpp    \
     src/presswidget.cpp     \
     src/svgwidget.cpp       \
+    src/timerwidget.cpp     \
     src/timewidget.cpp      \
     src/videotimewidget.cpp \
 

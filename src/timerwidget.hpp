@@ -1,22 +1,21 @@
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef EVENTTIMEWIDGET_HPP
-#define EVENTTIMEWIDGET_HPP
+#ifndef TIMERWIDGET_HPP
+#define TIMERWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
-#include "osc_event.hpp"
 #include "timewidget.hpp"
 
 #include <QDateTime>
 #include <QWidget>
 
 ////////////////////////////////////////////////////////////////////////////////
-class EventTimeWidget : public TimeWidget
+class TimerWidget : public TimeWidget
 {
     Q_OBJECT
 
 public:
     ////////////////////
-    explicit EventTimeWidget(QWidget* parent = nullptr);
+    explicit TimerWidget(QWidget* parent = nullptr);
 
     void start();
     void stop() { _running = false; }
@@ -28,10 +27,8 @@ private:
     void update(const QDateTime&);
 
     bool _running = false;
-    qint64 _epoch;
-
-    Osc::Event _event;
+    qint64 _epoch = 0;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-#endif // EVENTTIMEWIDGET_HPP
+#endif // TIMERWIDGET_HPP
