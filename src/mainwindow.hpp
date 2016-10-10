@@ -4,12 +4,14 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 #include "clockwidget.hpp"
-#include "eventtimewidget.hpp"
+#include "countdownwidget.hpp"
+#include "osc_event.hpp"
+#include "osc_video.hpp"
+#include "timerwidget.hpp"
 #include "ui_mainwindow.h"
-#include "videotimewidget.hpp"
 
-////////////////////////////////////////////////////////////////////////////////
-enum class Panel { TruckTime, EventTime, VideoTime };
+#include <QWidget>
+#include <QTime>
 
 ////////////////////////////////////////////////////////////////////////////////
 class MainWindow : public QWidget, private Ui::MainWindow
@@ -20,18 +22,16 @@ public:
     ////////////////////
     explicit MainWindow(QWidget* parent = nullptr);
 
-    ////////////////////
-    void show_panel(Panel p) { set_panel_visible(p, true); }
-    void hide_panel(Panel p) { set_panel_visible(p, false); }
-
-    void set_panel_visible(Panel p, bool visible) { panel(p)->setVisible(visible); }
-
-    void set_time_lo(QTime time) { _video->set_time_lo(std::move(time)); }
+    void set_threshold(QTime threshold) { _count->set_threshold(std::move(threshold)); }
 
 private:
-    QWidget* panel(Panel) const;
+    ////////////////////
+    ClockWidget* _clock;
+    TimerWidget* _timer;
+    CountDownWidget* _count;
 
-    VideoTimeWidget* _video;
+    Osc::Event _event;
+    Osc::Video _video;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
