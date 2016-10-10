@@ -17,7 +17,6 @@ HEADERS +=                  \
     src/colonwidget.hpp     \
     src/countdownwidget.hpp \
     src/digitwidget.hpp     \
-    src/error.hpp           \
     src/mainwindow.hpp      \
     src/numberwidget.hpp    \
     src/osc_event.hpp       \
