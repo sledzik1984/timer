@@ -3,6 +3,9 @@
 #include "timerwidget.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
+const QTime midnight { 0, 0 };
+
+////////////////////////////////////////////////////////////////////////////////
 TimerWidget::TimerWidget(QWidget* parent) :
     TimeWidget(Display::HrsMinSec, Qt::gray, parent)
 {
@@ -25,7 +28,7 @@ void TimerWidget::start()
 void TimerWidget::reset()
 {
     stop();
-    set_time(QTime(0, 0, 0));
+    set_time(midnight);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -60,5 +63,5 @@ void TimerWidget::proc_clicked(Unit unit)
 ////////////////////////////////////////////////////////////////////////////////
 void TimerWidget::update(const QDateTime& datetime)
 {
-    if(_running) set_time(QTime(0, 0, 0).addMSecs(datetime.toMSecsSinceEpoch() - _epoch));
+    if(_running) set_time(midnight.addMSecs(datetime.toMSecsSinceEpoch() - _epoch));
 }
