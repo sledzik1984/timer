@@ -15,6 +15,7 @@ HEADERS +=                  \
     src/clock.hpp           \
     src/clockwidget.hpp     \
     src/colonwidget.hpp     \
+    src/countdownwidget.hpp \
     src/digitwidget.hpp     \
     src/error.hpp           \
     src/mainwindow.hpp      \
@@ -27,13 +28,13 @@ HEADERS +=                  \
     src/svgwidget.hpp       \
     src/timerwidget.hpp     \
     src/timewidget.hpp      \
-    src/videotimewidget.hpp \
 
 ################################################################################
 SOURCES +=                  \
     src/clock.cpp           \
     src/clockwidget.cpp     \
     src/colonwidget.cpp     \
+    src/countdownwidget.cpp \
     src/digitwidget.cpp     \
     src/main.cpp            \
     src/mainwindow.cpp      \
@@ -46,12 +47,10 @@ SOURCES +=                  \
     src/svgwidget.cpp       \
     src/timerwidget.cpp     \
     src/timewidget.cpp      \
-    src/videotimewidget.cpp \
 
 ################################################################################
 FORMS +=                    \
     src/mainwindow.ui       \
-    src/videotimewidget.ui  \
 
 ################################################################################
 RESOURCES +=                \

@@ -1,39 +1,36 @@
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef VIDEOTIMEWIDGET_HPP
-#define VIDEOTIMEWIDGET_HPP
+#ifndef COUNTDOWNWIDGET_HPP
+#define COUNTDOWNWIDGET_HPP
 
 ////////////////////////////////////////////////////////////////////////////////
-#include "osc_event.hpp"
-#include "osc_video.hpp"
 #include "timewidget.hpp"
 
 #include <QTime>
 #include <QTimer>
+#include <QWidget>
 
 #include <utility>
 
 ////////////////////////////////////////////////////////////////////////////////
-class VideoTimeWidget : public TimeWidget
+class CountDownWidget : public TimeWidget
 {
     Q_OBJECT
 
 public:
     ////////////////////
-    explicit VideoTimeWidget(QWidget* parent = nullptr);
+    explicit CountDownWidget(QWidget* parent = nullptr);
+    explicit CountDownWidget(QTime threshold, QWidget* parent = nullptr) : CountDownWidget(parent) { set_threshold(std::move(threshold)); }
 
     void reset();
-    void set_time_lo(QTime time) { _time_lo = std::move(time); }
+    void set_threshold(QTime threshold);
 
 private:
     ////////////////////
-    void update(const QTime& time, const QTime& total);
+    void update(const QTime&);
 
-    QTime _time_lo;
+    QTime _threshold;
     QTimer _timer;
-
-    Osc::Event _event;
-    Osc::Video _video;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-#endif // VIDEOTIMEWIDGET_HPP
+#endif // COUNTDOWNWIDGET_HPP
