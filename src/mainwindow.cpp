@@ -27,12 +27,28 @@ MainWindow::MainWindow(QWidget* parent) :
         case Osc::Event::Reset:
             _timer->reset();
             _count->reset();
+            reset_video_name();
             break;
         }
     });
+
+    connect(_count, &CountDownWidget::long_pressed, this, &MainWindow::reset_video_name);
 
     connect(&_video, &Osc::Video::time_changed, [this](const QTime& time, const QTime& total)
     {
         _count->set_time(QTime(0, 0).addMSecs(time.msecsTo(total)));
     });
+    connect(&_video, &Osc::Video::name_changed, this, &MainWindow::set_video_name);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void MainWindow::set_video_name(QString name)
+{
+    auto p = name.lastIndexOf('/');
+    if(p >= 0) name.remove(0, p + 1);
+
+    p = name.lastIndexOf('.');
+    if(p >= 0) name.remove(p, name.size());
+
+    label_3->setText(name.toUpper());
 }

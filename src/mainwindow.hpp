@@ -10,8 +10,9 @@
 #include "timerwidget.hpp"
 #include "ui_mainwindow.h"
 
-#include <QWidget>
+#include <QString>
 #include <QTime>
+#include <QWidget>
 
 ////////////////////////////////////////////////////////////////////////////////
 class MainWindow : public QWidget, private Ui::MainWindow
@@ -32,6 +33,9 @@ private:
 
     Osc::Event _event;
     Osc::Video _video;
+
+    void set_video_name(QString);
+    void reset_video_name() { set_video_name("CURRENT VIDEO"); }
 };
 
 ////////////////////////////////////////////////////////////////////////////////
