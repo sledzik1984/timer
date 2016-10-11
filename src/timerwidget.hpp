@@ -18,7 +18,7 @@ public:
     explicit TimerWidget(QWidget* parent = nullptr);
 
     void start();
-    void stop() { _running = false; }
+    void stop();
     void reset();
 
 private:

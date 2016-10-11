@@ -22,6 +22,15 @@ void TimerWidget::start()
 {
     _epoch = Clock::instance()->datetime().addMSecs(-time().msecsSinceStartOfDay()).toMSecsSinceEpoch();
     _running = true;
+
+    set_color(Qt::white);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void TimerWidget::stop()
+{
+    _running = false;
+    set_color(Qt::gray);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
