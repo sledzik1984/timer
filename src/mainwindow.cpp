@@ -2,6 +2,9 @@
 #include "mainwindow.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
+const QTime midnight { 0, 0 };
+
+////////////////////////////////////////////////////////////////////////////////
 MainWindow::MainWindow(QWidget* parent) :
     QWidget(parent),
     _video(1, 10)
@@ -32,11 +35,11 @@ MainWindow::MainWindow(QWidget* parent) :
         }
     });
 
-    connect(_count, &CountDownWidget::long_pressed, this, &MainWindow::reset_video_name);
+    connect(_count, &CountDownWidget::time_reset, this, &MainWindow::reset_video_name);
 
     connect(&_video, &Osc::Video::time_changed, [this](const QTime& time, const QTime& total)
     {
-        _count->set_time(QTime(0, 0).addMSecs(time.msecsTo(total)));
+        _count->set_time(midnight.addMSecs(time.msecsTo(total)));
     });
     connect(&_video, &Osc::Video::name_changed, this, &MainWindow::set_video_name);
 }
