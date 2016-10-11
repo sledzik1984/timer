@@ -24,12 +24,15 @@ public:
     void reset();
     void set_threshold(QTime threshold);
 
+signals:
+    void time_reset();
+
 private:
     ////////////////////
     void update(const QTime&);
 
     QTime _threshold;
-    QTimer _timer;
+    QTimer _blink, _stop;
 };
 
 ////////////////////////////////////////////////////////////////////////////////

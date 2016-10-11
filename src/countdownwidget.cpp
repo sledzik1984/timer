@@ -14,14 +14,20 @@ CountDownWidget::CountDownWidget(QWidget* parent) :
     connect(this, &CountDownWidget::long_pressed, this, &CountDownWidget::reset);
     connect(this, &CountDownWidget::time_changed, this, &CountDownWidget::update);
 
-    _timer.setInterval(500);
-    connect(&_timer, &QTimer::timeout, [this]() { setVisible(!isVisible()); });
+    _blink.setInterval(500);
+    connect(&_blink, &QTimer::timeout, [this]() { setVisible(!isVisible()); });
+
+    _stop.setInterval(10000);
+    connect(&_stop, &QTimer::timeout, this, &CountDownWidget::reset);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void CountDownWidget::reset()
 {
+    _stop.stop();
+
     set_time(midnight);
+    emit time_reset();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,15 +40,23 @@ void CountDownWidget::set_threshold(QTime threshold)
 ////////////////////////////////////////////////////////////////////////////////
 void CountDownWidget::update(const QTime& time)
 {
-    if(time <= _threshold && time != midnight)
+    if(time > _threshold)
+    {
+        _blink.stop();
+        set_color(Qt::green);
+        show();
+    }
+    else if(time > midnight)
     {
         set_color(Qt::red);
-        if(!_timer.isActive()) _timer.start();
+        if(!_blink.isActive()) _blink.start();
     }
     else
     {
+        _blink.stop();
         set_color(Qt::gray);
-        _timer.stop();
         show();
     }
+
+    _stop.start();
 }
