@@ -49,7 +49,7 @@ void Listener::ProcessMessage(const osc::ReceivedMessage& message, const IpEndpo
             args.append(QVariant());
             break;
         case osc::INT32_TYPE_TAG:
-            args.append(ri->AsInt32());
+            args.append(QVariant::fromValue<osc::int32>(ri->AsInt32()));
             break;
         case osc::FLOAT_TYPE_TAG:
             args.append(ri->AsFloat());
@@ -58,10 +58,10 @@ void Listener::ProcessMessage(const osc::ReceivedMessage& message, const IpEndpo
             args.append(ri->AsChar());
             break;
         case osc::RGBA_COLOR_TYPE_TAG:
-            args.append(ri->AsRgbaColor());
+            args.append(QVariant::fromValue<osc::uint32>(ri->AsRgbaColor()));
             break;
         case osc::MIDI_MESSAGE_TYPE_TAG:
-            args.append(ri->AsMidiMessage());
+            args.append(QVariant::fromValue<osc::uint32>(ri->AsMidiMessage()));
             break;
         case osc::INT64_TYPE_TAG:
             args.append(QVariant::fromValue<osc::int64>(ri->AsInt64()));
