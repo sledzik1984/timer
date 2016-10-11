@@ -40,13 +40,15 @@ void CountDownWidget::set_threshold(QTime threshold)
 ////////////////////////////////////////////////////////////////////////////////
 void CountDownWidget::update(const QTime& time)
 {
-    if(time > _threshold)
+    auto value = time.addMSecs(-time.msec());
+
+    if(value > _threshold)
     {
         _blink.stop();
         set_color(Qt::green);
         show();
     }
-    else if(time > midnight)
+    else if(value > midnight)
     {
         set_color(Qt::red);
         if(!_blink.isActive()) _blink.start();
