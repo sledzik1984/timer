@@ -2,6 +2,7 @@
 #include "mainwindow.hpp"
 
 #include <QApplication>
+#include <QDesktopWidget>
 
 #include <exception>
 #include <iostream>
@@ -23,6 +24,7 @@ try
         if(option == "--full")
         {
             window.setWindowState(window.windowState() | Qt::WindowFullScreen);
+            window.setGeometry(QApplication::desktop()->screenGeometry(&window));
         }
         else if(option == "--blink")
         {
