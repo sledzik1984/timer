@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
-    <height>720</height>
+    <width>800</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,21 +16,21 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(30, 30, 30);
 border-width: 0;
-font: 18pt;
+font: 14pt;
 color: grey;</string>
   </property>
   <layout class="QGridLayout" name="_1">
    <property name="leftMargin">
-    <number>0</number>
+    <number>10</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>10</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>10</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>10</number>
    </property>
    <property name="spacing">
     <number>0</number>
@@ -52,16 +52,11 @@ color: grey;</string>
 	background-color: rgb(36, 36, 36);
 	background-clip: padding;
 }
-
-#main &gt; #panel_1,#panel_2,#panel_3 {
-	border-image: url(:/panel.png) stretch;
-	border-width: 20px;
-}
 </string>
      </property>
      <layout class="QVBoxLayout" name="_2">
       <property name="spacing">
-       <number>0</number>
+       <number>10</number>
       </property>
       <property name="leftMargin">
        <number>0</number>
@@ -94,16 +89,16 @@ color: grey;</string>
           <number>0</number>
          </property>
          <property name="leftMargin">
-          <number>30</number>
+          <number>10</number>
          </property>
          <property name="topMargin">
-          <number>20</number>
+          <number>0</number>
          </property>
          <property name="rightMargin">
-          <number>30</number>
+          <number>10</number>
          </property>
          <property name="bottomMargin">
-          <number>30</number>
+          <number>10</number>
          </property>
          <item>
           <widget class="QLabel" name="label_1">
@@ -137,16 +132,16 @@ color: grey;</string>
           <number>0</number>
          </property>
          <property name="leftMargin">
-          <number>30</number>
+          <number>10</number>
          </property>
          <property name="topMargin">
-          <number>20</number>
+          <number>0</number>
          </property>
          <property name="rightMargin">
-          <number>30</number>
+          <number>10</number>
          </property>
          <property name="bottomMargin">
-          <number>30</number>
+          <number>10</number>
          </property>
          <item>
           <widget class="QLabel" name="label_2">
@@ -180,16 +175,16 @@ color: grey;</string>
           <number>0</number>
          </property>
          <property name="leftMargin">
-          <number>30</number>
+          <number>10</number>
          </property>
          <property name="topMargin">
-          <number>20</number>
+          <number>0</number>
          </property>
          <property name="rightMargin">
-          <number>30</number>
+          <number>10</number>
          </property>
          <property name="bottomMargin">
-          <number>30</number>
+          <number>10</number>
          </property>
          <item>
           <widget class="QLabel" name="label_3">
