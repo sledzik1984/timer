@@ -13,3 +13,19 @@ ColonWidget::ColonWidget(QColor color, QWidget* parent) :
     SvgWidget(::viewbox, std::move(color), ::contents, parent),
     PressWidget(this)
 { }
+
+////////////////////////////////////////////////////////////////////////////////
+void ColonWidget::resizeEvent(QResizeEvent*)
+{
+    if(viewbox().isValid())
+    {
+        auto width = height() * viewbox().width() / viewbox().height();
+        setMinimumWidth(width);
+        setMaximumWidth(width);
+    }
+    else
+    {
+        setMinimumWidth(0);
+        setMaximumWidth(QWIDGETSIZE_MAX);
+    }
+}

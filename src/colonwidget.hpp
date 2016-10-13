@@ -26,6 +26,10 @@ signals:
     void pressed() override;
     void long_pressed() override;
     void released() override;
+
+protected:
+    ////////////////////
+    void resizeEvent(QResizeEvent*) override;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
