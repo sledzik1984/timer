@@ -55,3 +55,19 @@ void DigitWidget::set_digit(Digit digit)
         set_contents(::digit[static_cast<size_t>(_digit)]);
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+void DigitWidget::resizeEvent(QResizeEvent*)
+{
+    if(viewbox().isValid())
+    {
+        auto width = height() * viewbox().width() / viewbox().height();
+        setMinimumWidth(width);
+        setMaximumWidth(width);
+    }
+    else
+    {
+        setMinimumWidth(0);
+        setMaximumWidth(QWIDGETSIZE_MAX);
+    }
+}

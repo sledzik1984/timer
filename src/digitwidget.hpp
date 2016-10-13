@@ -40,6 +40,10 @@ signals:
 
     void digit_changed(Digit);
 
+protected:
+    ////////////////////
+    void resizeEvent(QResizeEvent*) override;
+
 private:
     ////////////////////
     Digit _digit;
