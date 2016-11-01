@@ -28,7 +28,7 @@ try
         }
         else if(option == "--blink")
         {
-            window.set_threshold(QTime(0, 0, 30));
+            window.set_threshold(QTime(0, 0, 10));
         }
     }
 
